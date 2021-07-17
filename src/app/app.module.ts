@@ -39,11 +39,14 @@ import {MatSnackBarModule} from '@angular/material/snack-bar';
 import {MatTableModule} from '@angular/material/table';
 import {MatSortModule} from '@angular/material/sort';
 import {MatPaginatorModule} from '@angular/material/paginator';
+import { HomeComponent } from './ui/home/home.component';
+import { ViewPatientComponent } from './ui/view-patient/view-patient.component';
+import { CreatePatientComponent } from './ui/create-patient/create-patient.component';
 
 Amplify.configure(awsconfig);
 
 @NgModule({
-  declarations: [AppComponent],
+  declarations: [AppComponent, HomeComponent, ViewPatientComponent, CreatePatientComponent],
   imports: [
     AmplifyUIAngularModule, 
     BrowserModule, 
