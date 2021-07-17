@@ -1,6 +1,6 @@
 {
   "auth": {
-    "ayakata8fbdda29": {
+    "ayakatanew8e5d8bb9": {
       "service": "Cognito",
       "providerPlugin": "awscloudformation",
       "dependsOn": [],
@@ -8,7 +8,7 @@
     }
   },
   "api": {
-    "PatientAPI": {
+    "ayakatanew": {
       "service": "AppSync",
       "providerPlugin": "awscloudformation",
       "output": {
@@ -17,7 +17,7 @@
             "authenticationType": "API_KEY",
             "apiKeyConfig": {
               "apiKeyExpirationDays": 365,
-              "description": "Get and post patients' data"
+              "description": ""
             }
           },
           "additionalAuthenticationProviders": []
@@ -26,20 +26,20 @@
     }
   },
   "function": {
-    "S3Trigger2b8bcd48": {
+    "S3Triggerd5c59b9c": {
       "service": "Lambda",
       "providerPlugin": "awscloudformation",
       "build": true
     }
   },
   "storage": {
-    "patient": {
+    "patientdata": {
       "service": "S3",
       "providerPlugin": "awscloudformation",
       "dependsOn": [
         {
           "category": "function",
-          "resourceName": "S3Trigger2b8bcd48",
+          "resourceName": "S3Triggerd5c59b9c",
           "attributes": [
             "Name",
             "Arn",

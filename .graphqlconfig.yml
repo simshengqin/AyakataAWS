@@ -1,5 +1,5 @@
 projects:
-  RestaurantAPI:
+  Patient:
     schemaPath: src/graphql/schema.json
     includes:
       - src/graphql/**/*.graphql
@@ -10,7 +10,7 @@ projects:
         codeGenTarget: angular
         generatedFileName: src/app/API.service.ts
         docsFilePath: src/graphql
-  PatientAPI:
+  ayakatanew:
     schemaPath: src/graphql/schema.json
     includes:
       - src/graphql/**/*.graphql

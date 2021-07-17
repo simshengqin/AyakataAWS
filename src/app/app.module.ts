@@ -6,7 +6,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AmplifyUIAngularModule } from '@aws-amplify/ui-angular';
 import Amplify, { Auth, Storage } from 'aws-amplify';
 
-import awsconfig from '../aws-exports';
+import awsconfig from '../aws-exports_old';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
@@ -53,11 +53,11 @@ Amplify.configure(awsconfig);
   declarations: [AppComponent, HomeComponent, ViewPatientComponent, CreatePatientComponent, HeaderComponent],
   imports: [
     RouterModule,
-    AmplifyUIAngularModule, 
+    AmplifyUIAngularModule,
     AppRoutingModule,
-    BrowserModule, 
+    BrowserModule,
     FormsModule,
-    ReactiveFormsModule, 
+    ReactiveFormsModule,
     BrowserAnimationsModule,
     MatCheckboxModule,
     MatCheckboxModule,
@@ -89,7 +89,8 @@ Amplify.configure(awsconfig);
     MatSnackBarModule,
     MatTableModule,
     MatSortModule,
-    MatPaginatorModule
+    MatPaginatorModule,
+
   ],
   providers: [],
   bootstrap: [AppComponent],

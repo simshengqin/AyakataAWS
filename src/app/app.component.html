@@ -1,12 +1,12 @@
 <amplify-authenticator>
-  
+
   <div>
     <span *ngIf="user?.username" class="App-header">Hello, {{ user.username }}</span>
     <div class="spacer"></div>
     <router-outlet></router-outlet>
     <amplify-sign-out></amplify-sign-out>
   </div>
-  <!-- 
+  <!--
   <div class="form-body">
     <form autocomplete="off" [formGroup]="createForm" (ngSubmit)="onCreate(createForm.value)">
       <div>
@@ -30,9 +30,8 @@
     <div>{{ restaurant.name }}</div>
     <div>{{ restaurant.description }}</div>
   </div>
-  
+
   -->
-<input #file class="mb-3 form-control" accept=".csv" type="file">
-  <button class="btn btn-info" (click)="uploadFile()">Upload</button>
+
   <router-outlet></router-outlet>
 </amplify-authenticator>

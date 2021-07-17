@@ -1,24 +1,24 @@
 {
   "dev": {
     "awscloudformation": {
-      "AuthRoleName": "amplify-ayakata-dev-165613-authRole",
-      "UnauthRoleArn": "arn:aws:iam::156257273650:role/amplify-ayakata-dev-165613-unauthRole",
-      "AuthRoleArn": "arn:aws:iam::156257273650:role/amplify-ayakata-dev-165613-authRole",
+      "AuthRoleName": "amplify-ayakatanew-dev-10032-authRole",
+      "UnauthRoleArn": "arn:aws:iam::156257273650:role/amplify-ayakatanew-dev-10032-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::156257273650:role/amplify-ayakatanew-dev-10032-authRole",
       "Region": "ap-southeast-1",
-      "DeploymentBucketName": "amplify-ayakata-dev-165613-deployment",
-      "UnauthRoleName": "amplify-ayakata-dev-165613-unauthRole",
-      "StackName": "amplify-ayakata-dev-165613",
-      "StackId": "arn:aws:cloudformation:ap-southeast-1:156257273650:stack/amplify-ayakata-dev-165613/d8f79570-e6dc-11eb-a05d-063c5f980302",
-      "AmplifyAppId": "dk53fprl0kfmm"
+      "DeploymentBucketName": "amplify-ayakatanew-dev-10032-deployment",
+      "UnauthRoleName": "amplify-ayakatanew-dev-10032-unauthRole",
+      "StackName": "amplify-ayakatanew-dev-10032",
+      "StackId": "arn:aws:cloudformation:ap-southeast-1:156257273650:stack/amplify-ayakatanew-dev-10032/826ddd60-e720-11eb-a05d-063c5f980302",
+      "AmplifyAppId": "d38id6w0n6y2pa"
     },
     "categories": {
       "auth": {
-        "ayakata8fbdda29": {}
+        "ayakatanew8e5d8bb9": {}
       },
       "function": {
-        "S3Trigger2b8bcd48": {
-          "deploymentBucketName": "amplify-ayakata-dev-165613-deployment",
-          "s3Key": "amplify-builds/S3Trigger2b8bcd48-6b7636454173444c3641-build.zip"
+        "S3Triggerd5c59b9c": {
+          "deploymentBucketName": "amplify-ayakatanew-dev-10032-deployment",
+          "s3Key": "amplify-builds/S3Triggerd5c59b9c-30416d6c7a5375362f31-build.zip"
         }
       }
     }

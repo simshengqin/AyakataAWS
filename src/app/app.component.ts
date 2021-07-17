@@ -1,6 +1,6 @@
 import {Component, ChangeDetectorRef, OnInit, OnDestroy, ElementRef, ViewChild} from '@angular/core';
 import { onAuthUIStateChange, CognitoUserInterface, AuthState } from '@aws-amplify/ui-components';
-import {Restaurant} from '../types/restaurant';
+import {Patient} from '../types/patient';
 import {Subscription} from 'rxjs';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {APIService} from './API.service';
@@ -17,8 +17,8 @@ export class AppComponent implements OnInit, OnDestroy{
   authState: AuthState;
   public createForm!: FormGroup;
 
-  /* declare restaurants variable */
-  restaurants: Array<Restaurant> = [];
+  /* declare patients variable */
+  patients: Array<Patient> = [];
   subscription: Subscription | null | undefined;
   @ViewChild('file') file: ElementRef;
   constructor(private api: APIService, private fb: FormBuilder, private ref: ChangeDetectorRef) { }
@@ -36,30 +36,26 @@ export class AppComponent implements OnInit, OnDestroy{
       city: ['', Validators.required]
     });
 
-    /* fetch restaurants when app loads */
-    this.api.ListRestaurants().then(event => {
-      this.restaurants = (event.items as Array<Restaurant>);
+    /* fetch patients when app loads */
+    this.api.ListPatients().then(event => {
+      this.patients = (event.items as Array<Patient>);
     });
 
-    /* subscribe to new restaurants being created */
-    this.subscription = <Subscription> this.api.OnCreateRestaurantListener.subscribe((event: any) => {
-      const newRestaurant = event.value.data.onCreateRestaurant;
-      this.restaurants = [newRestaurant, ...this.restaurants];
+    /* subscribe to new patients being created */
+    this.subscription = <Subscription> this.api.OnCreatePatientListener.subscribe((event: any) => {
+      const newPatient = event.value.data.onCreatePatient;
+      this.patients = [newPatient, ...this.patients];
     });
   }
-  public onCreate(restaurant: Restaurant) {
-    this.api.CreateRestaurant(restaurant).then(event => {
-      console.log('item created!');
+  public onCreate(patient: Patient) {
+    this.api.CreatePatient(patient).then(event => {
       this.createForm.reset();
     })
       .catch(e => {
-        console.log('error creating restaurant...', e);
+        console.log('error creating patient...', e);
       });
   }
-  async uploadFile() {
-    const result = await Storage.put(this.file.nativeElement.files.item(0).name, this.file.nativeElement.files.item(0));
-    // console.log(result);
-  }
+
   ngOnDestroy() {
     if (this.subscription) {
       this.subscription.unsubscribe();
