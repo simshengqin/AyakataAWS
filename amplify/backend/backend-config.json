@@ -1,6 +1,6 @@
 {
   "auth": {
-    "angauthenticator98214054": {
+    "ayakata8fbdda29": {
       "service": "Cognito",
       "providerPlugin": "awscloudformation",
       "dependsOn": [],
@@ -8,7 +8,7 @@
     }
   },
   "api": {
-    "RestaurantAPI": {
+    "PatientAPI": {
       "service": "AppSync",
       "providerPlugin": "awscloudformation",
       "output": {
@@ -17,7 +17,7 @@
             "authenticationType": "API_KEY",
             "apiKeyConfig": {
               "apiKeyExpirationDays": 365,
-              "description": "demo"
+              "description": "Get and post patients' data"
             }
           },
           "additionalAuthenticationProviders": []

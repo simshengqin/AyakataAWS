@@ -1,8 +1,8 @@
 {
-    "identityPoolName": "angauthenticator98214054_identitypool_98214054",
+    "identityPoolName": "ayakata8fbdda29_identitypool_8fbdda29",
     "allowUnauthenticatedIdentities": false,
-    "resourceNameTruncated": "angaut98214054",
-    "userPoolName": "angauthenticator98214054_userpool_98214054",
+    "resourceNameTruncated": "ayakat8fbdda29",
+    "userPoolName": "ayakata8fbdda29_userpool_8fbdda29",
     "autoVerifiedAttributes": [
         "email"
     ],
@@ -20,7 +20,7 @@
     "requiredAttributes": [
         "email"
     ],
-    "userpoolClientGenerateSecret": true,
+    "userpoolClientGenerateSecret": false,
     "userpoolClientRefreshTokenValidity": 30,
     "userpoolClientWriteAttributes": [
         "email"
@@ -28,9 +28,10 @@
     "userpoolClientReadAttributes": [
         "email"
     ],
-    "userpoolClientLambdaRole": "angaut98214054_userpoolclient_lambda_role",
+    "userpoolClientLambdaRole": "ayakat8fbdda29_userpoolclient_lambda_role",
     "userpoolClientSetAttributes": false,
-    "resourceName": "angauthenticator98214054",
+    "sharedId": "8fbdda29",
+    "resourceName": "ayakata8fbdda29",
     "authSelections": "identityPoolAndUserPool",
     "authRoleArn": {
         "Fn::GetAtt": [
@@ -46,5 +47,7 @@
     },
     "useDefault": "default",
     "userPoolGroupList": [],
+    "serviceName": "Cognito",
+    "usernameCaseSensitive": false,
     "dependsOn": []
 }

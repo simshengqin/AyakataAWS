@@ -1,5 +1,5 @@
 {
-  "AppSyncApiName": "RestaurantAPI",
+  "AppSyncApiName": "PatientAPI",
   "DynamoDBBillingMode": "PAY_PER_REQUEST",
   "DynamoDBEnableServerSideEncryption": false
 }
