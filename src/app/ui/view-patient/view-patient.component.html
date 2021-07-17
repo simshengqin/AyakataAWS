@@ -1,2 +1,27 @@
 <app-header></app-header>
-<p>view-patient works!</p>
+
+<div class="form-body">
+  <form autocomplete="off" [formGroup]="createForm" (ngSubmit)="onCreate(createForm.value)">
+    <div>
+      <label>Patient_No: </label>
+      <input type="text" formControlName="Patient_No" autocomplete="off">
+    </div>
+    <div>
+      <label>Case_No: </label>
+      <input type="text" formControlName="Case_No" autocomplete="off">
+    </div>
+    <div>
+      <label>Referral_Type_From: </label>
+      <input type="text" formControlName="Referral_Type_From" autocomplete="off">
+    </div>
+    <button type="submit">Submit</button>
+  </form>
+</div>
+
+<div *ngFor="let patient of patients">
+  <div>{{ patient.Patient_No }}</div>
+  <div>{{ patient.Case_No }}</div>
+  <div>{{ patient.Referral_Type_From }}</div>
+</div>
+
+
