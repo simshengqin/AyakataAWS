@@ -1,6 +1,6 @@
 {
     "identityPoolName": "ayakata8fbdda29_identitypool_8fbdda29",
-    "allowUnauthenticatedIdentities": false,
+    "allowUnauthenticatedIdentities": true,
     "resourceNameTruncated": "ayakat8fbdda29",
     "userPoolName": "ayakata8fbdda29_userpool_8fbdda29",
     "autoVerifiedAttributes": [

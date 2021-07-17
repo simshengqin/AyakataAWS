@@ -3,7 +3,8 @@ import { NgModule } from '@angular/core';
 import { AppComponent } from './app.component';
 
 import { AmplifyUIAngularModule } from '@aws-amplify/ui-angular';
-import Amplify from 'aws-amplify';
+import Amplify, { Auth, Storage } from 'aws-amplify';
+
 import awsconfig from '../aws-exports';
 import {ReactiveFormsModule} from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -48,9 +49,9 @@ Amplify.configure(awsconfig);
 @NgModule({
   declarations: [AppComponent, HomeComponent, ViewPatientComponent, CreatePatientComponent],
   imports: [
-    AmplifyUIAngularModule, 
-    BrowserModule, 
-    ReactiveFormsModule, 
+    AmplifyUIAngularModule,
+    BrowserModule,
+    ReactiveFormsModule,
     BrowserAnimationsModule,
     MatCheckboxModule,
     MatCheckboxModule,

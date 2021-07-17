@@ -11,7 +11,19 @@ const awsmobile = {
     "aws_appsync_graphqlEndpoint": "https://q3etpwxwazhcvln22n4mczmmhy.appsync-api.ap-southeast-1.amazonaws.com/graphql",
     "aws_appsync_region": "ap-southeast-1",
     "aws_appsync_authenticationType": "API_KEY",
-    "aws_appsync_apiKey": "da2-bwalro2ktbcppjdhmxtztr5f2u"
+    "aws_appsync_apiKey": "da2-bwalro2ktbcppjdhmxtztr5f2u",
+    "aws_user_files_s3_bucket": "ayakata2165613-dev",
+    "aws_user_files_s3_bucket_region": "ap-southeast-1",
+    "Auth": {
+        "identityPoolId": "ap-southeast-1:d5585b9f-d11f-4d3a-9fec-9b069010a8c1",
+        "region": "ap-southeast-1"
+    },
+    "Storage": {
+        "AWSS3": {
+            "bucket": "ayakata",
+            "region": "ap-southeast-1"
+        }
+    }
 };
 
 

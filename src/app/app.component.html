@@ -1,6 +1,6 @@
 <amplify-authenticator>
   <div>
-    <span class="App-header">Hello, {{ user.username }}</span>
+    <span *ngIf="user?.username" class="App-header">Hello, {{ user.username }}</span>
     <div class="spacer"></div>
     <amplify-sign-out></amplify-sign-out>
   </div>
@@ -27,4 +27,6 @@
     <div>{{ restaurant.name }}</div>
     <div>{{ restaurant.description }}</div>
   </div>
+  <input #file class="mb-3 form-control" accept=".csv" type="file">
+  <button class="btn btn-info" (click)="uploadFile()">Upload</button>
 </amplify-authenticator>
