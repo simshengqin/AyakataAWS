@@ -1,6 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { AppComponent } from './app.component';
+import { AppRoutingModule } from './app-routing.module';
 
 import { AmplifyUIAngularModule } from '@aws-amplify/ui-angular';
 import Amplify, { Auth, Storage } from 'aws-amplify';
@@ -43,15 +44,17 @@ import {MatPaginatorModule} from '@angular/material/paginator';
 import { HomeComponent } from './ui/home/home.component';
 import { ViewPatientComponent } from './ui/view-patient/view-patient.component';
 import { CreatePatientComponent } from './ui/create-patient/create-patient.component';
+import { HeaderComponent } from './shared/components/header/header.component';
 
 Amplify.configure(awsconfig);
 
 @NgModule({
-  declarations: [AppComponent, HomeComponent, ViewPatientComponent, CreatePatientComponent],
+  declarations: [AppComponent, HomeComponent, ViewPatientComponent, CreatePatientComponent, HeaderComponent],
   imports: [
-    AmplifyUIAngularModule,
-    BrowserModule,
-    ReactiveFormsModule,
+    AmplifyUIAngularModule, 
+    AppRoutingModule,
+    BrowserModule, 
+    ReactiveFormsModule, 
     BrowserAnimationsModule,
     MatCheckboxModule,
     MatCheckboxModule,
