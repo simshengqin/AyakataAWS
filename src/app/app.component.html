@@ -1,8 +1,11 @@
 <amplify-authenticator>
   
   <div>
+    <!-- 
     <span class="App-header">Hello, {{ user.username }}</span>
     <div class="spacer"></div>
+    -->
+    <router-outlet></router-outlet>
     <amplify-sign-out></amplify-sign-out>
   </div>
   <!-- 
@@ -30,6 +33,6 @@
     <div>{{ restaurant.description }}</div>
   </div>
   -->
-
-  <router-outlet></router-outlet>
+  <!-- <app-home></app-home> -->
+  
 </amplify-authenticator>
