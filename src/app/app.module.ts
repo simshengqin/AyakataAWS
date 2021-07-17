@@ -7,7 +7,7 @@ import { AmplifyUIAngularModule } from '@aws-amplify/ui-angular';
 import Amplify, { Auth, Storage } from 'aws-amplify';
 
 import awsconfig from '../aws-exports';
-import {ReactiveFormsModule} from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 //Angular Material Components
@@ -45,15 +45,18 @@ import { HomeComponent } from './ui/home/home.component';
 import { ViewPatientComponent } from './ui/view-patient/view-patient.component';
 import { CreatePatientComponent } from './ui/create-patient/create-patient.component';
 import { HeaderComponent } from './shared/components/header/header.component';
+import { RouterModule } from '@angular/router';
 
 Amplify.configure(awsconfig);
 
 @NgModule({
   declarations: [AppComponent, HomeComponent, ViewPatientComponent, CreatePatientComponent, HeaderComponent],
   imports: [
+    RouterModule,
     AmplifyUIAngularModule, 
     AppRoutingModule,
     BrowserModule, 
+    FormsModule,
     ReactiveFormsModule, 
     BrowserAnimationsModule,
     MatCheckboxModule,

@@ -2,24 +2,55 @@
 
 <div class="d-flex align-items-center justify-content-center">
     <div class="container">
+        
+        <br>
+        <br>
+            
 
-        <div class="row">
-            <img src={{imagePath}} />
+        <div class="row justify-content-center">
+            <img src="../../../assets/images/home/logo-NUHS.png" class="img-fluid" alt="Responsive image"/>
         </div>
+
+        <br>
+        <br>
+
+        <div>
+            <div class="row justify-content-center">
+                <h1> Welcome to "App Name"</h1>
+            </div>
+        </div>
+
+        <br>
+        <br>
         
         <!-- Input Text for Paitent ID & Patient Case number -->
+        <form [formGroup]="myForm">
         <div class="row">
-            <div class="col-6 justify-content-center">
-            <div class="input-group input-group-lg">
-                <input type="text" class="form-control" placeholder="Patient ID" >
+            <div class="col-5 justify-content-center">
+                <div class="input-group input-group-lg">
+                    <input type="text" class="form-control" placeholder="Patient ID" ([ngModel])="patientid" formControlName="PID">
+                </div>
             </div>
+            <div class="col-5 justify-content-center">
+                <div class="input-group input-group-lg">
+                    <input type="text" class="form-control" placeholder="Patient Case Number" ([ngModel])="patientCasenumber" formControlName="PCN">
+                </div>
             </div>
-            <div class="col-6 justify-content-center">
-            <div class="input-group input-group-lg">
-                <input type="text" class="form-control" placeholder="Patient Case Number">
-            </div>
+            <div class="col-2 justify-content-center">
+                <div class="input-group input-group-lg">
+                    <button type="button" class="btn btn-outline-success btn-lg" (click)="search()"> Search </button>
+                </div>
             </div>
         </div>
+    </form>
+
+        <br>
+
+        <div class="row justify-content-center">
+            <button type="button" class="btn btn-primary btn-lg" (click)="create()"> Create </button>
+        </div>
+
+        <br>
 
     </div>
   </div>
