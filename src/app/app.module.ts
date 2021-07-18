@@ -10,6 +10,9 @@ import awsconfig from '../aws-exports_old';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
+// NGX Modules
+import { ToastrModule } from 'ngx-toastr';
+
 //Angular Material Components
 import {MatCheckboxModule} from '@angular/material/checkbox';
 import {MatButtonModule} from '@angular/material/button';
@@ -90,7 +93,7 @@ Amplify.configure(awsconfig);
     MatTableModule,
     MatSortModule,
     MatPaginatorModule,
-
+    ToastrModule.forRoot()
   ],
   providers: [],
   bootstrap: [AppComponent],

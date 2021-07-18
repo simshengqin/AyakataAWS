@@ -16,6 +16,7 @@ export class HomeComponent implements OnInit {
   constructor(private router: Router) { }
 
   ngOnInit(): void {
+    
     this.myForm = new FormGroup({
       'PID':new FormControl(null),
       'PCN':new FormControl(null)
