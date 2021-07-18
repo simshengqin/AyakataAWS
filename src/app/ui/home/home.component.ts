@@ -9,7 +9,7 @@ import { FormGroup, FormControl } from '@angular/forms'; //imports
 })
 export class HomeComponent implements OnInit {
 
-  patientid:string;
+  patientid:string; //var:type --> from ngmodel in html
   patientCasenumber:string;
   myForm:FormGroup; 
 

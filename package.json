@@ -25,6 +25,8 @@
     "all": "0.0.0",
     "aws-amplify": "^3.0.18",
     "bootstrap": "^4.6.0",
+    "jquery": "^3.6.0",
+    "popper.js": "^1.16.1",
     "rxjs": "~6.5.4",
     "tslib": "^1.10.0",
     "zone.js": "~0.10.2"
@@ -51,5 +53,5 @@
   },
   "browser": {
     "crypto": false
-}
+  }
 }
