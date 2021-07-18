@@ -3,6 +3,10 @@ import { RouterModule, Routes } from '@angular/router';
 import { HomeComponent } from './ui/home/home.component';
 import { ViewPatientComponent } from './ui/view-patient/view-patient.component';
 import { CreatePatientComponent } from './ui/create-patient/create-patient.component';
+import { MyTaskComponent } from './ui/my-task/my-task.component';
+import { MyNotificationComponent } from './ui/my-notification/my-notification.component';
+import { MyReportComponent } from './ui/my-report/my-report.component';
+import { ProfileComponent } from './ui/profile/profile.component';
 
 const routes: Routes = [{
   path: '',
@@ -23,7 +27,27 @@ const routes: Routes = [{
       component: CreatePatientComponent
     },
     {
-      path: '**',
+      path: 'my-task',
+      pathMatch: 'full',
+      component: MyTaskComponent
+    },
+    {
+      path: 'my-notification',
+      pathMatch: 'full',
+      component: MyNotificationComponent
+    },
+    {
+      path: 'my-report',
+      pathMatch: 'full',
+      component: MyReportComponent
+    },
+    {
+      path: 'profile',
+      pathMatch: 'full',
+      component: ProfileComponent
+    },
+    {
+      path: '**', //'else'
       pathMatch: 'full',
       component: HomeComponent
     }

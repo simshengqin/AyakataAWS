@@ -23,6 +23,7 @@ export class AppComponent implements OnInit, OnDestroy{
     onAuthUIStateChange((authState, authData) => {
       this.authState = authState;
       this.user = authData as CognitoUserInterface;
+      localStorage.setItem('username', this.user.username); //setting session name -->cookies
       this.ref.detectChanges();
     });
   }

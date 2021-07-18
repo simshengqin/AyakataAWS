@@ -6,23 +6,23 @@
       </button>
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-          <li class="nav-item">
-            <a class="nav-link" aria-current="page" routerLink="/home"> Home </a>
+          <li class="nav-item" [ngClass]="{'active': url == '/home'}">
+            <a class="nav-link" aria-current="page" routerLink="/home"> Home </a> <!-- routerlink is redirect to the page-->
           </li>
-          <li class="nav-item">
+          <li class="nav-item" [ngClass]="{'active': url == '/create-patient'}">
             <a class="nav-link" aria-current="page"  routerLink="/create-patient"> Create Patient </a>
           </li>
-          <li class="nav-item">
+          <li class="nav-item" [ngClass]="{'active': url == '/view-patient'}">
             <a class="nav-link" aria-current="page"  routerLink="/view-patient"> View Patient </a>
           </li>
-          <li class="nav-item">
-            <a class="nav-link" aria-current="page" > My Task </a>
+          <li class="nav-item"[ngClass]="{'active': url == '/my-task'}">
+            <a class="nav-link" aria-current="page" routerLink="/my-task"> My Tasks </a>
           </li>
-          <li class="nav-item">
-            <a class="nav-link" aria-current="page"> My Notifications </a>
+          <li class="nav-item"[ngClass]="{'active': url == '/my-notification'}">
+            <a class="nav-link" aria-current="page" routerLink="my-notification"> My Notifications </a>
           </li>
-          <li class="nav-item">
-            <a class="nav-link" aria-current="page"> My Reports </a>
+          <li class="nav-item"[ngClass]="{'active': url == '/my-report'}">
+            <a class="nav-link" aria-current="page" routerLink="my-report"> My Reports </a>
           </li>
         </ul>
       </div>
@@ -30,10 +30,34 @@
         <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
           &nbsp; &nbsp;
         <button class="btn btn-outline-success" type="submit">Search</button>
-      </form>
+      </form>        
+      <div class= "row">
+        <div class="column">
+          <a class="nav-link" href="profile"  role="button">
+            {{username}} <!-- need curlly bracket to access variable inside the TS-->
+          </a>
+        </div>
+        <div class="column">
+          <div >
+            <amplify-sign-out></amplify-sign-out>
+          </div>
+          
+        </div>
+      </div>
+      <!-- <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+          {{username}}  need curlly bracket to access variable inside the TS
+        </a>
+
+        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+          <li><a class="dropdown-item" href="#">Profile</a></li>
+          <li><a class="dropdown-item" href="#"><amplify-sign-out></amplify-sign-out></a></li>
+        </ul>
+        
+      </li> -->
     </div>
   </nav>
 
   <div class="alert alert-dark" role="alert">
-    placeholder: "This is for announcement!"
+    Announcement: "999 Covid-19 due to KTV Cluster LOLLL"
   </div>

@@ -49,11 +49,15 @@ import { ViewPatientComponent } from './ui/view-patient/view-patient.component';
 import { CreatePatientComponent } from './ui/create-patient/create-patient.component';
 import { HeaderComponent } from './shared/components/header/header.component';
 import { RouterModule } from '@angular/router';
+import { MyTaskComponent } from './ui/my-task/my-task.component';
+import { MyNotificationComponent } from './ui/my-notification/my-notification.component';
+import { MyReportComponent } from './ui/my-report/my-report.component';
+import { ProfileComponent } from './ui/profile/profile.component';
 
 Amplify.configure(awsconfig);
 
 @NgModule({
-  declarations: [AppComponent, HomeComponent, ViewPatientComponent, CreatePatientComponent, HeaderComponent],
+  declarations: [AppComponent, HomeComponent, ViewPatientComponent, CreatePatientComponent, HeaderComponent, MyTaskComponent, ProfileComponent, MyReportComponent, MyNotificationComponent],
   imports: [
     RouterModule,
     AmplifyUIAngularModule,
