@@ -16,7 +16,7 @@
             <a class="nav-link" aria-current="page"  routerLink="/view-patient"> View Patient </a>
           </li>
           <li class="nav-item"[ngClass]="{'active': url == '/my-task'}">
-            <a class="nav-link" aria-current="page" routerLink="/my-task"> My Task </a>
+            <a class="nav-link" aria-current="page" routerLink="/my-task"> My Tasks </a>
           </li>
           <li class="nav-item"[ngClass]="{'active': url == '/my-notification'}">
             <a class="nav-link" aria-current="page" routerLink="my-notification"> My Notifications </a>
@@ -33,12 +33,15 @@
       </form>        
       <div class= "row">
         <div class="column">
-          <a class="nav-link" href="#"  role="button">
+          <a class="nav-link" href="profile"  role="button">
             {{username}} <!-- need curlly bracket to access variable inside the TS-->
           </a>
         </div>
         <div class="column">
-          <amplify-sign-out></amplify-sign-out>
+          <div >
+            <amplify-sign-out></amplify-sign-out>
+          </div>
+          
         </div>
       </div>
       <!-- <li class="nav-item dropdown">
