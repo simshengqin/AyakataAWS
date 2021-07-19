@@ -54,6 +54,7 @@ import { MyTaskComponent } from './ui/my-task/my-task.component';
 import { MyNotificationComponent } from './ui/my-notification/my-notification.component';
 import { MyReportComponent } from './ui/my-report/my-report.component';
 import { ProfileComponent } from './ui/profile/profile.component';
+import {MDBBootstrapModule} from "angular-bootstrap-md";
 
 Amplify.configure(awsconfig);
 
@@ -99,7 +100,8 @@ Amplify.configure(awsconfig);
     MatSortModule,
     MatPaginatorModule,
     ToastrModule.forRoot(),
-    NgxDropzoneModule
+    NgxDropzoneModule,
+    MDBBootstrapModule.forRoot()
   ],
   providers: [],
   bootstrap: [AppComponent],
