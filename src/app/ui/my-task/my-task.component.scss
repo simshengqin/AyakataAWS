@@ -1,0 +1,75 @@
+.max-width-section {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding-bottom: 32px;
+  padding-top: 32px;
+}
+
+table {
+  width: 100%;
+  mat-icon {
+    cursor: pointer;
+  }
+  mat-icon:hover {
+    color: coral;
+  }
+  mat-icon:active {
+    color: orangered;
+  }
+
+}
+
+th.mat-sort-header-sorted {
+  color: black;
+}
+.table-responsive {
+  display: block;
+  width: 100%;
+  overflow-x: auto;
+  .mat-table {
+    width: 100%;
+    max-width: 100%;
+    display: table;
+    border-collapse: collapse;
+    margin: 0px;
+  }
+  .mat-row,
+  .mat-header-row {
+    display: table-row;
+  }
+  .mat-cell,
+  .mat-header-cell {
+    word-wrap: initial;
+    display: table-cell;
+    padding: 0px 5px;
+    line-break: unset;
+    width: auto;
+    white-space: nowrap;
+    overflow: hidden;
+    vertical-align: middle;
+  }
+  .mat-row .mat-cell {
+    cursor: pointer;
+  }
+
+  .demo-row-is-clicked {
+    font-weight: bold;
+  }
+}
+.spinner-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #fafafa;
+  box-shadow:0 5px 5px -3px rgba(0,0,0,.2), 0 8px 10px 1px rgba(0,0,0,.14), 0 3px 14px 2px rgba(0,0,0,.12)
+}
+
+.view-graph {
+  text-align: right;
+  margin-top: 16px;
+}
+.view-graph:hover {
+  cursor: pointer;
+  color: #FD6642;
+}
+

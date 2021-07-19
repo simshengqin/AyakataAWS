@@ -55,11 +55,12 @@ import { MyNotificationComponent } from './ui/my-notification/my-notification.co
 import { MyReportComponent } from './ui/my-report/my-report.component';
 import { MyAccountComponent } from './ui/my-account/my-account.component';
 import {MDBBootstrapModule} from "angular-bootstrap-md";
+import { ChartComponent } from './ui/chart/chart.component';
 
 Amplify.configure(awsconfig);
 
 @NgModule({
-  declarations: [AppComponent, HomeComponent, ViewPatientComponent, CreatePatientComponent, HeaderComponent, MyTaskComponent, MyAccountComponent, MyReportComponent, MyNotificationComponent],
+  declarations: [AppComponent, HomeComponent, ViewPatientComponent, CreatePatientComponent, HeaderComponent, MyTaskComponent, MyAccountComponent, MyReportComponent, MyNotificationComponent, ChartComponent],
   imports: [
     RouterModule,
     AmplifyUIAngularModule,
