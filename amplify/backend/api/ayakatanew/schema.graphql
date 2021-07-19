@@ -1,15 +1,15 @@
 type Task @model {
   id: ID!
   filename: String
-  uploadDate: Int
-  patientCount: Int
+  uploadDate: Float
+  patientCount: Float
   reportID: String
 }
 type Report @model {
   id: ID!
   patientID: String
-  predictedMonths: Int
-  predictedDate: Int
+  predictedMonths: Float
+  predictedDate: Float
   reportID: String
 }
 

@@ -5,6 +5,7 @@ import {MatPaginator} from '@angular/material/paginator';
 import {Task} from '../../core/models/task';
 import {APIService} from '../../API.service';
 import {Report} from '../../core/models/report';
+import {DateHelper} from "../../core/services/date-helper";
 
 @Component({
   selector: 'app-my-report',
@@ -57,18 +58,23 @@ export class MyReportComponent implements OnInit {
     ]
   };
   clickedRows = new Set<any>();
-  constructor(private api: APIService) {
+  fullMonthDayYearFormat: string;
+  constructor(private api: APIService, private dateHelper: DateHelper,) {
   }
 
   async ngOnInit(): Promise<void> {
-
-    const newReport = {
-      patientID: '6',
-      predictedMonths: 6,
-      predictedDate: 65000,
-      reportID: '2'
-    };
-    await this.api.CreateReport(newReport);
+    await Promise.all([
+      this.dateHelper.getFormat('fullMonthDayYear'),
+    ]).then((results) => {
+      this.fullMonthDayYearFormat = results[1];
+    });
+    // const newReport = {
+    //   patientID: '6',
+    //   predictedMonths: 6,
+    //   predictedDate: 65000,
+    //   reportID: '2'
+    // };
+    // await this.api.CreateReport(newReport);
     this.api.ListReports().then(event => {
       const reports = event.items as Array<Report>;
       for (let i = 0; i < reports.length; i++) {

@@ -19,8 +19,8 @@ export type CreateTaskInput = {
 
 export type ModelTaskConditionInput = {
   filename?: ModelStringInput | null;
-  uploadDate?: ModelIntInput | null;
-  patientCount?: ModelIntInput | null;
+  uploadDate?: ModelFloatInput | null;
+  patientCount?: ModelFloatInput | null;
   reportID?: ModelStringInput | null;
   and?: Array<ModelTaskConditionInput | null> | null;
   or?: Array<ModelTaskConditionInput | null> | null;
@@ -66,7 +66,7 @@ export type ModelSizeInput = {
   between?: Array<number | null> | null;
 };
 
-export type ModelIntInput = {
+export type ModelFloatInput = {
   ne?: number | null;
   eq?: number | null;
   le?: number | null;
@@ -111,8 +111,8 @@ export type CreateReportInput = {
 
 export type ModelReportConditionInput = {
   patientID?: ModelStringInput | null;
-  predictedMonths?: ModelIntInput | null;
-  predictedDate?: ModelIntInput | null;
+  predictedMonths?: ModelFloatInput | null;
+  predictedDate?: ModelFloatInput | null;
   reportID?: ModelStringInput | null;
   and?: Array<ModelReportConditionInput | null> | null;
   or?: Array<ModelReportConditionInput | null> | null;
@@ -145,8 +145,8 @@ export type DeleteReportInput = {
 export type ModelTaskFilterInput = {
   id?: ModelIDInput | null;
   filename?: ModelStringInput | null;
-  uploadDate?: ModelIntInput | null;
-  patientCount?: ModelIntInput | null;
+  uploadDate?: ModelFloatInput | null;
+  patientCount?: ModelFloatInput | null;
   reportID?: ModelStringInput | null;
   and?: Array<ModelTaskFilterInput | null> | null;
   or?: Array<ModelTaskFilterInput | null> | null;
@@ -178,8 +178,8 @@ export type ModelTaskConnection = {
 export type ModelReportFilterInput = {
   id?: ModelIDInput | null;
   patientID?: ModelStringInput | null;
-  predictedMonths?: ModelIntInput | null;
-  predictedDate?: ModelIntInput | null;
+  predictedMonths?: ModelFloatInput | null;
+  predictedDate?: ModelFloatInput | null;
   reportID?: ModelStringInput | null;
   and?: Array<ModelReportFilterInput | null> | null;
   or?: Array<ModelReportFilterInput | null> | null;

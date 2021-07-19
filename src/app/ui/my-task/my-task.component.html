@@ -29,7 +29,7 @@
 
       <ng-container matColumnDef="uploadDate">
         <th mat-header-cell *matHeaderCellDef mat-sort-header> Upload Date </th>
-        <td mat-cell *matCellDef="let element"> {{ element["uploadDate"] }} </td>
+        <td mat-cell *matCellDef="let element"> {{ element["uploadDate"] | date: fullMonthDayYearFormat}} </td>
       </ng-container>
 
       <ng-container matColumnDef="patientCount">
@@ -40,10 +40,10 @@
       <ng-container matColumnDef="status">
         <th mat-header-cell *matHeaderCellDef mat-sort-header> Status </th>
         <td mat-cell *matCellDef="let element">
-          <span>
-            {{ element["status"] | titlecase}}
+          <span *ngIf="!element.reportID">
+            Processing
           </span>
-          <span *ngIf="element.status == 'completed'" class="view-report" (click)="onViewReport(element.filename)">
+          <span *ngIf="element.reportID" class="view-report" (click)="onViewReport(element.filename)">
             View Report >
           </span>
         </td>

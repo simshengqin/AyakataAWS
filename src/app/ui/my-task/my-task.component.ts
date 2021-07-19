@@ -6,6 +6,7 @@ import {Router} from '@angular/router';
 import {Task} from '../../core/models/task';
 import {APIService} from "../../API.service";
 import {Report} from "../../core/models/report";
+import {DateHelper} from "../../core/services/date-helper";
 
 @Component({
   selector: 'app-my-task',
@@ -59,21 +60,22 @@ export class MyTaskComponent implements OnInit {
     ]
   };
   clickedRows = new Set<any>();
+  fullMonthDayYearFormat: string;
   constructor(
     private router: Router,
-    private api: APIService
+    private api: APIService,
+    private dateHelper: DateHelper,
   ) {
 
   }
 
   async ngOnInit(): Promise<void> {
-    const newTask = {
-      filename: 'bb',
-      uploadDate: 10005,
-      patientCount: 8,
-      reportID: '3'
-    };
-    await this.api.CreateTask(newTask);
+    await Promise.all([
+      this.dateHelper.getFormat('fullMonthDayYear'),
+    ]).then((results) => {
+      this.fullMonthDayYearFormat = results[1];
+    });
+
     this.api.ListTasks().then(event => {
       const tasks = event.items as Array<Task>;
       for (let i = 0; i < tasks.length; i++) {
