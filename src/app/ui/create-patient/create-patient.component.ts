@@ -9,6 +9,16 @@ import {ToastrService} from 'ngx-toastr';
 })
 export class CreatePatientComponent implements OnInit {
   
+  files: File[] = [];
+  
+  fileNames:string[] = [
+    "casevisit_test.csv" ,
+    "labresult_test.csv" , 
+    "medicationorder_test.csv", 
+    "patientdemo_test.csv", 
+    "surgical_test.csv"
+  ]
+
   ngx_toast_index_success:number = 1;
   ngx_toast_index_error:number = 1;
   
@@ -18,11 +28,13 @@ export class CreatePatientComponent implements OnInit {
   errorMessages:string = "";
   successMessage:string = "";
 
+  /*
   @ViewChild('filePatient') filePatient: ElementRef;
   @ViewChild('fileLab') fileLab: ElementRef;
   @ViewChild('fileCase') fileCase: ElementRef;
   @ViewChild('fileMedication') fileMedication: ElementRef;
   @ViewChild('fileSurgical') fileSurgical: ElementRef;
+  */
   
   constructor(private toastr: ToastrService) { }
 
@@ -30,6 +42,64 @@ export class CreatePatientComponent implements OnInit {
     this.start()
   }
 
+  // NGX Dropzone
+  public onSelect(event) {
+    console.log(event);
+    this.files.push(...event.addedFiles);
+  }
+
+  public onRemove(event) {
+    console.log(event);
+    this.files.splice(this.files.indexOf(event), 1);
+  }
+
+  start(){
+    document.getElementById("displayUploadStatus").style.display = "none"
+  }
+
+  async uploadFile() {
+
+    this.SuccessfulFileUpload = 0; // reset count
+    this.UnsuccessfulFileUpload = 0; // reset count
+    this.ngx_toast_index_success = 1; // reset index
+    this.ngx_toast_index_error = 1; // reset index 
+    
+    for(var ele of this.files){
+      if(this.fileNames.includes(ele.name.toLowerCase())){ 
+        this.ngx_toast_index_success++;
+        this.SuccessfulFileUpload++;
+        const result = await Storage.put(ele.name, ele);
+      } else {
+        this.errorMessages += this.ngx_toast_index_error + ".) " + ele.name
+        this.ngx_toast_index_error++;
+        this.UnsuccessfulFileUpload++;
+      }
+    }
+    
+    document.getElementById("displayUploadStatus").style.display = "block";
+
+    if(this.SuccessfulFileUpload>0){
+      this.showSuccess();
+    }
+    if(this.UnsuccessfulFileUpload>0){
+      this.showError();
+    }
+    
+    this.files = [];
+
+  }
+
+  public showSuccess() {
+    this.toastr.success( this.SuccessfulFileUpload + ' File(s) have been Uploaded successfully!', '', {positionClass: 'toast-top-center'});
+  }
+  public showError(){
+    this.toastr.error('The following file(s) could not be Uploaded: ' + this.errorMessages + ' unsuccessfully!', '', {positionClass: 'toast-top-center'})
+  }
+  public closeDisplay(){
+    document.getElementById("displayUploadStatus").style.display = "none"
+  }
+
+  /*
   start(){
     document.getElementById("displayUploadStatus").style.display = "none"
   }
@@ -45,7 +115,7 @@ export class CreatePatientComponent implements OnInit {
     // Check for PATIENT Data file
     if(this.filePatient.nativeElement.files.item(0) != null){
       if(this.checkFileNamingConvention(this.filePatient.nativeElement.files.item(0).name)){
-        //const result = await Storage.put(this.filePatient.nativeElement.files.item(0).name, this.filePatient.nativeElement.files.item(0));
+        const result = await Storage.put(this.filePatient.nativeElement.files.item(0).name, this.filePatient.nativeElement.files.item(0));
       }
     } else {
       console.log(" Patient Data is not included")
@@ -54,7 +124,7 @@ export class CreatePatientComponent implements OnInit {
     // Check for LAB Data file
     if(this.fileLab.nativeElement.files.item(0) != null){
       if(this.checkFileNamingConvention(this.fileLab.nativeElement.files.item(0).name)){
-        //const result = await Storage.put(this.fileLab.nativeElement.files.item(0).name, this.fileLab.nativeElement.files.item(0));
+        const result = await Storage.put(this.fileLab.nativeElement.files.item(0).name, this.fileLab.nativeElement.files.item(0));
       }
     } else {
       console.log(" Lab Data is not included")
@@ -63,7 +133,7 @@ export class CreatePatientComponent implements OnInit {
     // Check for CASE Data file
     if(this.fileCase.nativeElement.files.item(0) != null){
       if(this.checkFileNamingConvention(this.fileCase.nativeElement.files.item(0).name)){
-        //const result = await Storage.put(this.fileCase.nativeElement.files.item(0).name, this.fileCase.nativeElement.files.item(0));
+        const result = await Storage.put(this.fileCase.nativeElement.files.item(0).name, this.fileCase.nativeElement.files.item(0));
       }
     } else {
       console.log(" Case Data is not included")
@@ -72,7 +142,7 @@ export class CreatePatientComponent implements OnInit {
     // Check for MEDICATION Data file
     if(this.fileMedication.nativeElement.files.item(0) != null){
       if(this.checkFileNamingConvention(this.fileMedication.nativeElement.files.item(0).name)){
-        //const result = await Storage.put(this.fileMedication.nativeElement.files.item(0).name, this.fileMedication.nativeElement.files.item(0));
+        const result = await Storage.put(this.fileMedication.nativeElement.files.item(0).name, this.fileMedication.nativeElement.files.item(0));
       }
     } else {
       console.log(" Medication Data is not included")
@@ -81,7 +151,7 @@ export class CreatePatientComponent implements OnInit {
     // Check for SURGICAL Data file
     if(this.fileSurgical.nativeElement.files.item(0) != null){
       if(this.checkFileNamingConvention(this.fileSurgical.nativeElement.files.item(0).name)){
-        //const result = await Storage.put(this.fileSurgical.nativeElement.files.item(0).name, this.fileSurgical.nativeElement.files.item(0));
+        const result = await Storage.put(this.fileSurgical.nativeElement.files.item(0).name, this.fileSurgical.nativeElement.files.item(0));
       }
     } else {
       console.log(" Surgical Data is not included")
@@ -117,15 +187,9 @@ export class CreatePatientComponent implements OnInit {
     }
   }
 
-  public showSuccess() {
-    //this.toastr.success('Hello world!', 'Toastr fun!');
-    this.toastr.success('The following file(s) have been Uploaded: ' + this.successMessage +  ' successfully!', '', {positionClass: 'toast-top-center'});
-  }
-  public showError(){
-    this.toastr.error('The following file(s) could not be Uploaded: ' + this.errorMessages + ' unsuccessfully!', '', {positionClass: 'toast-top-center'})
-  }
+
   public closeDisplay(){
     document.getElementById("displayUploadStatus").style.display = "none"
-  }
+  } */
 
 }

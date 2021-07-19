@@ -12,6 +12,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 // NGX Modules
 import { ToastrModule } from 'ngx-toastr';
+import { NgxDropzoneModule } from 'ngx-dropzone';
 
 //Angular Material Components
 import {MatCheckboxModule} from '@angular/material/checkbox';
@@ -97,7 +98,8 @@ Amplify.configure(awsconfig);
     MatTableModule,
     MatSortModule,
     MatPaginatorModule,
-    ToastrModule.forRoot()
+    ToastrModule.forRoot(),
+    NgxDropzoneModule
   ],
   providers: [],
   bootstrap: [AppComponent],
