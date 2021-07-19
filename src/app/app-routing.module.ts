@@ -6,7 +6,7 @@ import { CreatePatientComponent } from './ui/create-patient/create-patient.compo
 import { MyTaskComponent } from './ui/my-task/my-task.component';
 import { MyNotificationComponent } from './ui/my-notification/my-notification.component';
 import { MyReportComponent } from './ui/my-report/my-report.component';
-import { ProfileComponent } from './ui/profile/profile.component';
+import { MyAccountComponent } from './ui/my-account/my-account.component';
 
 const routes: Routes = [{
   path: '',
@@ -42,12 +42,12 @@ const routes: Routes = [{
       component: MyReportComponent
     },
     {
-      path: 'profile',
+      path: 'my-account',
       pathMatch: 'full',
-      component: ProfileComponent
+      component: MyAccountComponent
     },
     {
-      path: '**', //'else'
+      path: '**', // 'else'
       pathMatch: 'full',
       component: HomeComponent
     }

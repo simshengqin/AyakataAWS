@@ -2,10 +2,10 @@ import { Component, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-profile',
-  templateUrl: './profile.component.html',
-  styleUrls: ['./profile.component.css']
+  templateUrl: './my-account.component.html',
+  styleUrls: ['./my-account.component.css']
 })
-export class ProfileComponent implements OnInit {
+export class MyAccountComponent implements OnInit {
   username: string;
 
   constructor() { }
