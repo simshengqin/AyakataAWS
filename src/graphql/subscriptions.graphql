@@ -1,231 +1,66 @@
 # this is an auto generated file. This will be overwritten
-subscription OnCreatePatient {
-  onCreatePatient {
+subscription OnCreateTask {
+  onCreateTask {
     id
-    Patient_No
-    Case_No
-    Referral_Type_From
-    No_of_Subspecialities
-    No_of_Secondary_Diagnosis_ICD9
-    Adm_DateTime
-    Adm_Dept_Description
-    Adm_Type_Desc
-    Adm_Reason
-    Adm_Trt_Cat_Desc
-    Adm_Physical_Class_Desc
-    Adm_Subspecialty_Desc
-    Dis_DateTime
-    Dis_Dept_Description
-    Dis_Reason
-    Dis_Physical_Class_Desc
-    Case_Specialty_Desc
-    Discharge_Type_Desc
-    Primary_Diagnosis_Code_Mediclaim
-    Primary_Diagnosis_Description_Mediclaim
-    Secondary_Diagnosis_Codes_Subvention
-    MDC_Code
-    MDC_Description
-    Dis_DateTime_Planned
-    CCI_Score
-    DS_Turn_Inpatient_Ind
-    Outpatient_Turn_DS_Ind
-    Unplanned_Surgery_Ind
-    Re_Adm_Ind
-    Planned_Adm_Ind
-    Lodger_Ind
-    Surgical_Emergency_Ind
-    LOS_Days
-    Last_Day_LOS_Hours
-    Acute_LOS_Days
-    HD_LOS_Days
-    ICU_LOS_Days
-    Rehab_LOS_Days
-    No_of_Surgical_Operations
-    No_of_Secondary_Diagnosis_Subvention
-    Test_Code
-    Test_Result
-    Result_Test_Date
-    Minimum_Range
-    Maximum_Range
-    Short_Text
-    Panel_Test_Code
-    Test_Order
-    Chapter_Description
-    Number_of_Tests
-    Order_Text
-    Order_Creation_Date
-    Dosage_Ordered_Unit
-    Dosage_Ordered
-    Dosage_Form
-    Strength_Unit
-    Component_Type_Code
-    Component_Type_Description
-    Medication_Order_Component_Text
-    Cluster_Preferred_Name_Code
-    Cluster_Preferred_Name_Description
-    Patient_DOB
-    Religion
-    Race
-    Gender
-    Marital_Status
-    Surgical_Code
-    Surgical_Desc
-    Operation_Table_Code
-    Operation_Date
+    filename
+    uploadDate
+    patientCount
+    reportID
     createdAt
     updatedAt
   }
 }
-subscription OnUpdatePatient {
-  onUpdatePatient {
+subscription OnUpdateTask {
+  onUpdateTask {
     id
-    Patient_No
-    Case_No
-    Referral_Type_From
-    No_of_Subspecialities
-    No_of_Secondary_Diagnosis_ICD9
-    Adm_DateTime
-    Adm_Dept_Description
-    Adm_Type_Desc
-    Adm_Reason
-    Adm_Trt_Cat_Desc
-    Adm_Physical_Class_Desc
-    Adm_Subspecialty_Desc
-    Dis_DateTime
-    Dis_Dept_Description
-    Dis_Reason
-    Dis_Physical_Class_Desc
-    Case_Specialty_Desc
-    Discharge_Type_Desc
-    Primary_Diagnosis_Code_Mediclaim
-    Primary_Diagnosis_Description_Mediclaim
-    Secondary_Diagnosis_Codes_Subvention
-    MDC_Code
-    MDC_Description
-    Dis_DateTime_Planned
-    CCI_Score
-    DS_Turn_Inpatient_Ind
-    Outpatient_Turn_DS_Ind
-    Unplanned_Surgery_Ind
-    Re_Adm_Ind
-    Planned_Adm_Ind
-    Lodger_Ind
-    Surgical_Emergency_Ind
-    LOS_Days
-    Last_Day_LOS_Hours
-    Acute_LOS_Days
-    HD_LOS_Days
-    ICU_LOS_Days
-    Rehab_LOS_Days
-    No_of_Surgical_Operations
-    No_of_Secondary_Diagnosis_Subvention
-    Test_Code
-    Test_Result
-    Result_Test_Date
-    Minimum_Range
-    Maximum_Range
-    Short_Text
-    Panel_Test_Code
-    Test_Order
-    Chapter_Description
-    Number_of_Tests
-    Order_Text
-    Order_Creation_Date
-    Dosage_Ordered_Unit
-    Dosage_Ordered
-    Dosage_Form
-    Strength_Unit
-    Component_Type_Code
-    Component_Type_Description
-    Medication_Order_Component_Text
-    Cluster_Preferred_Name_Code
-    Cluster_Preferred_Name_Description
-    Patient_DOB
-    Religion
-    Race
-    Gender
-    Marital_Status
-    Surgical_Code
-    Surgical_Desc
-    Operation_Table_Code
-    Operation_Date
+    filename
+    uploadDate
+    patientCount
+    reportID
     createdAt
     updatedAt
   }
 }
-subscription OnDeletePatient {
-  onDeletePatient {
+subscription OnDeleteTask {
+  onDeleteTask {
     id
-    Patient_No
-    Case_No
-    Referral_Type_From
-    No_of_Subspecialities
-    No_of_Secondary_Diagnosis_ICD9
-    Adm_DateTime
-    Adm_Dept_Description
-    Adm_Type_Desc
-    Adm_Reason
-    Adm_Trt_Cat_Desc
-    Adm_Physical_Class_Desc
-    Adm_Subspecialty_Desc
-    Dis_DateTime
-    Dis_Dept_Description
-    Dis_Reason
-    Dis_Physical_Class_Desc
-    Case_Specialty_Desc
-    Discharge_Type_Desc
-    Primary_Diagnosis_Code_Mediclaim
-    Primary_Diagnosis_Description_Mediclaim
-    Secondary_Diagnosis_Codes_Subvention
-    MDC_Code
-    MDC_Description
-    Dis_DateTime_Planned
-    CCI_Score
-    DS_Turn_Inpatient_Ind
-    Outpatient_Turn_DS_Ind
-    Unplanned_Surgery_Ind
-    Re_Adm_Ind
-    Planned_Adm_Ind
-    Lodger_Ind
-    Surgical_Emergency_Ind
-    LOS_Days
-    Last_Day_LOS_Hours
-    Acute_LOS_Days
-    HD_LOS_Days
-    ICU_LOS_Days
-    Rehab_LOS_Days
-    No_of_Surgical_Operations
-    No_of_Secondary_Diagnosis_Subvention
-    Test_Code
-    Test_Result
-    Result_Test_Date
-    Minimum_Range
-    Maximum_Range
-    Short_Text
-    Panel_Test_Code
-    Test_Order
-    Chapter_Description
-    Number_of_Tests
-    Order_Text
-    Order_Creation_Date
-    Dosage_Ordered_Unit
-    Dosage_Ordered
-    Dosage_Form
-    Strength_Unit
-    Component_Type_Code
-    Component_Type_Description
-    Medication_Order_Component_Text
-    Cluster_Preferred_Name_Code
-    Cluster_Preferred_Name_Description
-    Patient_DOB
-    Religion
-    Race
-    Gender
-    Marital_Status
-    Surgical_Code
-    Surgical_Desc
-    Operation_Table_Code
-    Operation_Date
+    filename
+    uploadDate
+    patientCount
+    reportID
+    createdAt
+    updatedAt
+  }
+}
+subscription OnCreateReport {
+  onCreateReport {
+    id
+    patientID
+    predictedMonths
+    predictedDate
+    reportID
+    createdAt
+    updatedAt
+  }
+}
+subscription OnUpdateReport {
+  onUpdateReport {
+    id
+    patientID
+    predictedMonths
+    predictedDate
+    reportID
+    createdAt
+    updatedAt
+  }
+}
+subscription OnDeleteReport {
+  onDeleteReport {
+    id
+    patientID
+    predictedMonths
+    predictedDate
+    reportID
     createdAt
     updatedAt
   }

@@ -2,27 +2,30 @@ import {AfterViewInit, Component, OnInit, ViewChild} from '@angular/core';
 import {MatSort} from '@angular/material/sort';
 import {MatPaginator} from '@angular/material/paginator';
 import {MatTableDataSource} from '@angular/material/table';
-import {Router} from "@angular/router";
+import {Router} from '@angular/router';
+import {Task} from '../../core/models/task';
+import {APIService} from "../../API.service";
+import {Report} from "../../core/models/report";
 
 @Component({
   selector: 'app-my-task',
   templateUrl: './my-task.component.html',
   styleUrls: ['./my-task.component.scss']
 })
-export class MyTaskComponent implements OnInit, AfterViewInit {
+export class MyTaskComponent implements OnInit {
 
   dataSource;
   @ViewChild(MatSort) sort: MatSort;
   @ViewChild(MatPaginator) paginator: MatPaginator;
   tableColumns: string[] = ['position', 'filename', 'uploadDate', 'patientCount', 'status'];
-  data = [
-    {position: 1, filename: 'test1.csv', uploadDate: '16/01/2015', patientCount: '5', status: 'processing'},
-    {position: 2, filename: 'test2.csv', uploadDate: '18/05/2015', patientCount: '8', status: 'processing'},
-    {position: 3, filename: 'test3.csv', uploadDate: '26/06/2015', patientCount: '11', status: 'completed'},
-    {position: 4, filename: 'test4.csv', uploadDate: '22/01/2015', patientCount: '15', status: 'completed'},
-    {position: 5, filename: 'test5.csv', uploadDate: '16/05/2015', patientCount: '12', status: 'processing'},
-    {position: 6, filename: 'test6.csv', uploadDate: '21/03/2015', patientCount: '13', status: 'completed'},
-  ];
+  // data = [
+  //   {filename: 'test1.csv', uploadDate: '16/01/2015', patientCount: '5', status: 'processing'},
+  //   {filename: 'test2.csv', uploadDate: '18/05/2015', patientCount: '8', status: 'processing'},
+  //   {filename: 'test3.csv', uploadDate: '26/06/2015', patientCount: '11', status: 'completed'},
+  //   {filename: 'test4.csv', uploadDate: '22/01/2015', patientCount: '15', status: 'completed'},
+  //   {filename: 'test5.csv', uploadDate: '16/05/2015', patientCount: '12', status: 'processing'},
+  //   {filename: 'test6.csv', uploadDate: '21/03/2015', patientCount: '13', status: 'completed'},
+  // ];
   options = {
     Month: [
       {key: 'Month', selected: 'selected'},
@@ -58,19 +61,32 @@ export class MyTaskComponent implements OnInit, AfterViewInit {
   clickedRows = new Set<any>();
   constructor(
     private router: Router,
+    private api: APIService
   ) {
 
   }
 
-  ngOnInit(): void {
+  async ngOnInit(): Promise<void> {
+    const newTask = {
+      filename: 'bb',
+      uploadDate: 10005,
+      patientCount: 8,
+      reportID: '3'
+    };
+    await this.api.CreateTask(newTask);
+    this.api.ListTasks().then(event => {
+      const tasks = event.items as Array<Task>;
+      for (let i = 0; i < tasks.length; i++) {
+        tasks[i].position = i + 1;
+      }
+      this.dataSource = new MatTableDataSource(tasks);
+      this.dataSource.sort = this.sort;
+      this.dataSource.paginator = this.paginator;
+      console.log(this.dataSource);
+    });
+
   }
 
-  ngAfterViewInit() {
-    this.dataSource = new MatTableDataSource(this.data);
-    this.dataSource.sort = this.sort;
-    this.dataSource.paginator = this.paginator;
-    console.log(this.dataSource);
-  }
 
   onViewReport(filename: string | string) {
     this.router.navigate(['my-report'], { queryParams: { filename }});

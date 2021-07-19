@@ -1,79 +1,94 @@
-type Patient @model {
+type Task @model {
   id: ID!
-
-  Patient_No: String
-  Case_No: String
-  Referral_Type_From: String
-  No_of_Subspecialities: String
-  No_of_Secondary_Diagnosis_ICD9: String
-  Adm_DateTime: String
-  Adm_Dept_Description: String
-  Adm_Type_Desc: String
-  Adm_Reason: String
-  Adm_Trt_Cat_Desc: String
-  Adm_Physical_Class_Desc: String
-  Adm_Subspecialty_Desc: String
-  Dis_DateTime: String
-  Dis_Dept_Description: String
-  Dis_Reason: String
-  Dis_Physical_Class_Desc: String
-  Case_Specialty_Desc: String
-  Discharge_Type_Desc: String
-  Primary_Diagnosis_Code_Mediclaim: String
-  Primary_Diagnosis_Description_Mediclaim: String
-  Secondary_Diagnosis_Codes_Subvention: String
-  MDC_Code: String
-  MDC_Description: String
-  Dis_DateTime_Planned: String
-  CCI_Score: String
-  DS_Turn_Inpatient_Ind: String
-  Outpatient_Turn_DS_Ind: String
-  Unplanned_Surgery_Ind: String
-  Re_Adm_Ind: String
-  Planned_Adm_Ind: String
-  Lodger_Ind: String
-  Surgical_Emergency_Ind: String
-  LOS_Days: String
-  Last_Day_LOS_Hours: String
-  Acute_LOS_Days: String
-  HD_LOS_Days: String
-  ICU_LOS_Days: String
-  Rehab_LOS_Days: String
-  No_of_Surgical_Operations: String
-  No_of_Secondary_Diagnosis_Subvention: String
-
-
-  Test_Code: String
-  Test_Result: String
-  Result_Test_Date: String
-  Minimum_Range: String
-  Maximum_Range: String
-  Short_Text: String
-  Panel_Test_Code: String
-  Test_Order: String
-  Chapter_Description: String
-  Number_of_Tests: String
-
-  Order_Text: String
-  Order_Creation_Date: String
-  Dosage_Ordered_Unit: String
-  Dosage_Ordered: String
-  Dosage_Form: String
-  Strength_Unit: String
-  Component_Type_Code: String
-  Component_Type_Description: String
-  Medication_Order_Component_Text: String
-  Cluster_Preferred_Name_Code: String
-  Cluster_Preferred_Name_Description: String
-
-  Patient_DOB: String
-  Religion: String
-  Race: String
-  Gender: String
-  Marital_Status: String
-
-  Surgical_Code: String
-  Surgical_Desc: String
-  Operation_Table_Code: String
-  Operation_Date: String
+  filename: String
+  uploadDate: Int
+  patientCount: Int
+  reportID: String
 }
+type Report @model {
+  id: ID!
+  patientID: String
+  predictedMonths: Int
+  predictedDate: Int
+  reportID: String
+}
+
+#type Patient @model {
+#  id: ID!
+#
+#  Patient_No: String
+#  Case_No: String
+#  Referral_Type_From: String
+#  No_of_Subspecialities: String
+#  No_of_Secondary_Diagnosis_ICD9: String
+#  Adm_DateTime: String
+#  Adm_Dept_Description: String
+#  Adm_Type_Desc: String
+#  Adm_Reason: String
+#  Adm_Trt_Cat_Desc: String
+#  Adm_Physical_Class_Desc: String
+#  Adm_Subspecialty_Desc: String
+#  Dis_DateTime: String
+#  Dis_Dept_Description: String
+#  Dis_Reason: String
+#  Dis_Physical_Class_Desc: String
+#  Case_Specialty_Desc: String
+#  Discharge_Type_Desc: String
+#  Primary_Diagnosis_Code_Mediclaim: String
+#  Primary_Diagnosis_Description_Mediclaim: String
+#  Secondary_Diagnosis_Codes_Subvention: String
+#  MDC_Code: String
+#  MDC_Description: String
+#  Dis_DateTime_Planned: String
+#  CCI_Score: String
+#  DS_Turn_Inpatient_Ind: String
+#  Outpatient_Turn_DS_Ind: String
+#  Unplanned_Surgery_Ind: String
+#  Re_Adm_Ind: String
+#  Planned_Adm_Ind: String
+#  Lodger_Ind: String
+#  Surgical_Emergency_Ind: String
+#  LOS_Days: String
+#  Last_Day_LOS_Hours: String
+#  Acute_LOS_Days: String
+#  HD_LOS_Days: String
+#  ICU_LOS_Days: String
+#  Rehab_LOS_Days: String
+#  No_of_Surgical_Operations: String
+#  No_of_Secondary_Diagnosis_Subvention: String
+#
+#
+#  Test_Code: String
+#  Test_Result: String
+#  Result_Test_Date: String
+#  Minimum_Range: String
+#  Maximum_Range: String
+#  Short_Text: String
+#  Panel_Test_Code: String
+#  Test_Order: String
+#  Chapter_Description: String
+#  Number_of_Tests: String
+#
+#  Order_Text: String
+#  Order_Creation_Date: String
+#  Dosage_Ordered_Unit: String
+#  Dosage_Ordered: String
+#  Dosage_Form: String
+#  Strength_Unit: String
+#  Component_Type_Code: String
+#  Component_Type_Description: String
+#  Medication_Order_Component_Text: String
+#  Cluster_Preferred_Name_Code: String
+#  Cluster_Preferred_Name_Description: String
+#
+#  Patient_DOB: String
+#  Religion: String
+#  Race: String
+#  Gender: String
+#  Marital_Status: String
+#
+#  Surgical_Code: String
+#  Surgical_Desc: String
+#  Operation_Table_Code: String
+#  Operation_Date: String
+#}

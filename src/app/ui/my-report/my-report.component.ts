@@ -2,25 +2,28 @@ import {AfterViewInit, Component, OnInit, ViewChild} from '@angular/core';
 import {MatTableDataSource} from '@angular/material/table';
 import {MatSort} from '@angular/material/sort';
 import {MatPaginator} from '@angular/material/paginator';
+import {Task} from '../../core/models/task';
+import {APIService} from '../../API.service';
+import {Report} from '../../core/models/report';
 
 @Component({
   selector: 'app-my-report',
   templateUrl: './my-report.component.html',
   styleUrls: ['./my-report.component.scss']
 })
-export class MyReportComponent implements OnInit, AfterViewInit {
+export class MyReportComponent implements OnInit {
   dataSource;
   @ViewChild(MatSort) sort: MatSort;
   @ViewChild(MatPaginator) paginator: MatPaginator;
-  tableColumns: string[] = ['position', 'PatientID', 'Predicted Months', 'Predicted Date'];
-  data = [
-    {position: 1, PatientID: '007xXn9BM', 'Predicted Months': '2', 'Predicted Date': '16/01/2015'},
-    {position: 2, PatientID: '4MxPiblH7', 'Predicted Months': '3', 'Predicted Date': '28/05/2015'},
-    {position: 3, PatientID: 'fM8yLihji', 'Predicted Months': '5', 'Predicted Date': '20/05/2016'},
-    {position: 4, PatientID: 'U3eMTlDw6', 'Predicted Months': '1', 'Predicted Date': '31/05/2015'},
-    {position: 5, PatientID: 'fM8yLihji', 'Predicted Months': '5', 'Predicted Date': '20/05/2016'},
-    {position: 6, PatientID: 'U3eMTlDw6', 'Predicted Months': '1', 'Predicted Date': '31/05/2015'},
-  ];
+  tableColumns: string[] = ['position', 'patientID', 'predictedMonths', 'predictedDate'];
+  // data = [
+  //   { patientID: '007xXn9BM', predictedMonths: '2', predictedDate: '16/01/2015'},
+  //   { patientID: '4MxPiblH7', predictedMonths: '3', predictedDate: '28/05/2015'},
+  //   { patientID: 'fM8yLihji', predictedMonths: '5', predictedDate: '20/05/2016'},
+  //   { patientID: 'U3eMTlDw6', predictedMonths: '1', predictedDate: '31/05/2015'},
+  //   { patientID: 'fM8yLihji', predictedMonths: '5', predictedDate: '20/05/2016'},
+  //   { patientID: 'U3eMTlDw6', predictedMonths: '1', predictedDate: '31/05/2015'},
+  // ];
   options = {
     Month: [
       {key: 'Month', selected: 'selected'},
@@ -54,17 +57,29 @@ export class MyReportComponent implements OnInit, AfterViewInit {
     ]
   };
   clickedRows = new Set<any>();
-  constructor() {
-
+  constructor(private api: APIService) {
   }
 
-  ngOnInit(): void {
+  async ngOnInit(): Promise<void> {
+
+    const newReport = {
+      patientID: '6',
+      predictedMonths: 6,
+      predictedDate: 65000,
+      reportID: '2'
+    };
+    await this.api.CreateReport(newReport);
+    this.api.ListReports().then(event => {
+      const reports = event.items as Array<Report>;
+      for (let i = 0; i < reports.length; i++) {
+        reports[i].position = i + 1;
+      }
+      this.dataSource = new MatTableDataSource(reports);
+      this.dataSource.sort = this.sort;
+      this.dataSource.paginator = this.paginator;
+      console.log(this.dataSource);
+    });
   }
 
-  ngAfterViewInit() {
-    this.dataSource = new MatTableDataSource(this.data);
-    this.dataSource.sort = this.sort;
-    this.dataSource.paginator = this.paginator;
-    console.log(this.dataSource);
-  }
+
 }
