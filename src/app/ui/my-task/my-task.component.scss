@@ -68,8 +68,11 @@ th.mat-sort-header-sorted {
   text-align: right;
   margin-top: 16px;
 }
-.view-graph:hover {
+.view-graph:hover, .view-report:hover {
   cursor: pointer;
   color: #FD6642;
 }
 
+.view-report {
+  margin-left: 8px;
+}
