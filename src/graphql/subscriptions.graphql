@@ -5,7 +5,7 @@ subscription OnCreateTask {
     filename
     uploadDate
     patientCount
-    reportID
+    status2
     createdAt
     updatedAt
   }
@@ -16,7 +16,7 @@ subscription OnUpdateTask {
     filename
     uploadDate
     patientCount
-    reportID
+    status2
     createdAt
     updatedAt
   }
@@ -27,7 +27,7 @@ subscription OnDeleteTask {
     filename
     uploadDate
     patientCount
-    reportID
+    status2
     createdAt
     updatedAt
   }

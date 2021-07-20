@@ -3,12 +3,13 @@ type Task @model {
   filename: String
   uploadDate: Float
   patientCount: Float
-  reportID: String
+#  reportID: String
+  status2: Int #  0 => Processing, 1 => Processed, not read (notification), 2 => Read
 }
 type Report @model {
   id: ID!
   patientID: String
-  predictedMonths: Float
+  predictedMonths: Int
   predictedDate: Float
   reportID: String
 }

@@ -15,4 +15,8 @@
   margin-left: -.4rem;
   padding: .2em .45em;
 }
+.view-report:hover {
+    cursor: pointer;
+    color: #FD6642;
+  }
 /* .main is class, #main is ID */

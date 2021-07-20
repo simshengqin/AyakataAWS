@@ -8,7 +8,7 @@ mutation CreateTask(
     filename
     uploadDate
     patientCount
-    reportID
+    status2
     createdAt
     updatedAt
   }
@@ -22,7 +22,7 @@ mutation UpdateTask(
     filename
     uploadDate
     patientCount
-    reportID
+    status2
     createdAt
     updatedAt
   }
@@ -36,7 +36,7 @@ mutation DeleteTask(
     filename
     uploadDate
     patientCount
-    reportID
+    status2
     createdAt
     updatedAt
   }

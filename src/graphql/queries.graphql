@@ -5,7 +5,7 @@ query GetTask($id: ID!) {
     filename
     uploadDate
     patientCount
-    reportID
+    status2
     createdAt
     updatedAt
   }
@@ -21,7 +21,7 @@ query ListTasks(
       filename
       uploadDate
       patientCount
-      reportID
+      status2
       createdAt
       updatedAt
     }

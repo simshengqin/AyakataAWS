@@ -14,14 +14,14 @@ export type CreateTaskInput = {
   filename?: string | null;
   uploadDate?: number | null;
   patientCount?: number | null;
-  reportID?: string | null;
+  status2?: number | null;
 };
 
 export type ModelTaskConditionInput = {
   filename?: ModelStringInput | null;
   uploadDate?: ModelFloatInput | null;
   patientCount?: ModelFloatInput | null;
-  reportID?: ModelStringInput | null;
+  status2?: ModelIntInput | null;
   and?: Array<ModelTaskConditionInput | null> | null;
   or?: Array<ModelTaskConditionInput | null> | null;
   not?: ModelTaskConditionInput | null;
@@ -78,13 +78,25 @@ export type ModelFloatInput = {
   attributeType?: ModelAttributeTypes | null;
 };
 
+export type ModelIntInput = {
+  ne?: number | null;
+  eq?: number | null;
+  le?: number | null;
+  lt?: number | null;
+  ge?: number | null;
+  gt?: number | null;
+  between?: Array<number | null> | null;
+  attributeExists?: boolean | null;
+  attributeType?: ModelAttributeTypes | null;
+};
+
 export type Task = {
   __typename: "Task";
   id: string;
   filename?: string | null;
   uploadDate?: number | null;
   patientCount?: number | null;
-  reportID?: string | null;
+  status2?: number | null;
   createdAt: string;
   updatedAt: string;
 };
@@ -94,7 +106,7 @@ export type UpdateTaskInput = {
   filename?: string | null;
   uploadDate?: number | null;
   patientCount?: number | null;
-  reportID?: string | null;
+  status2?: number | null;
 };
 
 export type DeleteTaskInput = {
@@ -111,7 +123,7 @@ export type CreateReportInput = {
 
 export type ModelReportConditionInput = {
   patientID?: ModelStringInput | null;
-  predictedMonths?: ModelFloatInput | null;
+  predictedMonths?: ModelIntInput | null;
   predictedDate?: ModelFloatInput | null;
   reportID?: ModelStringInput | null;
   and?: Array<ModelReportConditionInput | null> | null;
@@ -147,7 +159,7 @@ export type ModelTaskFilterInput = {
   filename?: ModelStringInput | null;
   uploadDate?: ModelFloatInput | null;
   patientCount?: ModelFloatInput | null;
-  reportID?: ModelStringInput | null;
+  status2?: ModelIntInput | null;
   and?: Array<ModelTaskFilterInput | null> | null;
   or?: Array<ModelTaskFilterInput | null> | null;
   not?: ModelTaskFilterInput | null;
@@ -178,7 +190,7 @@ export type ModelTaskConnection = {
 export type ModelReportFilterInput = {
   id?: ModelIDInput | null;
   patientID?: ModelStringInput | null;
-  predictedMonths?: ModelFloatInput | null;
+  predictedMonths?: ModelIntInput | null;
   predictedDate?: ModelFloatInput | null;
   reportID?: ModelStringInput | null;
   and?: Array<ModelReportFilterInput | null> | null;
@@ -198,7 +210,7 @@ export type CreateTaskMutation = {
   filename?: string | null;
   uploadDate?: number | null;
   patientCount?: number | null;
-  reportID?: string | null;
+  status2?: number | null;
   createdAt: string;
   updatedAt: string;
 };
@@ -209,7 +221,7 @@ export type UpdateTaskMutation = {
   filename?: string | null;
   uploadDate?: number | null;
   patientCount?: number | null;
-  reportID?: string | null;
+  status2?: number | null;
   createdAt: string;
   updatedAt: string;
 };
@@ -220,7 +232,7 @@ export type DeleteTaskMutation = {
   filename?: string | null;
   uploadDate?: number | null;
   patientCount?: number | null;
-  reportID?: string | null;
+  status2?: number | null;
   createdAt: string;
   updatedAt: string;
 };
@@ -264,7 +276,7 @@ export type GetTaskQuery = {
   filename?: string | null;
   uploadDate?: number | null;
   patientCount?: number | null;
-  reportID?: string | null;
+  status2?: number | null;
   createdAt: string;
   updatedAt: string;
 };
@@ -277,7 +289,7 @@ export type ListTasksQuery = {
     filename?: string | null;
     uploadDate?: number | null;
     patientCount?: number | null;
-    reportID?: string | null;
+    status2?: number | null;
     createdAt: string;
     updatedAt: string;
   } | null> | null;
@@ -316,7 +328,7 @@ export type OnCreateTaskSubscription = {
   filename?: string | null;
   uploadDate?: number | null;
   patientCount?: number | null;
-  reportID?: string | null;
+  status2?: number | null;
   createdAt: string;
   updatedAt: string;
 };
@@ -327,7 +339,7 @@ export type OnUpdateTaskSubscription = {
   filename?: string | null;
   uploadDate?: number | null;
   patientCount?: number | null;
-  reportID?: string | null;
+  status2?: number | null;
   createdAt: string;
   updatedAt: string;
 };
@@ -338,7 +350,7 @@ export type OnDeleteTaskSubscription = {
   filename?: string | null;
   uploadDate?: number | null;
   patientCount?: number | null;
-  reportID?: string | null;
+  status2?: number | null;
   createdAt: string;
   updatedAt: string;
 };
@@ -391,7 +403,7 @@ export class APIService {
           filename
           uploadDate
           patientCount
-          reportID
+          status2
           createdAt
           updatedAt
         }
@@ -418,7 +430,7 @@ export class APIService {
           filename
           uploadDate
           patientCount
-          reportID
+          status2
           createdAt
           updatedAt
         }
@@ -445,7 +457,7 @@ export class APIService {
           filename
           uploadDate
           patientCount
-          reportID
+          status2
           createdAt
           updatedAt
         }
@@ -550,7 +562,7 @@ export class APIService {
           filename
           uploadDate
           patientCount
-          reportID
+          status2
           createdAt
           updatedAt
         }
@@ -577,7 +589,7 @@ export class APIService {
             filename
             uploadDate
             patientCount
-            reportID
+            status2
             createdAt
             updatedAt
           }
@@ -667,7 +679,7 @@ export class APIService {
           filename
           uploadDate
           patientCount
-          reportID
+          status2
           createdAt
           updatedAt
         }
@@ -686,7 +698,7 @@ export class APIService {
           filename
           uploadDate
           patientCount
-          reportID
+          status2
           createdAt
           updatedAt
         }
@@ -705,7 +717,7 @@ export class APIService {
           filename
           uploadDate
           patientCount
-          reportID
+          status2
           createdAt
           updatedAt
         }

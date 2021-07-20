@@ -1,8 +1,9 @@
 import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
 import {Storage} from 'aws-amplify';
 import {ToastrService} from 'ngx-toastr';
-import {NgxCsvParser} from "ngx-csv-parser";
-import {APIService} from "../../API.service";
+import {NgxCsvParser} from 'ngx-csv-parser';
+import {APIService} from '../../API.service';
+import {first} from 'rxjs/operators';
 
 @Component({
   selector: 'app-create-patient',
@@ -13,22 +14,22 @@ export class CreatePatientComponent implements OnInit {
 
   files: File[] = [];
 
-  fileNames:string[] = [
-    "casevisit_test.csv" ,
-    "labresult_test.csv" ,
-    "medicationorder_test.csv",
-    "patientdemo_test.csv",
-    "surgical_test.csv"
-  ]
+  fileNames: string[] = [
+    'casevisit_test.csv' ,
+    'labresult_test.csv' ,
+    'medicationorder_test.csv',
+    'patientdemo_test.csv',
+    'surgical_test.csv'
+  ];
 
-  ngx_toast_index_success:number = 1;
-  ngx_toast_index_error:number = 1;
+  ngx_toast_index_success = 1;
+  ngx_toast_index_error = 1;
 
-  SuccessfulFileUpload:number = 0;
-  UnsuccessfulFileUpload:number = 0;
+  SuccessfulFileUpload = 0;
+  UnsuccessfulFileUpload = 0;
 
-  errorMessages:string = "";
-  successMessage:string = "";
+  errorMessages = '';
+  successMessage = '';
 
   /*
   @ViewChild('filePatient') filePatient: ElementRef;
@@ -41,7 +42,7 @@ export class CreatePatientComponent implements OnInit {
   constructor(private toastr: ToastrService, private ngxCsvParser: NgxCsvParser, private api: APIService, ) { }
 
   ngOnInit(): void {
-    this.start()
+    this.start();
   }
 
   // NGX Dropzone
@@ -56,7 +57,7 @@ export class CreatePatientComponent implements OnInit {
   }
 
   start(){
-    document.getElementById("displayUploadStatus").style.display = "none"
+    document.getElementById('displayUploadStatus').style.display = 'none';
   }
 
   async uploadFile() {
@@ -66,11 +67,10 @@ export class CreatePatientComponent implements OnInit {
     this.ngx_toast_index_success = 1; // reset index
     this.ngx_toast_index_error = 1; // reset index
 
-    for(var ele of this.files){
-      if(this.fileNames.includes(ele.name.toLowerCase())){
+    for (const ele of this.files){
+      if (this.fileNames.includes(ele.name.toLowerCase())){
         this.ngx_toast_index_success++;
         this.SuccessfulFileUpload++;
-        const result = await Storage.put(ele.name, ele);
         const patientCount = 0;
         const patients = new Set();
         this.ngxCsvParser.parse(ele, { header: true, delimiter: ',' })
@@ -83,26 +83,37 @@ export class CreatePatientComponent implements OnInit {
             filename: ele.name,
             uploadDate: Date.now(),
             patientCount: patients.size,
-            reportID: null
+            status2: 0
+            // reportID: null,
+            // isRead: false
           };
           console.log(newTask);
-          await this.api.CreateTask(newTask);
+          const newTaskDB = await this.api.CreateTask(newTask);
+          const result = await Storage.put(newTaskDB.id + '/' + ele.name, ele);
+          // const newNotification = {
+          //   taskID:  newTaskDB.id,
+          //   filename: ele.name,
+          //   isActivated: false,
+          //   isRead: false,
+          // };
+          // console.log(newNotification);
+          // await this.api.CreateNotification(newNotification);
         });
 
 
       } else {
-        this.errorMessages += this.ngx_toast_index_error + ".) " + ele.name
+        this.errorMessages += this.ngx_toast_index_error + '.) ' + ele.name;
         this.ngx_toast_index_error++;
         this.UnsuccessfulFileUpload++;
       }
     }
 
-    document.getElementById("displayUploadStatus").style.display = "block";
+    document.getElementById('displayUploadStatus').style.display = 'block';
 
-    if(this.SuccessfulFileUpload>0){
+    if (this.SuccessfulFileUpload > 0){
       this.showSuccess();
     }
-    if(this.UnsuccessfulFileUpload>0){
+    if (this.UnsuccessfulFileUpload > 0){
       this.showError();
     }
 
@@ -114,10 +125,10 @@ export class CreatePatientComponent implements OnInit {
     this.toastr.success( this.SuccessfulFileUpload + ' File(s) have been Uploaded successfully!', '', {positionClass: 'toast-top-center'});
   }
   public showError(){
-    this.toastr.error('The following file(s) could not be Uploaded: ' + this.errorMessages + ' unsuccessfully!', '', {positionClass: 'toast-top-center'})
+    this.toastr.error('The following file(s) could not be Uploaded: ' + this.errorMessages + ' unsuccessfully!', '', {positionClass: 'toast-top-center'});
   }
   public closeDisplay(){
-    document.getElementById("displayUploadStatus").style.display = "none"
+    document.getElementById('displayUploadStatus').style.display = 'none';
   }
 
   /*

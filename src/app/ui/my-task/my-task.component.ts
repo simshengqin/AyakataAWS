@@ -4,9 +4,9 @@ import {MatPaginator} from '@angular/material/paginator';
 import {MatTableDataSource} from '@angular/material/table';
 import {Router} from '@angular/router';
 import {Task} from '../../core/models/task';
-import {APIService} from "../../API.service";
-import {Report} from "../../core/models/report";
-import {DateHelper} from "../../core/services/date-helper";
+import {APIService} from '../../API.service';
+import {Report} from '../../core/models/report';
+import {DateHelper} from '../../core/services/date-helper';
 
 @Component({
   selector: 'app-my-task',
@@ -90,7 +90,7 @@ export class MyTaskComponent implements OnInit {
   }
 
 
-  onViewReport(filename: string | string) {
+  onViewReport(filename: string) {
     this.router.navigate(['my-report'], { queryParams: { filename }});
   }
 }

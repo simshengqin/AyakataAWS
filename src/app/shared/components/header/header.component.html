@@ -39,11 +39,16 @@
       <li class="nav-item avatar dropdown" dropdown>
         <a dropdownToggle mdbWavesEffect type="button" class="nav-link dropdown-toggle waves-light notification-bell" mdbWavesEffect>
           <i class="fas fa-bell"></i>
-          <span class="badge rounded-circle red z-depth-1">2</span>
+          <span *ngIf="newTasks.length > 0" class="badge rounded-circle red z-depth-1"> {{ newTasks.length }}</span>
         </a>
         <div *dropdownMenu class="dropdown-menu dropdown-menu-right dropdown dropdown-primary" role="menu">
-          <a class="dropdown-item waves-light" mdbWavesEffect  routerLink="">Task 1 is completed</a>
-          <a class="dropdown-item waves-light" mdbWavesEffect  routerLink="">Task 2 is completed</a>
+          <div *ngFor="let newTask of newTasks" class="dropdown-item waves-light" mdbWavesEffect >
+            <span (click)=onViewReport(newTask.filename) class="view-report"> {{ newTask.filename + " "}} has finished processing </span>
+          </div>
+          <div *ngIf="newTasks.length == 0" class="dropdown-item waves-light" mdbWavesEffect  >
+            No new notifications
+          </div>
+
         </div>
       </li>
       <li class="nav-item avatar dropdown" dropdown>
