@@ -61,5 +61,10 @@
     <mat-progress-spinner class="mt-2 mb-2" mode="indeterminate" [diameter]="40"></mat-progress-spinner>
   </div>
   <mat-paginator class="mt-3" [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+  <div class="col-3 mx-auto">
+    <select class="form-control" >
+      <option *ngFor="let option of options.Year" [value]="option.key == 'Year' ? '' : option.key" [selected]="option.selected">{{option.key}}</option>
+    </select>
+  </div>
   <app-chart  [chartDatasets] = patientCountsByMonth></app-chart>
 </div>

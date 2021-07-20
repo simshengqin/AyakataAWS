@@ -42,26 +42,13 @@ export class MyReportComponent implements OnInit {
       {key: 'Nov', selected: ''},
       {key: 'Dec', selected: ''},
     ],
-    Year: [
-      {key: 'Year', selected: 'selected'},
-      {key: '2010', selected: ''},
-      {key: '2011', selected: ''},
-      {key: '2012', selected: ''},
-      {key: '2013', selected: ''},
-      {key: '2014', selected: ''},
-      {key: '2015', selected: ''},
-      {key: '2016', selected: ''},
-      {key: '2017', selected: ''},
-      {key: '2018', selected: ''},
-      {key: '2019', selected: ''},
-      {key: '2020', selected: ''},
-      {key: '2021', selected: ''},
-    ]
+    Year: [ 'Select Year']
   };
   clickedRows = new Set<any>();
   fullMonthDayYearFormat: string;
   filename: string;
   patientCountsByMonth: Array<any>;
+  selectedChartYear = 'Select Year';
   constructor(private api: APIService, private dateHelper: DateHelper, private activatedRoute: ActivatedRoute, ) {
   }
 
@@ -100,17 +87,36 @@ export class MyReportComponent implements OnInit {
         }
         reports = filteredReports;
       }
-      const patientCountsByMonthArr = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+      const patientCountsByMonthDict = {};
+      const totalPatientCountsByMonthArr = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
       for (let i = 0; i < reports.length; i++) {
         reports[i].position = i + 1;
         let month = reports[i].predictedDate.split('/')[1];
+        const year = reports[i].predictedDate.split('/')[2];
         if (month[0] === '0') { month = month[1]; }
-        console.log(month);
-        patientCountsByMonthArr[+month - 1] += 1;
+        if (!(year in patientCountsByMonthDict)) {
+          patientCountsByMonthDict[year] = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+        }
+        if (!(this.options.Year.includes(year))) {
+          this.options.Year.push(year);
+        }
+        patientCountsByMonthDict[year][+month - 1] += 1;
+        totalPatientCountsByMonthArr[+month - 1] += 1;
       }
-      this.patientCountsByMonth = [
-        { data: patientCountsByMonthArr, label: 'Number of patients with complications in 2021' }
-      ];
+      this.options.Year.sort();
+      this.options.Year.unshift(this.options.Year.pop());
+      if (!this.selectedChartYear || this.selectedChartYear === 'Select Year') {
+        this.patientCountsByMonth = [
+          { data: totalPatientCountsByMonthArr, label: 'Total number of patients with complications' }
+        ];
+      }
+      else {
+        this.patientCountsByMonth = [
+          { data: patientCountsByMonthDict[this.selectedChartYear], label: 'Number of patients with complications in '
+              + this.selectedChartYear }
+        ];
+      }
+
       this.dataSource = new MatTableDataSource(reports);
       this.dataSource.sort = this.sort;
       this.dataSource.paginator = this.paginator;
