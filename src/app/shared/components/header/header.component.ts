@@ -19,15 +19,7 @@ export class HeaderComponent implements OnInit {
     this.url = this.router.url;
     console.log(this.url);
     this.username = localStorage.getItem('username'); // get cookies
-    this.api.ListTasks().then(event => {
-      const tasks = event.items as Array<Task>;
-      this.newTasks = [];
-      for (const task of tasks) {
-        if (task.status2 === 1) {
-          this.newTasks.push(task);
-        }
-      }
-    });
+    this.getNewTasks();
   } // ngOnInit --> run when components start
   async handleSignOutButtonClick() {
     try {
@@ -40,6 +32,17 @@ export class HeaderComponent implements OnInit {
       console.log('error signing out: ', error);
     }
   }
+  getNewTasks() {
+    this.api.ListTasks().then(event => {
+      const tasks = event.items as Array<Task>;
+      this.newTasks = [];
+      for (const task of tasks) {
+        if (task.status2 === 1) {
+          this.newTasks.push(task);
+        }
+      }
+    });
+  }
   async onViewReport(task: Task) {
     const updateTaskInput: UpdateTaskInput = {
       id: task.id,
@@ -50,6 +53,7 @@ export class HeaderComponent implements OnInit {
     };
     await this.api.UpdateTask(updateTaskInput);
     const filename = task.filename;
+    this.getNewTasks();
     this.router.navigate(['my-report'], {queryParams: {filename}});
   }
 }
