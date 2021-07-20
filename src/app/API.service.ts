@@ -15,6 +15,8 @@ export type CreateTaskInput = {
   uploadDate?: number | null;
   patientCount?: number | null;
   status2?: number | null;
+  createdAt?: string | null;
+  updatedAt?: string | null;
 };
 
 export type ModelTaskConditionInput = {
@@ -22,6 +24,8 @@ export type ModelTaskConditionInput = {
   uploadDate?: ModelFloatInput | null;
   patientCount?: ModelFloatInput | null;
   status2?: ModelIntInput | null;
+  createdAt?: ModelStringInput | null;
+  updatedAt?: ModelStringInput | null;
   and?: Array<ModelTaskConditionInput | null> | null;
   or?: Array<ModelTaskConditionInput | null> | null;
   not?: ModelTaskConditionInput | null;
@@ -97,8 +101,8 @@ export type Task = {
   uploadDate?: number | null;
   patientCount?: number | null;
   status2?: number | null;
-  createdAt: string;
-  updatedAt: string;
+  createdAt?: string | null;
+  updatedAt?: string | null;
 };
 
 export type UpdateTaskInput = {
@@ -107,6 +111,8 @@ export type UpdateTaskInput = {
   uploadDate?: number | null;
   patientCount?: number | null;
   status2?: number | null;
+  createdAt?: string | null;
+  updatedAt?: string | null;
 };
 
 export type DeleteTaskInput = {
@@ -115,17 +121,21 @@ export type DeleteTaskInput = {
 
 export type CreateReportInput = {
   id?: string | null;
+  filename?: string | null;
   patientID?: string | null;
-  predictedMonths?: number | null;
-  predictedDate?: number | null;
-  reportID?: string | null;
+  predictedMonths?: string | null;
+  predictedDate?: string | null;
+  createdAt?: string | null;
+  updatedAt?: string | null;
 };
 
 export type ModelReportConditionInput = {
+  filename?: ModelStringInput | null;
   patientID?: ModelStringInput | null;
-  predictedMonths?: ModelIntInput | null;
-  predictedDate?: ModelFloatInput | null;
-  reportID?: ModelStringInput | null;
+  predictedMonths?: ModelStringInput | null;
+  predictedDate?: ModelStringInput | null;
+  createdAt?: ModelStringInput | null;
+  updatedAt?: ModelStringInput | null;
   and?: Array<ModelReportConditionInput | null> | null;
   or?: Array<ModelReportConditionInput | null> | null;
   not?: ModelReportConditionInput | null;
@@ -134,20 +144,22 @@ export type ModelReportConditionInput = {
 export type Report = {
   __typename: "Report";
   id: string;
+  filename?: string | null;
   patientID?: string | null;
-  predictedMonths?: number | null;
-  predictedDate?: number | null;
-  reportID?: string | null;
-  createdAt: string;
-  updatedAt: string;
+  predictedMonths?: string | null;
+  predictedDate?: string | null;
+  createdAt?: string | null;
+  updatedAt?: string | null;
 };
 
 export type UpdateReportInput = {
   id: string;
+  filename?: string | null;
   patientID?: string | null;
-  predictedMonths?: number | null;
-  predictedDate?: number | null;
-  reportID?: string | null;
+  predictedMonths?: string | null;
+  predictedDate?: string | null;
+  createdAt?: string | null;
+  updatedAt?: string | null;
 };
 
 export type DeleteReportInput = {
@@ -160,6 +172,8 @@ export type ModelTaskFilterInput = {
   uploadDate?: ModelFloatInput | null;
   patientCount?: ModelFloatInput | null;
   status2?: ModelIntInput | null;
+  createdAt?: ModelStringInput | null;
+  updatedAt?: ModelStringInput | null;
   and?: Array<ModelTaskFilterInput | null> | null;
   or?: Array<ModelTaskFilterInput | null> | null;
   not?: ModelTaskFilterInput | null;
@@ -189,10 +203,12 @@ export type ModelTaskConnection = {
 
 export type ModelReportFilterInput = {
   id?: ModelIDInput | null;
+  filename?: ModelStringInput | null;
   patientID?: ModelStringInput | null;
-  predictedMonths?: ModelIntInput | null;
-  predictedDate?: ModelFloatInput | null;
-  reportID?: ModelStringInput | null;
+  predictedMonths?: ModelStringInput | null;
+  predictedDate?: ModelStringInput | null;
+  createdAt?: ModelStringInput | null;
+  updatedAt?: ModelStringInput | null;
   and?: Array<ModelReportFilterInput | null> | null;
   or?: Array<ModelReportFilterInput | null> | null;
   not?: ModelReportFilterInput | null;
@@ -211,8 +227,8 @@ export type CreateTaskMutation = {
   uploadDate?: number | null;
   patientCount?: number | null;
   status2?: number | null;
-  createdAt: string;
-  updatedAt: string;
+  createdAt?: string | null;
+  updatedAt?: string | null;
 };
 
 export type UpdateTaskMutation = {
@@ -222,8 +238,8 @@ export type UpdateTaskMutation = {
   uploadDate?: number | null;
   patientCount?: number | null;
   status2?: number | null;
-  createdAt: string;
-  updatedAt: string;
+  createdAt?: string | null;
+  updatedAt?: string | null;
 };
 
 export type DeleteTaskMutation = {
@@ -233,41 +249,41 @@ export type DeleteTaskMutation = {
   uploadDate?: number | null;
   patientCount?: number | null;
   status2?: number | null;
-  createdAt: string;
-  updatedAt: string;
+  createdAt?: string | null;
+  updatedAt?: string | null;
 };
 
 export type CreateReportMutation = {
   __typename: "Report";
   id: string;
+  filename?: string | null;
   patientID?: string | null;
-  predictedMonths?: number | null;
-  predictedDate?: number | null;
-  reportID?: string | null;
-  createdAt: string;
-  updatedAt: string;
+  predictedMonths?: string | null;
+  predictedDate?: string | null;
+  createdAt?: string | null;
+  updatedAt?: string | null;
 };
 
 export type UpdateReportMutation = {
   __typename: "Report";
   id: string;
+  filename?: string | null;
   patientID?: string | null;
-  predictedMonths?: number | null;
-  predictedDate?: number | null;
-  reportID?: string | null;
-  createdAt: string;
-  updatedAt: string;
+  predictedMonths?: string | null;
+  predictedDate?: string | null;
+  createdAt?: string | null;
+  updatedAt?: string | null;
 };
 
 export type DeleteReportMutation = {
   __typename: "Report";
   id: string;
+  filename?: string | null;
   patientID?: string | null;
-  predictedMonths?: number | null;
-  predictedDate?: number | null;
-  reportID?: string | null;
-  createdAt: string;
-  updatedAt: string;
+  predictedMonths?: string | null;
+  predictedDate?: string | null;
+  createdAt?: string | null;
+  updatedAt?: string | null;
 };
 
 export type GetTaskQuery = {
@@ -277,8 +293,8 @@ export type GetTaskQuery = {
   uploadDate?: number | null;
   patientCount?: number | null;
   status2?: number | null;
-  createdAt: string;
-  updatedAt: string;
+  createdAt?: string | null;
+  updatedAt?: string | null;
 };
 
 export type ListTasksQuery = {
@@ -290,8 +306,8 @@ export type ListTasksQuery = {
     uploadDate?: number | null;
     patientCount?: number | null;
     status2?: number | null;
-    createdAt: string;
-    updatedAt: string;
+    createdAt?: string | null;
+    updatedAt?: string | null;
   } | null> | null;
   nextToken?: string | null;
 };
@@ -299,12 +315,12 @@ export type ListTasksQuery = {
 export type GetReportQuery = {
   __typename: "Report";
   id: string;
+  filename?: string | null;
   patientID?: string | null;
-  predictedMonths?: number | null;
-  predictedDate?: number | null;
-  reportID?: string | null;
-  createdAt: string;
-  updatedAt: string;
+  predictedMonths?: string | null;
+  predictedDate?: string | null;
+  createdAt?: string | null;
+  updatedAt?: string | null;
 };
 
 export type ListReportsQuery = {
@@ -312,12 +328,12 @@ export type ListReportsQuery = {
   items?: Array<{
     __typename: "Report";
     id: string;
+    filename?: string | null;
     patientID?: string | null;
-    predictedMonths?: number | null;
-    predictedDate?: number | null;
-    reportID?: string | null;
-    createdAt: string;
-    updatedAt: string;
+    predictedMonths?: string | null;
+    predictedDate?: string | null;
+    createdAt?: string | null;
+    updatedAt?: string | null;
   } | null> | null;
   nextToken?: string | null;
 };
@@ -329,8 +345,8 @@ export type OnCreateTaskSubscription = {
   uploadDate?: number | null;
   patientCount?: number | null;
   status2?: number | null;
-  createdAt: string;
-  updatedAt: string;
+  createdAt?: string | null;
+  updatedAt?: string | null;
 };
 
 export type OnUpdateTaskSubscription = {
@@ -340,8 +356,8 @@ export type OnUpdateTaskSubscription = {
   uploadDate?: number | null;
   patientCount?: number | null;
   status2?: number | null;
-  createdAt: string;
-  updatedAt: string;
+  createdAt?: string | null;
+  updatedAt?: string | null;
 };
 
 export type OnDeleteTaskSubscription = {
@@ -351,41 +367,41 @@ export type OnDeleteTaskSubscription = {
   uploadDate?: number | null;
   patientCount?: number | null;
   status2?: number | null;
-  createdAt: string;
-  updatedAt: string;
+  createdAt?: string | null;
+  updatedAt?: string | null;
 };
 
 export type OnCreateReportSubscription = {
   __typename: "Report";
   id: string;
+  filename?: string | null;
   patientID?: string | null;
-  predictedMonths?: number | null;
-  predictedDate?: number | null;
-  reportID?: string | null;
-  createdAt: string;
-  updatedAt: string;
+  predictedMonths?: string | null;
+  predictedDate?: string | null;
+  createdAt?: string | null;
+  updatedAt?: string | null;
 };
 
 export type OnUpdateReportSubscription = {
   __typename: "Report";
   id: string;
+  filename?: string | null;
   patientID?: string | null;
-  predictedMonths?: number | null;
-  predictedDate?: number | null;
-  reportID?: string | null;
-  createdAt: string;
-  updatedAt: string;
+  predictedMonths?: string | null;
+  predictedDate?: string | null;
+  createdAt?: string | null;
+  updatedAt?: string | null;
 };
 
 export type OnDeleteReportSubscription = {
   __typename: "Report";
   id: string;
+  filename?: string | null;
   patientID?: string | null;
-  predictedMonths?: number | null;
-  predictedDate?: number | null;
-  reportID?: string | null;
-  createdAt: string;
-  updatedAt: string;
+  predictedMonths?: string | null;
+  predictedDate?: string | null;
+  createdAt?: string | null;
+  updatedAt?: string | null;
 };
 
 @Injectable({
@@ -481,10 +497,10 @@ export class APIService {
         createReport(input: $input, condition: $condition) {
           __typename
           id
+          filename
           patientID
           predictedMonths
           predictedDate
-          reportID
           createdAt
           updatedAt
         }
@@ -508,10 +524,10 @@ export class APIService {
         updateReport(input: $input, condition: $condition) {
           __typename
           id
+          filename
           patientID
           predictedMonths
           predictedDate
-          reportID
           createdAt
           updatedAt
         }
@@ -535,10 +551,10 @@ export class APIService {
         deleteReport(input: $input, condition: $condition) {
           __typename
           id
+          filename
           patientID
           predictedMonths
           predictedDate
-          reportID
           createdAt
           updatedAt
         }
@@ -616,10 +632,10 @@ export class APIService {
         getReport(id: $id) {
           __typename
           id
+          filename
           patientID
           predictedMonths
           predictedDate
-          reportID
           createdAt
           updatedAt
         }
@@ -643,10 +659,10 @@ export class APIService {
           items {
             __typename
             id
+            filename
             patientID
             predictedMonths
             predictedDate
-            reportID
             createdAt
             updatedAt
           }
@@ -733,10 +749,10 @@ export class APIService {
         onCreateReport {
           __typename
           id
+          filename
           patientID
           predictedMonths
           predictedDate
-          reportID
           createdAt
           updatedAt
         }
@@ -752,10 +768,10 @@ export class APIService {
         onUpdateReport {
           __typename
           id
+          filename
           patientID
           predictedMonths
           predictedDate
-          reportID
           createdAt
           updatedAt
         }
@@ -771,10 +787,10 @@ export class APIService {
         onDeleteReport {
           __typename
           id
+          filename
           patientID
           predictedMonths
           predictedDate
-          reportID
           createdAt
           updatedAt
         }

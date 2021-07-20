@@ -8,10 +8,10 @@ const awsmobile = {
     "aws_user_pools_id": "ap-southeast-1_xT1bypUMX",
     "aws_user_pools_web_client_id": "2j1nr5i1g4594eck98eubhqhlf",
     "oauth": {},
-    "aws_appsync_graphqlEndpoint": "https://u7cnlfb7pfd7rfzmssitghlwnu.appsync-api.ap-southeast-1.amazonaws.com/graphql",
+    "aws_appsync_graphqlEndpoint": "https://6e5ayl3flbaebfls3i5cd2ux64.appsync-api.ap-southeast-1.amazonaws.com/graphql",
     "aws_appsync_region": "ap-southeast-1",
     "aws_appsync_authenticationType": "API_KEY",
-    "aws_appsync_apiKey": "da2-mpj5sjjcpfh4palf2smukij2lu",
+    "aws_appsync_apiKey": "da2-twlmcbhlcfgtra723ulgqnosb4",
     "aws_user_files_s3_bucket": "patientdata10032-dev",
     "aws_user_files_s3_bucket_region": "ap-southeast-1"
 };

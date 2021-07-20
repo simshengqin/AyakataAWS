@@ -61,5 +61,5 @@
     <mat-progress-spinner class="mt-2 mb-2" mode="indeterminate" [diameter]="40"></mat-progress-spinner>
   </div>
   <mat-paginator class="mt-3" [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
-  <app-chart></app-chart>
+  <app-chart [data]="patientCountsByMonth"></app-chart>
 </div>

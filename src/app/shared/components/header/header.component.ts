@@ -34,13 +34,16 @@ export class HeaderComponent implements OnInit {
   }
   getNewTasks() {
     this.api.ListTasks().then(event => {
-      const tasks = event.items as Array<Task>;
-      this.newTasks = [];
-      for (const task of tasks) {
-        if (task.status2 === 1) {
-          this.newTasks.push(task);
+      if (event.items) {
+        const tasks = event.items as Array<Task>;
+        this.newTasks = [];
+        for (const task of tasks) {
+          if (task.status2 === 1) {
+            this.newTasks.push(task);
+          }
         }
       }
+
     });
   }
   async onViewReport(task: Task) {

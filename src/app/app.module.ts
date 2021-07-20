@@ -55,7 +55,7 @@ import { MyNotificationComponent } from './ui/my-notification/my-notification.co
 import { MyReportComponent } from './ui/my-report/my-report.component';
 import { MyAccountComponent } from './ui/my-account/my-account.component';
 import {MDBBootstrapModule} from "angular-bootstrap-md";
-import { ChartComponent } from './ui/chart/chart.component';
+import { ChartComponent } from './shared/components/chart/chart.component';
 import {NgxCsvParserModule} from "ngx-csv-parser";
 
 Amplify.configure(awsconfig);

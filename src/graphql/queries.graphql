@@ -31,10 +31,10 @@ query ListTasks(
 query GetReport($id: ID!) {
   getReport(id: $id) {
     id
+    filename
     patientID
     predictedMonths
     predictedDate
-    reportID
     createdAt
     updatedAt
   }
@@ -47,10 +47,10 @@ query ListReports(
   listReports(filter: $filter, limit: $limit, nextToken: $nextToken) {
     items {
       id
+      filename
       patientID
       predictedMonths
       predictedDate
-      reportID
       createdAt
       updatedAt
     }

@@ -35,10 +35,10 @@ subscription OnDeleteTask {
 subscription OnCreateReport {
   onCreateReport {
     id
+    filename
     patientID
     predictedMonths
     predictedDate
-    reportID
     createdAt
     updatedAt
   }
@@ -46,10 +46,10 @@ subscription OnCreateReport {
 subscription OnUpdateReport {
   onUpdateReport {
     id
+    filename
     patientID
     predictedMonths
     predictedDate
-    reportID
     createdAt
     updatedAt
   }
@@ -57,10 +57,10 @@ subscription OnUpdateReport {
 subscription OnDeleteReport {
   onDeleteReport {
     id
+    filename
     patientID
     predictedMonths
     predictedDate
-    reportID
     createdAt
     updatedAt
   }

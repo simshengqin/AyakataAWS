@@ -61,6 +61,7 @@ export class MyTaskComponent implements OnInit {
   };
   clickedRows = new Set<any>();
   fullMonthDayYearFormat: string;
+  patientCountsByMonth = [];
   constructor(
     private router: Router,
     private api: APIService,
@@ -85,6 +86,7 @@ export class MyTaskComponent implements OnInit {
       this.dataSource.sort = this.sort;
       this.dataSource.paginator = this.paginator;
       console.log(this.dataSource);
+      this.patientCountsByMonth = [100, 190, 88, 78, 55, 25, 150, 170, 122, 59, 135, 143];
     });
 
   }

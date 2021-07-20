@@ -6,6 +6,7 @@ import {Task} from '../../core/models/task';
 import {APIService} from '../../API.service';
 import {Report} from '../../core/models/report';
 import {DateHelper} from "../../core/services/date-helper";
+import {ActivatedRoute} from "@angular/router";
 
 @Component({
   selector: 'app-my-report',
@@ -59,7 +60,9 @@ export class MyReportComponent implements OnInit {
   };
   clickedRows = new Set<any>();
   fullMonthDayYearFormat: string;
-  constructor(private api: APIService, private dateHelper: DateHelper,) {
+  filename: string;
+  patientCountsByMonth = [];
+  constructor(private api: APIService, private dateHelper: DateHelper, private activatedRoute: ActivatedRoute, ) {
   }
 
   async ngOnInit(): Promise<void> {
@@ -75,10 +78,26 @@ export class MyReportComponent implements OnInit {
     //   reportID: '2'
     // };
     // await this.api.CreateReport(newReport);
+    this.activatedRoute.queryParams.subscribe(async params => {
+      this.filename = params.filename;
+      console.log(this.filename);
+    });
     this.api.ListReports().then(event => {
-      const reports = event.items as Array<Report>;
+      let reports = event.items as Array<Report>;
+      const filteredReports = [];
+      if (this.filename) {
+        for (const report of reports) {
+          if (report.filename === this.filename) {
+            filteredReports.push(report);
+          }
+        }
+        reports = filteredReports;
+      }
+      // this.patientCountsByMonth = [100, 190, 88, 78, 55, 25, 150, 170, 122, 59, 135, 143];
+      this.patientCountsByMonth = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
       for (let i = 0; i < reports.length; i++) {
         reports[i].position = i + 1;
+        const month = reports[i].predictedDate.split("/");
       }
       this.dataSource = new MatTableDataSource(reports);
       this.dataSource.sort = this.sort;

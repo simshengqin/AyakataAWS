@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 
 @Component({
   selector: 'app-chart',
@@ -7,9 +7,9 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ChartComponent implements OnInit {
   public chartType = 'bar';
-
+  @Input() data;
   public chartDatasets: Array<any> = [
-    { data: [100, 190, 88, 78, 55, 25, 150, 170, 122, 59, 135, 143], label: 'Number of patients with complications in 2021' }
+    { data: this.data, label: 'Number of patients with complications in 2021' }
   ];
 
   public chartLabels: Array<any> = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];

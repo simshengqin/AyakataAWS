@@ -47,10 +47,10 @@ mutation CreateReport(
 ) {
   createReport(input: $input, condition: $condition) {
     id
+    filename
     patientID
     predictedMonths
     predictedDate
-    reportID
     createdAt
     updatedAt
   }
@@ -61,10 +61,10 @@ mutation UpdateReport(
 ) {
   updateReport(input: $input, condition: $condition) {
     id
+    filename
     patientID
     predictedMonths
     predictedDate
-    reportID
     createdAt
     updatedAt
   }
@@ -75,10 +75,10 @@ mutation DeleteReport(
 ) {
   deleteReport(input: $input, condition: $condition) {
     id
+    filename
     patientID
     predictedMonths
     predictedDate
-    reportID
     createdAt
     updatedAt
   }

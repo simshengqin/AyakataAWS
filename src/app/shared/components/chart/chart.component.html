@@ -1,6 +1,6 @@
 
 <div style="display: block">
-  <canvas mdbChart
+  <canvas *ngIf="data" mdbChart
           [chartType]="chartType"
           [datasets]="chartDatasets"
           [labels]="chartLabels"
