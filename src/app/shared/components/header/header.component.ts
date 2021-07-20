@@ -56,7 +56,8 @@ export class HeaderComponent implements OnInit {
     };
     await this.api.UpdateTask(updateTaskInput);
     const filename = task.filename;
-    this.getNewTasks();
-    this.router.navigate(['my-report'], {queryParams: {filename}});
+    // this.getNewTasks();
+    this.router.navigateByUrl('/', {skipLocationChange: true}).then(() =>
+      this.router.navigate(['my-report'], {queryParams: {filename}}));
   }
 }

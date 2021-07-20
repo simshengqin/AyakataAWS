@@ -7,10 +7,7 @@ import {Component, Input, OnInit} from '@angular/core';
 })
 export class ChartComponent implements OnInit {
   public chartType = 'bar';
-  @Input() data;
-  public chartDatasets: Array<any> = [
-    { data: this.data, label: 'Number of patients with complications in 2021' }
-  ];
+  @Input() chartDatasets: Array<any>;
 
   public chartLabels: Array<any> = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
 

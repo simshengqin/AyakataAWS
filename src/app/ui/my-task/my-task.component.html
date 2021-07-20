@@ -51,7 +51,7 @@
       <tr mat-header-row *matHeaderRowDef="tableColumns"></tr>
       <tr
         mat-row
-        (click)="clickedRows.has(row) ? clickedRows.delete(row) : clickedRows.add(row)"
+        (click)="onRowClick(row)"
         [class.demo-row-is-clicked]="clickedRows.has(row)"
         *matRowDef="let row; columns: tableColumns;"
       ></tr>
@@ -61,5 +61,5 @@
     <mat-progress-spinner class="mt-2 mb-2" mode="indeterminate" [diameter]="40"></mat-progress-spinner>
   </div>
   <mat-paginator class="mt-3" [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
-  <app-chart [data]="patientCountsByMonth"></app-chart>
+  <app-chart  [chartDatasets] = patientCountsByMonth></app-chart>
 </div>

@@ -1,4 +1,4 @@
-import {AfterViewInit, Component, OnInit, ViewChild} from '@angular/core';
+import {AfterViewInit, Component, Input, OnInit, ViewChild} from '@angular/core';
 import {MatTableDataSource} from '@angular/material/table';
 import {MatSort} from '@angular/material/sort';
 import {MatPaginator} from '@angular/material/paginator';
@@ -61,7 +61,7 @@ export class MyReportComponent implements OnInit {
   clickedRows = new Set<any>();
   fullMonthDayYearFormat: string;
   filename: string;
-  patientCountsByMonth = [];
+  patientCountsByMonth: Array<any>;
   constructor(private api: APIService, private dateHelper: DateHelper, private activatedRoute: ActivatedRoute, ) {
   }
 
@@ -83,6 +83,13 @@ export class MyReportComponent implements OnInit {
       console.log(this.filename);
     });
     this.api.ListReports().then(event => {
+      const reports = event.items as Array<Report>;
+
+    });
+    this.updateChartData();
+  }
+  updateChartData() {
+    this.api.ListReports().then(event => {
       let reports = event.items as Array<Report>;
       const filteredReports = [];
       if (this.filename) {
@@ -93,16 +100,22 @@ export class MyReportComponent implements OnInit {
         }
         reports = filteredReports;
       }
-      // this.patientCountsByMonth = [100, 190, 88, 78, 55, 25, 150, 170, 122, 59, 135, 143];
-      this.patientCountsByMonth = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+      const patientCountsByMonthArr = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
       for (let i = 0; i < reports.length; i++) {
         reports[i].position = i + 1;
-        const month = reports[i].predictedDate.split("/");
+        let month = reports[i].predictedDate.split('/')[1];
+        if (month[0] === '0') { month = month[1]; }
+        console.log(month);
+        patientCountsByMonthArr[+month - 1] += 1;
       }
+      this.patientCountsByMonth = [
+        { data: patientCountsByMonthArr, label: 'Number of patients with complications in 2021' }
+      ];
       this.dataSource = new MatTableDataSource(reports);
       this.dataSource.sort = this.sort;
       this.dataSource.paginator = this.paginator;
       console.log(this.dataSource);
+
     });
   }
 

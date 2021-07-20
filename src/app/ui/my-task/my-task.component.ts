@@ -61,7 +61,7 @@ export class MyTaskComponent implements OnInit {
   };
   clickedRows = new Set<any>();
   fullMonthDayYearFormat: string;
-  patientCountsByMonth = [];
+  patientCountsByMonth: Array<any>;
   constructor(
     private router: Router,
     private api: APIService,
@@ -86,13 +86,44 @@ export class MyTaskComponent implements OnInit {
       this.dataSource.sort = this.sort;
       this.dataSource.paginator = this.paginator;
       console.log(this.dataSource);
-      this.patientCountsByMonth = [100, 190, 88, 78, 55, 25, 150, 170, 122, 59, 135, 143];
     });
+    this.updateChartData();
 
   }
 
 
   onViewReport(filename: string) {
     this.router.navigate(['my-report'], { queryParams: { filename }});
+  }
+  onRowClick(row: any) {
+    this.clickedRows.has(row) ? this.clickedRows.delete(row) : this.clickedRows.add(row);
+    this.updateChartData();
+  }
+  updateChartData() {
+    this.api.ListReports().then(event => {
+      let reports = event.items as Array<Report>;
+      if (this.clickedRows.size > 0) {
+        const filteredReports = [];
+        for (const report of reports) {
+          for (const clickedRow of this.clickedRows) {
+            if (clickedRow.filename === report.filename) {
+              filteredReports.push(report);
+              break;
+            }
+          }
+        }
+        reports = filteredReports;
+      }
+      const patientCountsByMonthArr = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+      for (let i = 0; i < reports.length; i++) {
+        reports[i].position = i + 1;
+        let month = reports[i].predictedDate.split('/')[1];
+        if (month[0] === '0') { month = month[1]; }
+        patientCountsByMonthArr[+month - 1] += 1;
+      }
+      this.patientCountsByMonth = [
+        { data: patientCountsByMonthArr, label: 'Number of patients with complications in 2021' }
+      ];
+    });
   }
 }
