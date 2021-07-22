@@ -18,7 +18,7 @@
       "function": {
         "S3Triggerd5c59b9c": {
           "deploymentBucketName": "amplify-ayakatanew-dev-10032-deployment",
-          "s3Key": "amplify-builds/S3Triggerd5c59b9c-554a3648424368387962-build.zip"
+          "s3Key": "amplify-builds/S3Triggerd5c59b9c-74496f394c59364d6d38-build.zip"
         }
       }
     }
