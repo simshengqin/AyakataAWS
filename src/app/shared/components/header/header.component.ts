@@ -55,9 +55,10 @@ export class HeaderComponent implements OnInit {
       status2: 2 // Read the task notification
     };
     await this.api.UpdateTask(updateTaskInput);
+    const id = task.id;
     const filename = task.filename;
     // this.getNewTasks();
     this.router.navigateByUrl('/', {skipLocationChange: true}).then(() =>
-      this.router.navigate(['my-report'], {queryParams: {filename}}));
+      this.router.navigate(['my-report'], {queryParams: {id}}));
   }
 }
