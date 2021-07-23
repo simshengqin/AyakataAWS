@@ -43,7 +43,7 @@
         </a>
         <div *dropdownMenu class="dropdown-menu dropdown-menu-right dropdown dropdown-primary" role="menu">
           <div *ngFor="let newTask of newTasks" class="dropdown-item waves-light" mdbWavesEffect >
-            <span (click)=onViewReport(newTask) class="view-report"> {{ newTask.filename + " "}} has finished processing </span>
+            <span (click)=onViewReport(newTask) class="view-report"> {{ newTask.id + " "}} has finished processing </span>
           </div>
           <div *ngIf="newTasks.length == 0" class="dropdown-item waves-light" mdbWavesEffect  >
             No new notifications
