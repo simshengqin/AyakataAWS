@@ -20,9 +20,9 @@
         <a dropdownToggle mdbWavesEffect type="button" class="nav-link dropdown-toggle waves-light" mdbWavesEffect>
           Patient<span class="caret"></span></a>
         <div *dropdownMenu class="dropdown-menu dropdown dropdown-primary" role="menu">
-          <a class="dropdown-item waves-light" mdbWavesEffect routerLink="/create-patient">Create Patient</a>
-          <a class="dropdown-item waves-light" mdbWavesEffect routerLink="/create-patient">Update Patient</a>
-          <a class="dropdown-item waves-light" mdbWavesEffect routerLink="/view-patient">View Patient</a>
+          <a class="dropdown-item waves-light" mdbWavesEffect routerLink="/create-patient">Create / Update </a>
+          <!-- <a class="dropdown-item waves-light" mdbWavesEffect routerLink="/create-patient">Update Patient</a> -->
+          <a class="dropdown-item waves-light" mdbWavesEffect routerLink="/view-patient">View</a>
         </div>
       </li>
       <li class="nav-item" [ngClass]="{'active': url == '/my-task'}">

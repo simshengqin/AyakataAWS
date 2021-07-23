@@ -1,8 +1,19 @@
 <app-header></app-header>
+<br>
+<br>
 <div class="container">
+
+    <div class="row justify-content-center">
+        <img src="../../../assets/images/home/logo-NUHS.png" class="img-fluid" alt="Responsive image"/>
+    </div>
+
+    <h2> Upload Patient Data </h2>
+
+    <p> Please upload the following file(s), not all files are mandatory  </p>
+
     <br>
         <ngx-dropzone (change)="onSelect($event)">
-            <ngx-dropzone-label> Please drop your file(s) here :) ..... We won't Bit ^_^! </ngx-dropzone-label>
+            <ngx-dropzone-label> Please drop your file(s) here :) ..... We won't bite ^_^! </ngx-dropzone-label>
             <ngx-dropzone-preview *ngFor="let f of files" [removable]="true" (removed)="onRemove(f)">
                 <ngx-dropzone-label>{{ f.name }} </ngx-dropzone-label>
             </ngx-dropzone-preview>

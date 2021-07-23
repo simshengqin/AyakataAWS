@@ -1,8 +1,10 @@
 <app-header></app-header>
-
+<br>
+<br>
+<!-- 
 <div class="form-body">
   <form autocomplete="off" [formGroup]="createForm" (ngSubmit)="onCreate(createForm.value)">
-    <div>
+    <div class="row">
       <label>Patient_No: </label>
       <input type="text" formControlName="Patient_No" autocomplete="off">
     </div>
@@ -17,11 +19,102 @@
     <button type="submit">Submit</button>
   </form>
 </div>
+-->
+<div class="container">
 
+<div class="form-body">
+  <form autocomplete="off" [formGroup]="createForm" (ngSubmit)="onCreate(createForm.value)">
+    
+    <div class="row">
+      <!-- Patient_No -->
+      <div class="col-5 justify-content-center">
+        <div class="input-group input-group-lg">
+          <input type="text" class="form-control" formControlName="Patient_No" autocomplete="off" placeholder="Patient ID"> 
+        </div>
+      </div>
+      <!-- End of Patient_No -->
+      <!-- Case_No -->
+      <div class="col-5 justify-content-center">
+        <div class="input-group input-group-lg">
+            <input type="text" class="form-control" formControlName="Case_No" autocomplete="off" placeholder="Patient Case Number">
+        </div>
+      </div>
+      <!-- End of Case_No -->
+      <!-- Button -->
+      <div class="col-2 justify-content-center">
+        <div class="input-group input-group-lg">
+            <button type="submit" class="btn btn-outline-success btn-lg"> Search </button>
+        </div>
+      </div>
+      <!-- End of Button -->
+    </div>
+  </form>
+  </div> <!-- End of Form body container -->
+
+<br>
+<br>
+
+  <div class="row">
+    <h1 class="display-4">  Results: </h1>
+    <div class="col-12 shadow p-3 mb-5 bg-white rounded">
+      <!-- If patients array / search query is not length 0 or null -->
+      <div *ngIf="patients.length == 0">
+        <div class="d-flex justify-content-center display-3">  Patient ID: </div>
+        <br>
+        <div class="d-flex justify-content-center"> <h1 class="display-5 text-muted"> {{placeHolder.Patient_No}} </h1> </div>
+        <br>
+        <div class="row">
+          <!-- Predicted Date: -->
+          <div class="col-6">
+            <div class="d-flex justify-content-center display-4"> Predicted Date: </div>
+            <div class="d-flex justify-content-center"> <h1 class="display-5 text-muted">{{placeHolder.Predicted_Date}}</h1> </div>
+          </div>
+          <!-- Predicted Months: -->
+          <div class="col-6">
+            <div class="d-flex justify-content-center display-4"> Predicted Months: </div>
+            <div class="d-flex justify-content-center"> <h1 class="display-5 text-muted"> {{placeHolder.Predicted_Months}} </h1> </div>
+          </div>
+        </div> <!-- End of row -->
+      </div> <!-- End of first ngIf -->
+      <!-- If patients array / search query length is greater than 0 or NOT null-->
+      <div class="justify-content-center" *ngIf="patients.length > 0">
+        <div *ngFor="let patient of patients">
+
+          <div class="d-flex justify-content-center display-3">  Patient ID: </div>
+          <br>
+          <div class="d-flex justify-content-center"> <h1 class="display-5 text-muted"> {{ patient.Patient_No }} </h1> </div>
+          <br>
+          <div class="row">
+            <!-- Predicted Date: -->
+            <div class="col-6">
+              <div class="d-flex justify-content-center display-4"> Predicted Date: </div>
+              <div class="d-flex justify-content-center"> <h1 class="display-5 text-muted"> {{ patient.Case_No }} </h1> </div>
+            </div>
+            <!-- Predicted Months: -->
+            <div class="col-6">
+              <div class="d-flex justify-content-center display-4"> Predicted Months: </div>
+              <div class="d-flex justify-content-center"> <h1 class="display-5 text-muted"> {{ patient.Referral_Type_From }} </h1> </div>
+            </div>
+          </div> <!-- End of row -->
+
+        </div> <!-- End of ngFor -->
+      </div> <!-- End of second ngIf  -->
+      <br>
+      <button type="button" class="btn btn-info btn-lg btn-block"> Re-calculate Predicted Months </button>
+      <br>
+    </div> <!-- End of Col-12 Div -->
+
+  </div> <!-- End of Row -->
+
+</div> <!-- End of Container -->
+
+
+
+<!-- 
 <div *ngFor="let patient of patients">
   <div>{{ patient.Patient_No }}</div>
   <div>{{ patient.Case_No }}</div>
   <div>{{ patient.Referral_Type_From }}</div>
 </div>
-
+-->
 

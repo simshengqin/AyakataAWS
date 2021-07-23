@@ -16,9 +16,11 @@ export class ViewPatientComponent implements OnInit, OnDestroy {
   /* declare patients variable */
   patients: Array<Patient> = [];
   subscription: Subscription | null | undefined;
+  // Only if patients array is 0
+  placeHolder = {Patient_No:"Please Select a Patient", Predicted_Date: "DD/MM/YYYY", Predicted_Months: "0" } 
   constructor(private api: APIService, private fb: FormBuilder) { }
 
-  ngOnInit(): void {
+  ngOnInit(): void {  
     this.createForm = this.fb.group({
       Patient_No: ['', Validators.required],
       Case_No: ['', Validators.required],
@@ -36,6 +38,7 @@ export class ViewPatientComponent implements OnInit, OnDestroy {
     //   this.patients = [newPatient, ...this.patients];
     // });
   }
+  /*
   public onCreate(patient: Patient) {
     // this.api.CreatePatient(patient).then(event => {
     //   this.createForm.reset();
@@ -43,6 +46,10 @@ export class ViewPatientComponent implements OnInit, OnDestroy {
     //   .catch(e => {
     //     console.log('error creating patient...', e);
     //   });
+  }
+  */
+  public onCreate(data: any) {
+    console.log(data);
   }
 
   ngOnDestroy() {
