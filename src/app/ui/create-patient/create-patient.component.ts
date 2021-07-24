@@ -4,6 +4,7 @@ import {ToastrService} from 'ngx-toastr';
 import {NgxCsvParser} from 'ngx-csv-parser';
 import {APIService} from '../../API.service';
 import {first} from 'rxjs/operators';
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-create-patient',
@@ -40,7 +41,7 @@ export class CreatePatientComponent implements OnInit {
   @ViewChild('fileSurgical') fileSurgical: ElementRef;
   */
 
-  constructor(private toastr: ToastrService, private ngxCsvParser: NgxCsvParser, private api: APIService, ) { }
+  constructor(private toastr: ToastrService, private ngxCsvParser: NgxCsvParser, private api: APIService, private router: Router) { }
 
   ngOnInit(): void {
     this.start();
@@ -144,6 +145,7 @@ export class CreatePatientComponent implements OnInit {
 
   public showSuccess() {
     this.toastr.success( '5 File(s) have been Uploaded successfully!', '', {positionClass: 'toast-top-center'});
+    this.router.navigate(['my-task']);
   }
   // public showError(){
   //   this.toastr.error('The following file(s) could not be Uploaded' + ' successfully: ' + this.errorMessages, '', {positionClass: 'toast-top-center', timeOut: 10000});

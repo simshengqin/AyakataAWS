@@ -51,6 +51,7 @@ export class MyReportComponent implements OnInit {
   patientCountsByMonth: Array<any>;
   selectedChartYear = 'Select Year';
   reports: Array<Report> = [];
+  isNoReportsInAWS = false;
   constructor(private api: APIService, private dateHelper: DateHelper, private activatedRoute: ActivatedRoute,) {
   }
 
@@ -120,7 +121,8 @@ export class MyReportComponent implements OnInit {
         // console.log(this.reports);
       },
       error => {
-        console.log( 'Boo. Err. ', error );
+        this.isNoReportsInAWS = true;
+        console.log( 'No reports found', error );
       });
   }
 

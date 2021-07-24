@@ -1,3 +1,7 @@
+<style type="text/css">
+  .no-reports-message {
+  }
+</style>
 <app-header></app-header>
 <div class="max-width-section">
 <!--  <div class="row" >-->
@@ -16,49 +20,60 @@
     <h1 *ngIf="!filename">My Reports</h1>
     <h1 *ngIf="filename">Report for {{ filename }}</h1>
   </div>
-  <div class="table-responsive">
-    <table mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8">
+  <ng-container>
+    <div  class="table-responsive">
+      <table mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8">
 
-      <!-- Position Column -->
-<!--      <ng-container matColumnDef="position">-->
-<!--        <th mat-header-cell *matHeaderCellDef mat-sort-header> No. </th>-->
-<!--        <td mat-cell *matCellDef="let element; let i = index"> {{ element["position"] }} </td>-->
-<!--      </ng-container>-->
+        <!-- Position Column -->
+        <!--      <ng-container matColumnDef="position">-->
+        <!--        <th mat-header-cell *matHeaderCellDef mat-sort-header> No. </th>-->
+        <!--        <td mat-cell *matCellDef="let element; let i = index"> {{ element["position"] }} </td>-->
+        <!--      </ng-container>-->
 
-      <ng-container matColumnDef="patientNo">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header> Patient ID </th>
-        <td mat-cell *matCellDef="let element"> {{ element["patientNo"] }} </td>
-      </ng-container>
+        <ng-container matColumnDef="patientNo">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Patient ID </th>
+          <td mat-cell *matCellDef="let element"> {{ element["patientNo"] }} </td>
+        </ng-container>
 
-      <ng-container matColumnDef="predictedMonths">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header> Predicted Months </th>
-        <td mat-cell *matCellDef="let element"> {{ element["predictedMonths"] }} </td>
-      </ng-container>
+        <ng-container matColumnDef="predictedMonths">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Predicted Months </th>
+          <td mat-cell *matCellDef="let element"> {{ element["predictedMonths"] | number:'1.0-0'}} </td>
+        </ng-container>
 
-      <ng-container matColumnDef="predictedDate">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header> Predicted Date </th>
-        <td mat-cell *matCellDef="let element"> {{ element["predictedDate"] }} </td>
-<!--        {{ element["predictedDate"] | date: fullMonthDayYearFormat }}-->
-      </ng-container>
+        <ng-container matColumnDef="predictedDate">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Predicted Date </th>
+          <td mat-cell *matCellDef="let element">
+            <ng-container *ngIf="element.predictedDate !== ''">
+              {{ element["predictedDate"] }}
+            </ng-container>
+            <ng-container *ngIf="element.predictedDate === ''">
+              -
+            </ng-container>
+          </td>
+          <!--        {{ element["predictedDate"] | date: fullMonthDayYearFormat }}-->
+        </ng-container>
 
 
-      <tr mat-header-row *matHeaderRowDef="tableColumns"></tr>
-      <tr
-        mat-row
-        *matRowDef="let row; columns: tableColumns;"
-      ></tr>
-    </table>
-  </div>
-  <div *ngIf="!dataSource" class="spinner-container">
-    <mat-progress-spinner class="mt-2 mb-2" mode="indeterminate" [diameter]="40"></mat-progress-spinner>
-  </div>
-  <mat-paginator class="mt-3" [pageSizeOptions]="[5, 10, 20, 50, 100]" showFirstLastButtons></mat-paginator>
-  <div class="col-3 mx-auto">
-    <select class="form-control" [(ngModel)]="selectedChartYear" (change)="updateChartData()">
-      <option *ngFor="let option of options.Year" [value]="option">
-        {{option}}
-      </option>
-    </select>
-  </div>
-  <app-chart [chartDatasets] = patientCountsByMonth></app-chart>
+        <tr mat-header-row *matHeaderRowDef="tableColumns"></tr>
+        <tr
+          mat-row
+          *matRowDef="let row; columns: tableColumns;"
+        ></tr>
+      </table>
+    </div>
+    <div *ngIf="!dataSource" class="spinner-container">
+      <mat-progress-spinner *ngIf="!isNoReportsInAWS" class="mt-2 mb-2" mode="indeterminate" [diameter]="40"></mat-progress-spinner>
+      <div *ngIf="isNoReportsInAWS" class="no-reports-message">No reports currently. Upload patients' data to display the reports!</div>
+    </div>
+    <mat-paginator class="mt-3" [pageSizeOptions]="[5, 10, 20, 50, 100]" showFirstLastButtons></mat-paginator>
+    <div class="col-3 mx-auto">
+      <select class="form-control" [(ngModel)]="selectedChartYear" (change)="updateChartData()">
+        <option *ngFor="let option of options.Year" [value]="option">
+          {{option}}
+        </option>
+      </select>
+    </div>
+    <app-chart [chartDatasets] = patientCountsByMonth></app-chart>
+  </ng-container>
+
 </div>
