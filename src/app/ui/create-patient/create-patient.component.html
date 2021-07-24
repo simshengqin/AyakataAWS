@@ -8,100 +8,111 @@
     </div>
 
     <h2> Upload Patient Data </h2>
+    <ng-container *ngIf="hasProcessingTask" class="has-processing-tasks">
+      <div class="alert alert-info mt-3">
+        Task is processing
+      </div>
+      <button class="btn btn-outline-info mt-3" [routerLink]="'/my-task'">View Tasks</button>
+    </ng-container>
 
-    <p> Please upload all 5 files with these exact names: casevisit_test.csv,&nbsp;
-      labresult_test.csv,&nbsp;
-      medicationorder_test.csv,&nbsp;
-      patientdemo_test.csv,&nbsp;
-      surgical_test.csv
-    </p>
+    <ng-container *ngIf="!hasProcessingTask">
+      <p> Please upload all 5 files with these exact names: casevisit_test.csv,&nbsp;
+        labresult_test.csv,&nbsp;
+        medicationorder_test.csv,&nbsp;
+        patientdemo_test.csv,&nbsp;
+        surgical_test.csv
+      </p>
 
-    <br>
-        <ngx-dropzone (change)="onSelect($event)">
-            <ngx-dropzone-label> Please drop your files here or click to upload :) ..... We won't Bite ^_^! </ngx-dropzone-label>
-            <ngx-dropzone-preview *ngFor="let f of files" [removable]="true" (removed)="onRemove(f)">
-                <ngx-dropzone-label>{{ f.name }} </ngx-dropzone-label>
-            </ngx-dropzone-preview>
-        </ngx-dropzone>
-    <br>
+      <br>
+      <ngx-dropzone (change)="onSelect($event)">
+        <ngx-dropzone-label> Please drop your files here or click to upload :) ..... We won't Bite ^_^! </ngx-dropzone-label>
+        <ngx-dropzone-preview *ngFor="let f of files" [removable]="true" (removed)="onRemove(f)">
+          <ngx-dropzone-label>{{ f.name }} </ngx-dropzone-label>
+        </ngx-dropzone-preview>
+      </ngx-dropzone>
+      <br>
 
-<!--        <div class="mb-4" id="displayUploadStatus">-->
-<!--            <h4> File(s): </h4>-->
-<!--            <h5 *ngIf="SuccessfulFileUpload==0 && UnsuccessfulFileUpload==0"> No files were uploaded, please try again </h5>-->
-<!--            <h5 *ngIf="SuccessfulFileUpload>0"> - Uploaded Successfully: {{ SuccessfulFileUpload }} </h5>-->
-<!--            <h5 *ngIf="UnsuccessfulFileUpload>0"> - Unsuccessful Uploaded: {{ UnsuccessfulFileUpload }} </h5>-->
+      <!--        <div class="mb-4" id="displayUploadStatus">-->
+      <!--            <h4> File(s): </h4>-->
+      <!--            <h5 *ngIf="SuccessfulFileUpload==0 && UnsuccessfulFileUpload==0"> No files were uploaded, please try again </h5>-->
+      <!--            <h5 *ngIf="SuccessfulFileUpload>0"> - Uploaded Successfully: {{ SuccessfulFileUpload }} </h5>-->
+      <!--            <h5 *ngIf="UnsuccessfulFileUpload>0"> - Unsuccessful Uploaded: {{ UnsuccessfulFileUpload }} </h5>-->
 
-<!--            <button class="btn btn-warning" (click)="closeDisplay()"> Close </button>-->
-<!--        </div>-->
-    <br>
-    <div *ngIf="wrongfileMessage !== ''"class="alert alert-warning" role="alert">
-      {{ wrongfileMessage}}
-    </div>
-    <div *ngIf="missingfileMessage !== ''" class="alert alert-danger" role="alert">
-      {{ missingfileMessage}}
-    </div>
+      <!--            <button class="btn btn-warning" (click)="closeDisplay()"> Close </button>-->
+      <!--        </div>-->
+      <br>
+      <div *ngIf="wrongfileMessage !== ''"class="alert alert-warning" role="alert">
+        {{ wrongfileMessage}}
+      </div>
+      <div *ngIf="missingfileMessage !== ''" class="alert alert-danger" role="alert">
+        {{ missingfileMessage}}
+      </div>
+<!--      <div>-->
+<!--        Uploading in process: <mat-progress-bar id="progress-bar" mode="determinate" class="mt-3 mb-3"></mat-progress-bar>-->
+<!--      </div>-->
+      <div class="float-right">
+        <button class="btn btn-info" (click)="uploadFile()">Upload</button>
+      </div>
+      <!--
+      <div class="row">
 
-  <div class="float-right">
-            <button class="btn btn-info" (click)="uploadFile()">Upload</button>
-        </div>
-    <!--
-    <div class="row">
+          <div class="col-6 justify-content-center mb-3">
+              <h3> File Upload </h3>
 
-        <div class="col-6 justify-content-center mb-3">
-            <h3> File Upload </h3>
+              <div class="input-group mb-3">
+                  <label for="patient-data-csv" class="col-4 col-form-label">Patient Data:</label>
+                  <input #filePatient class="form-control" accept=".csv" type="file" id="patient-data-csv">
+              </div>
 
-            <div class="input-group mb-3">
-                <label for="patient-data-csv" class="col-4 col-form-label">Patient Data:</label>
-                <input #filePatient class="form-control" accept=".csv" type="file" id="patient-data-csv">
-            </div>
+              <div class="input-group mb-3">
+                  <label for="lab-data-csv" class="col-4 col-form-label">Lab Data:</label>
+                  <input #fileLab class="form-control" accept=".csv" type="file" id="lab-data-csv">
+              </div>
 
-            <div class="input-group mb-3">
-                <label for="lab-data-csv" class="col-4 col-form-label">Lab Data:</label>
-                <input #fileLab class="form-control" accept=".csv" type="file" id="lab-data-csv">
-            </div>
+              <div class="input-group mb-3">
+                  <label for="case-data-csv" class="col-4 col-form-label">Case Data:</label>
+                  <input #fileCase class="form-control" accept=".csv" type="file" id="case-data-csv">
+              </div>
 
-            <div class="input-group mb-3">
-                <label for="case-data-csv" class="col-4 col-form-label">Case Data:</label>
-                <input #fileCase class="form-control" accept=".csv" type="file" id="case-data-csv">
-            </div>
+              <div class="input-group mb-3">
+                  <label for="medication-data-csv" class="col-4 col-form-label">Medication Data:</label>
+                  <input #fileMedication class="form-control" accept=".csv" type="file" id="medication-data-csv">
+              </div>
 
-            <div class="input-group mb-3">
-                <label for="medication-data-csv" class="col-4 col-form-label">Medication Data:</label>
-                <input #fileMedication class="form-control" accept=".csv" type="file" id="medication-data-csv">
-            </div>
+              <div class="input-group mb-3">
+                  <label for="Surgical-data-csv" class="col-4 col-form-label">Surgical Data:</label>
+                  <input #fileSurgical class="form-control" accept=".csv" type="file" id="surgical-data-csv">
+              </div>
+              <div class="mb-4" id="displayUploadStatus">
+                  <h5> File(s) Uploaded Successfully: {{ SuccessfulFileUpload }} Unsuccessful Uploaded: {{ UnsuccessfulFileUpload }}</h5>
+                  <button class="btn btn-warning" (click)="closeDisplay()"> Close </button>
+              </div>
+          </div>
 
-            <div class="input-group mb-3">
-                <label for="Surgical-data-csv" class="col-4 col-form-label">Surgical Data:</label>
-                <input #fileSurgical class="form-control" accept=".csv" type="file" id="surgical-data-csv">
-            </div>
-            <div class="mb-4" id="displayUploadStatus">
-                <h5> File(s) Uploaded Successfully: {{ SuccessfulFileUpload }} Unsuccessful Uploaded: {{ UnsuccessfulFileUpload }}</h5>
-                <button class="btn btn-warning" (click)="closeDisplay()"> Close </button>
-            </div>
-        </div>
+          <div class="col-6 justify-content-center mb-3">
+              <h3> Details </h3>
 
-        <div class="col-6 justify-content-center mb-3">
-            <h3> Details </h3>
+              <div>
+                  <label for="dateOfUpload">Date Of Upload</label>
+                  <div class="input-group">
+                      <input type="date" class="form-control" id="dateOfUpload">
+                  </div>
+              </div>
+              <br>
 
-            <div>
-                <label for="dateOfUpload">Date Of Upload</label>
-                <div class="input-group">
-                    <input type="date" class="form-control" id="dateOfUpload">
-                </div>
-            </div>
-            <br>
+              <div>
+                  <label for="patientName">Patient Name</label>
+                  <div class="input-group">
+                      <input type="text" class="form-control" id="patientName" placeholder="Patient Name">
+                  </div>
+              </div>
+          </div>
 
-            <div>
-                <label for="patientName">Patient Name</label>
-                <div class="input-group">
-                    <input type="text" class="form-control" id="patientName" placeholder="Patient Name">
-                </div>
-            </div>
-        </div>
+      </div>
+      -->
+      <!-- <button class="btn btn-info" (click)="uploadFile()">Upload</button> -->
+    </ng-container>
 
-    </div>
-    -->
-    <!-- <button class="btn btn-info" (click)="uploadFile()">Upload</button> -->
 </div>
 
 

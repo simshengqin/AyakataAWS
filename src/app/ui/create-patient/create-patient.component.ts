@@ -4,7 +4,8 @@ import {ToastrService} from 'ngx-toastr';
 import {NgxCsvParser} from 'ngx-csv-parser';
 import {APIService} from '../../API.service';
 import {first} from 'rxjs/operators';
-import {Router} from "@angular/router";
+import {Router} from '@angular/router';
+import {Task} from '../../core/models/task';
 
 @Component({
   selector: 'app-create-patient',
@@ -33,6 +34,8 @@ export class CreatePatientComponent implements OnInit {
   successMessage = '';
   wrongfileMessage = '';
   missingfileMessage = '';
+  hasProcessingTask = false;
+  uploadProgress = 0;
   /*
   @ViewChild('filePatient') filePatient: ElementRef;
   @ViewChild('fileLab') fileLab: ElementRef;
@@ -44,7 +47,16 @@ export class CreatePatientComponent implements OnInit {
   constructor(private toastr: ToastrService, private ngxCsvParser: NgxCsvParser, private api: APIService, private router: Router) { }
 
   ngOnInit(): void {
-    this.start();
+    // this.start();
+    this.api.ListTasks().then(event => {
+      const tasks = event.items as Array<Task>;
+      for (const task of tasks) {
+        console.log(task);
+        if (task.status2 === 0) {
+          this.hasProcessingTask = true;
+        }
+      }
+    });
   }
 
   // NGX Dropzone
@@ -113,9 +125,22 @@ export class CreatePatientComponent implements OnInit {
         // isRead: false
       };
       console.log(newTask);
-      const newTaskDB = await this.api.CreateTask(newTask);
+      // const newTaskDB = await this.api.CreateTask(newTask);
       for (const ele of this.files) {
-        const result = await Storage.put(newTaskDB.id + '/' + ele.name, ele);
+        // newTaskDB.id
+        const result = await Storage.put('aaa' + '/' + ele.name, ele,
+          // {progressCallback(progress) {
+          //   let uploadProgress = progress.loaded / progress.total * 100;
+          //   const progressBar = document.getElementById('progress-bar');
+          //   console.log(progressBar);
+          //   progressBar.nativeElement.value = String(uploadProgress);
+          //     // .setAttribute('value', String(uploadProgress));
+          //   console.log(`Uploaded: ${progress.loaded}/${progress.total}`);
+          //   console.log(uploadProgress);
+          //   console.log(progressBar.getAttribute('value'));
+          //   }
+          // }
+          );
       }
       this.showSuccess();
     }
