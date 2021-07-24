@@ -80,7 +80,7 @@ export class MyReportComponent implements OnInit {
     // });
     await this.loadReports();
   }
-  async loadReports() {
+  async loadReports(updateChartData = true) {
     // this.api.ListReports().then(event => {
     // let reports = event.items as Array<Report>;
     const taskID = '02558c19-ae10-4ebf-8b5f-c8f9cb34a4aa';
@@ -113,7 +113,10 @@ export class MyReportComponent implements OnInit {
               };
               this.reports.push(report);
             }
-            this.updateChartData();
+            if (updateChartData) {
+              this.updateChartData();
+            }
+            
           });
       },
       error => {
@@ -123,10 +126,13 @@ export class MyReportComponent implements OnInit {
 
   updateChartData() {
     const filteredReports = [];
-    if (this.filename) {
-      for (const report of this.reports) {
-        if (report.filename === this.filename) {
-          filteredReports.push(report);
+    this.loadReports(false);
+    if (this.selectedChartYear && this.selectedChartYear !== 'Select Year') {
+      for (let i = 0; i < this.reports.length; i++) {
+        const year = this.reports[i].predictedDate.split('/')[2];
+        if (year === this.selectedChartYear) { 
+          filteredReports.push(this.reports[i]);
+          
         }
       }
       this.reports = filteredReports;
