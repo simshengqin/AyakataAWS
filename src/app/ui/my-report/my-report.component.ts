@@ -5,8 +5,9 @@ import {MatPaginator} from '@angular/material/paginator';
 import {Task} from '../../core/models/task';
 import {APIService} from '../../API.service';
 import {Report} from '../../core/models/report';
-import {DateHelper} from "../../core/services/date-helper";
-import {ActivatedRoute} from "@angular/router";
+import {DateHelper} from '../../core/services/date-helper';
+import {ActivatedRoute} from '@angular/router';
+import {Storage} from 'aws-amplify';
 
 @Component({
   selector: 'app-my-report',
@@ -49,7 +50,8 @@ export class MyReportComponent implements OnInit {
   filename: string;
   patientCountsByMonth: Array<any>;
   selectedChartYear = 'Select Year';
-  constructor(private api: APIService, private dateHelper: DateHelper, private activatedRoute: ActivatedRoute, ) {
+  reports: Array<Report> = [];
+  constructor(private api: APIService, private dateHelper: DateHelper, private activatedRoute: ActivatedRoute,) {
   }
 
   async ngOnInit(): Promise<void> {
@@ -58,71 +60,113 @@ export class MyReportComponent implements OnInit {
     ]).then((results) => {
       this.fullMonthDayYearFormat = results[1];
     });
-    // const newReport = {
-    //   patientID: '6',
-    //   predictedMonths: 6,
-    //   predictedDate: 65000,
-    //   reportID: '2'
-    // };
-    // await this.api.CreateReport(newReport);
-    this.activatedRoute.queryParams.subscribe(async params => {
-      this.filename = params.filename;
-      console.log(this.filename);
-    });
-    this.api.ListReports().then(event => {
-      const reports = event.items as Array<Report>;
-
-    });
-    this.updateChartData();
+    // for (let i = 0; i < 2000; i++) {
+    //   const newReport = {
+    //     id: i.toString(),
+    //     patientID: '6',
+    //     predictedMonths: '6',
+    //     predictedDate: '65000',
+    //   };
+    //   await this.api.CreateReport(newReport);
+    //
+    // }
+    // this.activatedRoute.queryParams.subscribe(async params => {
+    //   this.filename = params.filename;
+    //   console.log(this.filename);
+    // });
+    // this.api.ListReports().then(event => {
+    //   const reports = event.items as Array<Report>;
+    //
+    // });
+    await this.loadReports();
   }
+  async loadReports() {
+    // this.api.ListReports().then(event => {
+    // let reports = event.items as Array<Report>;
+    const taskID = '02558c19-ae10-4ebf-8b5f-c8f9cb34a4aa';
+    // const storage = this.amplifyService.storage();
+
+    const storageOptions = {
+      bucket: 'patientdata10032-dev',
+      // see https://github.com/aws/aws-amplify/blob/master/packages/aws-amplify/src/Storage/Storage.ts#L325
+      // public appears to be the only option that doesn't append hardcoded values
+      customPrefix: {
+        public: ''
+      },
+      download: true ,
+      level: 'public'
+    };
+    await Storage.get( 'public/02558c19-ae10-4ebf-8b5f-c8f9cb34a4aa/output.csv', storageOptions ).then(
+      async data => {
+        data["Body"].text().then(
+          async csvText => {
+            const csvTextArr = csvText.split('\n');
+            // - 1 as there is an empty line at the end
+            for (let i = 1; i < csvTextArr.length - 1; i++) {
+              const lineArr = csvTextArr[i].split(',');
+              const report = {
+                patientID: lineArr[0],
+                predictedMonths: lineArr[2],
+                predictedDate: lineArr[1]
+              };
+              this.reports.push(report);
+            }
+            this.updateChartData();
+          });
+      },
+      error => {
+        console.log( 'Boo. Err. ', error );
+      });
+  }
+
   updateChartData() {
-    this.api.ListReports().then(event => {
-      let reports = event.items as Array<Report>;
-      const filteredReports = [];
-      if (this.filename) {
-        for (const report of reports) {
-          if (report.filename === this.filename) {
-            filteredReports.push(report);
-          }
+    const filteredReports = [];
+    if (this.filename) {
+      for (const report of this.reports) {
+        if (report.filename === this.filename) {
+          filteredReports.push(report);
         }
-        reports = filteredReports;
       }
-      const patientCountsByMonthDict = {};
-      const totalPatientCountsByMonthArr = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
-      for (let i = 0; i < reports.length; i++) {
-        reports[i].position = i + 1;
-        let month = reports[i].predictedDate.split('/')[1];
-        const year = reports[i].predictedDate.split('/')[2];
-        if (month[0] === '0') { month = month[1]; }
-        if (!(year in patientCountsByMonthDict)) {
-          patientCountsByMonthDict[year] = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+      this.reports = filteredReports;
+    }
+    const patientCountsByMonthDict = {};
+    const totalPatientCountsByMonthArr = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+    for (let i = 0; i < this.reports.length; i++) {
+      this.reports[i].position = i + 1;
+      let month = this.reports[i].predictedDate.split('/')[1];
+      const year = this.reports[i].predictedDate.split('/')[2];
+      if (month[0] === '0') {
+        month = month[1];
+      }
+      if (!(year in patientCountsByMonthDict)) {
+        patientCountsByMonthDict[year] = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+      }
+      if (!(this.options.Year.includes(year))) {
+        this.options.Year.push(year);
+      }
+      patientCountsByMonthDict[year][+month - 1] += 1;
+      totalPatientCountsByMonthArr[+month - 1] += 1;
+    }
+    this.options.Year.sort();
+    this.options.Year.unshift(this.options.Year.pop());
+    if (!this.selectedChartYear || this.selectedChartYear === 'Select Year') {
+      this.patientCountsByMonth = [
+        {data: totalPatientCountsByMonthArr, label: 'Total number of patients with complications'}
+      ];
+    } else {
+      this.patientCountsByMonth = [
+        {
+          data: patientCountsByMonthDict[this.selectedChartYear], label: 'Number of patients with complications in '
+            + this.selectedChartYear
         }
-        if (!(this.options.Year.includes(year))) {
-          this.options.Year.push(year);
-        }
-        patientCountsByMonthDict[year][+month - 1] += 1;
-        totalPatientCountsByMonthArr[+month - 1] += 1;
-      }
-      this.options.Year.sort();
-      this.options.Year.unshift(this.options.Year.pop());
-      if (!this.selectedChartYear || this.selectedChartYear === 'Select Year') {
-        this.patientCountsByMonth = [
-          { data: totalPatientCountsByMonthArr, label: 'Total number of patients with complications' }
-        ];
-      }
-      else {
-        this.patientCountsByMonth = [
-          { data: patientCountsByMonthDict[this.selectedChartYear], label: 'Number of patients with complications in '
-              + this.selectedChartYear }
-        ];
-      }
+      ];
+    }
 
-      this.dataSource = new MatTableDataSource(reports);
-      this.dataSource.sort = this.sort;
-      this.dataSource.paginator = this.paginator;
-      console.log(this.dataSource);
+    this.dataSource = new MatTableDataSource(this.reports);
+    this.dataSource.sort = this.sort;
+    this.dataSource.paginator = this.paginator;
+    console.log(this.dataSource);
 
-    });
   }
 
 
