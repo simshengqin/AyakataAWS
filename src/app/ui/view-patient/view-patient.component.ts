@@ -19,7 +19,7 @@ export class ViewPatientComponent implements OnInit, OnDestroy {
   patients: Array<Patient> = [];
   subscription: Subscription | null | undefined;
   // Only if patients array is 0
-  placeHolder = {Patient_No:"Please Select a Patient", Predicted_Date: "DD/MM/YYYY", Predicted_Months: "0" } 
+  placeHolder = {Patient_No:"Please Select a Patient", Predicted_Date: "DD/MM/YYYY", Predicted_Months: "0" }
   reports: any;
   selectedPatientNo: string;
   predictedDate: string = "Predicted Date";
@@ -28,7 +28,7 @@ export class ViewPatientComponent implements OnInit, OnDestroy {
   router: any;
   constructor(private api: APIService, private fb: FormBuilder , private activatedRoute: ActivatedRoute) { }
 
-  ngOnInit(): void {  
+  ngOnInit(): void {
     this.createForm = this.fb.group({
       Patient_No: ['', Validators.required],
       Case_No: ['', Validators.required],
@@ -49,7 +49,7 @@ export class ViewPatientComponent implements OnInit, OnDestroy {
     //   { path: 'crisis-center/:param1', component: CrisisListComponent },
     //   { path: 'hero/:param2',      component: view-patientComponent },
     // ];
-    
+
     // @NgModule({
     //   imports: [
     //     RouterModule.forRoot(
@@ -97,7 +97,7 @@ export class ViewPatientComponent implements OnInit, OnDestroy {
     // const storage = this.amplifyService.storage();
 
     const storageOptions = {
-      bucket: 'patientdata10032-dev',
+      bucket: 'sagemaker-output-sq',
       // see https://github.com/aws/aws-amplify/blob/master/packages/aws-amplify/src/Storage/Storage.ts#L325
       // public appears to be the only option that doesn't append hardcoded values
       customPrefix: {
@@ -109,7 +109,7 @@ export class ViewPatientComponent implements OnInit, OnDestroy {
     await Storage.get( 'public/02558c19-ae10-4ebf-8b5f-c8f9cb34a4aa/output.csv', storageOptions ).then(
       async data => {
         data["Body"].text().then(
-          async csvText => { 
+          async csvText => {
             console.log(csvText);
             const csvTextArr = csvText.split('\n');
             // - 1 as there is an empty line at the end
@@ -120,7 +120,7 @@ export class ViewPatientComponent implements OnInit, OnDestroy {
               //     patientID: lineArr[0],
               //     predictedMonths: lineArr[2],
               //     predictedDate: lineArr[1]
-              //   } 
+              //   }
                 if (this.selectedPatientNo ==  lineArr[0]) {
                   this.predictedMonths = lineArr[2];
                   this.predictedDate = lineArr[1];

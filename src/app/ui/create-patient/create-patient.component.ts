@@ -30,7 +30,8 @@ export class CreatePatientComponent implements OnInit {
 
   errorMessages = '';
   successMessage = '';
-
+  wrongfileMessage = '';
+  missingfileMessage = '';
   /*
   @ViewChild('filePatient') filePatient: ElementRef;
   @ViewChild('fileLab') fileLab: ElementRef;
@@ -66,11 +67,13 @@ export class CreatePatientComponent implements OnInit {
     this.UnsuccessfulFileUpload = 0; // reset count
     this.ngx_toast_index_success = 1; // reset index
     this.ngx_toast_index_error = 1; // reset index
-
+    const uploadedFileNames = [];
+    const wrongFileNames = [];
     for (const ele of this.files){
       if (this.fileNames.includes(ele.name.toLowerCase())){
-        this.ngx_toast_index_success++;
-        this.SuccessfulFileUpload++;
+        uploadedFileNames.push(ele.name.toLowerCase());
+        // this.ngx_toast_index_success++;
+        // this.SuccessfulFileUpload++;
         const patientCount = 0;
         const patients = new Set();
         this.ngxCsvParser.parse(ele, { header: true, delimiter: ',' })
@@ -79,17 +82,6 @@ export class CreatePatientComponent implements OnInit {
           for (const csvRecord of csvRecords) {
             patients.add(csvRecord['Patient No']);
           }
-          const newTask = {
-            filename: ele.name,
-            uploadDate: Date.now(),
-            patientCount: patients.size,
-            status2: 0
-            // reportID: null,
-            // isRead: false
-          };
-          console.log(newTask);
-          const newTaskDB = await this.api.CreateTask(newTask);
-          const result = await Storage.put(newTaskDB.id + '/' + ele.name, ele);
           // const newNotification = {
           //   taskID:  newTaskDB.id,
           //   filename: ele.name,
@@ -100,36 +92,65 @@ export class CreatePatientComponent implements OnInit {
           // await this.api.CreateNotification(newNotification);
         });
 
-
       } else {
-        this.errorMessages += this.ngx_toast_index_error + '.) ' + ele.name;
-        this.ngx_toast_index_error++;
-        this.UnsuccessfulFileUpload++;
+        wrongFileNames.push(ele.name);
+        // this.errorMessages += this.ngx_toast_index_error + '.) ' + ele.name;
+        // this.ngx_toast_index_error++;
+        // this.UnsuccessfulFileUpload++;
       }
     }
 
-    document.getElementById('displayUploadStatus').style.display = 'block';
+    // document.getElementById('displayUploadStatus').style.display = 'block';
 
-    if (this.SuccessfulFileUpload > 0){
+    if (uploadedFileNames.length === 5){
+      const newTask = {
+        filename: '',
+        uploadDate: Date.now(),
+        // patientCount: patients.size,
+        status2: 0
+        // reportID: null,
+        // isRead: false
+      };
+      console.log(newTask);
+      const newTaskDB = await this.api.CreateTask(newTask);
+      for (const ele of this.files) {
+        const result = await Storage.put(newTaskDB.id + '/' + ele.name, ele);
+      }
       this.showSuccess();
     }
-    if (this.UnsuccessfulFileUpload > 0){
-      this.showError();
+    if (uploadedFileNames.length  < 5){
+      const missingFileNames = [];
+      for (const fileName of this.fileNames) {
+        if (!uploadedFileNames.includes(fileName)) {
+          missingFileNames.push(fileName);
+        }
+      }
+      this.wrongfileMessage = '';
+      this.missingfileMessage = '';
+      if (wrongFileNames.length > 0) {
+        this.wrongfileMessage = 'These files have the wrong names: ' + wrongFileNames.join(' , ');
+      }
+      if (missingFileNames.length > 0) {
+        this.missingfileMessage = 'Please upload these files: ' + missingFileNames.join(' , ');
+      }
+
+
+      // this.showError();
     }
 
-    this.files = [];
+    // this.files = [];
 
   }
 
   public showSuccess() {
-    this.toastr.success( this.SuccessfulFileUpload + ' File(s) have been Uploaded successfully!', '', {positionClass: 'toast-top-center'});
+    this.toastr.success( '5 File(s) have been Uploaded successfully!', '', {positionClass: 'toast-top-center'});
   }
-  public showError(){
-    this.toastr.error('The following file(s) could not be Uploaded: ' + this.errorMessages + ' unsuccessfully!', '', {positionClass: 'toast-top-center'});
-  }
-  public closeDisplay(){
-    document.getElementById('displayUploadStatus').style.display = 'none';
-  }
+  // public showError(){
+  //   this.toastr.error('The following file(s) could not be Uploaded' + ' successfully: ' + this.errorMessages, '', {positionClass: 'toast-top-center', timeOut: 10000});
+  // }
+  // public closeDisplay(){
+  //   document.getElementById('displayUploadStatus').style.display = 'none';
+  // }
 
   /*
   start(){
