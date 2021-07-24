@@ -11,7 +11,7 @@ type Task @model {
 type Report @model {
   id: ID!
   filename: String
-  patientID: String
+  patientNo: String
   predictedMonths: String
   predictedDate: String
   createdAt: AWSDateTime

@@ -1,7 +1,7 @@
 export type Report = {
   __typename?: 'Report';
   id?: string;
-  patientID?: string;
+  patientNo?: string;
   filename?: string;
   predictedMonths?: string;
   predictedDate?: string;

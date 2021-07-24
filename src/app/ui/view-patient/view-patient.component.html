@@ -29,7 +29,7 @@
       <!-- Patient_No -->
       <div class="col-5 justify-content-center">
         <div class="input-group input-group-lg">
-          <input type="text" class="form-control" formControlName="Patient_No" autocomplete="off" placeholder="Patient ID"> 
+          <input type="text" class="form-control" formControlName="Patient_No" autocomplete="off" placeholder="Patient ID" [(ngModel)] = "selectedPatientNo"> 
         </div>
       </div>
       <!-- End of Patient_No -->
@@ -43,7 +43,7 @@
       <!-- Button -->
       <div class="col-2 justify-content-center">
         <div class="input-group input-group-lg">
-            <button type="submit" class="btn btn-outline-success btn-lg"> Search </button>
+            <button type="submit" class="btn btn-outline-success btn-lg" (click) = loadReports()> Search </button>
         </div>
       </div>
       <!-- End of Button -->
@@ -58,50 +58,29 @@
     <h1 class="display-4">  Results: </h1>
     <div class="col-12 shadow p-3 mb-5 bg-white rounded">
       <!-- If patients array / search query is not length 0 or null -->
-      <div *ngIf="patients.length == 0">
-        <div class="d-flex justify-content-center display-3">  Patient ID: </div>
-        <br>
-        <div class="d-flex justify-content-center"> <h1 class="display-5 text-muted"> {{placeHolder.Patient_No}} </h1> </div>
-        <br>
-        <div class="row">
-          <!-- Predicted Date: -->
-          <div class="col-6">
-            <div class="d-flex justify-content-center display-4"> Predicted Date: </div>
-            <div class="d-flex justify-content-center"> <h1 class="display-5 text-muted">{{placeHolder.Predicted_Date}}</h1> </div>
-          </div>
-          <!-- Predicted Months: -->
-          <div class="col-6">
-            <div class="d-flex justify-content-center display-4"> Predicted Months: </div>
-            <div class="d-flex justify-content-center"> <h1 class="display-5 text-muted"> {{placeHolder.Predicted_Months}} </h1> </div>
-          </div>
-        </div> <!-- End of row -->
-      </div> <!-- End of first ngIf -->
       <!-- If patients array / search query length is greater than 0 or NOT null-->
-      <div class="justify-content-center" *ngIf="patients.length > 0">
-        <div *ngFor="let patient of patients">
+      <div class="justify-content-center">
 
           <div class="d-flex justify-content-center display-3">  Patient ID: </div>
           <br>
-          <div class="d-flex justify-content-center"> <h1 class="display-5 text-muted"> {{ patient.Patient_No }} </h1> </div>
+          <div class="d-flex justify-content-center"> <h1 class="display-5 text-muted"> {{selectedPatientNo}} </h1> </div>
           <br>
           <div class="row">
             <!-- Predicted Date: -->
             <div class="col-6">
               <div class="d-flex justify-content-center display-4"> Predicted Date: </div>
-              <div class="d-flex justify-content-center"> <h1 class="display-5 text-muted"> {{ patient.Case_No }} </h1> </div>
+              <div class="d-flex justify-content-center"> <h1 class="display-5 text-muted"> {{predictedDate}} </h1> </div>
             </div>
             <!-- Predicted Months: -->
             <div class="col-6">
               <div class="d-flex justify-content-center display-4"> Predicted Months: </div>
-              <div class="d-flex justify-content-center"> <h1 class="display-5 text-muted"> {{ patient.Referral_Type_From }} </h1> </div>
+              <div class="d-flex justify-content-center"> <h1 class="display-5 text-muted"> {{predictedMonths}} </h1> </div>
             </div>
           </div> <!-- End of row -->
-
-        </div> <!-- End of ngFor -->
       </div> <!-- End of second ngIf  -->
-      <br>
+      <!--<br>
       <button type="button" class="btn btn-info btn-lg btn-block"> Re-calculate Predicted Months </button>
-      <br>
+      <br>-->
     </div> <!-- End of Col-12 Div -->
 
   </div> <!-- End of Row -->

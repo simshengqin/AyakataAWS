@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, RouterModule, Routes } from '@angular/router';
 import { FormGroup, FormControl } from '@angular/forms'; // imports
+import { async } from '@angular/core/testing';
+import {Storage} from 'aws-amplify';
+import {APIService} from '../../API.service';
 
 @Component({
   selector: 'app-home',
@@ -9,7 +12,7 @@ import { FormGroup, FormControl } from '@angular/forms'; // imports
 })
 export class HomeComponent implements OnInit {
 
-  patientid: string; // :type --> from ngmodel in html
+  patientNo: string; // :type --> from ngmodel in html
   patientCasenumber: string;
   myForm: FormGroup;
 
@@ -34,7 +37,8 @@ export class HomeComponent implements OnInit {
       if patientCasenumber search result, returns null, inform Users of incorrect search.
 
     */
-    this.router.navigate(['/view-patient']);
+      console.log(this.patientNo);
+    this.router.navigate(['/view-patient'] , {queryParams: { patientNo : this.patientNo }});
   }
 
   create(){

@@ -18,7 +18,7 @@ export class MyReportComponent implements OnInit {
   dataSource;
   @ViewChild(MatSort) sort: MatSort;
   @ViewChild(MatPaginator) paginator: MatPaginator;
-  tableColumns: string[] = ['position', 'patientID', 'predictedMonths', 'predictedDate'];
+  tableColumns: string[] = ['position', 'patientNo', 'predictedMonths', 'predictedDate'];
   // data = [
   //   { patientID: '007xXn9BM', predictedMonths: '2', predictedDate: '16/01/2015'},
   //   { patientID: '4MxPiblH7', predictedMonths: '3', predictedDate: '28/05/2015'},
@@ -99,13 +99,15 @@ export class MyReportComponent implements OnInit {
     await Storage.get( 'public/02558c19-ae10-4ebf-8b5f-c8f9cb34a4aa/output.csv', storageOptions ).then(
       async data => {
         data["Body"].text().then(
-          async csvText => {
+         
+          async csvText => { 
+            console.log(csvText);
             const csvTextArr = csvText.split('\n');
             // - 1 as there is an empty line at the end
             for (let i = 1; i < csvTextArr.length - 1; i++) {
               const lineArr = csvTextArr[i].split(',');
               const report = {
-                patientID: lineArr[0],
+                patientNo: lineArr[0],
                 predictedMonths: lineArr[2],
                 predictedDate: lineArr[1]
               };
