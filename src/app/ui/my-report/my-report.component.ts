@@ -18,7 +18,7 @@ export class MyReportComponent implements OnInit {
   dataSource;
   @ViewChild(MatSort) sort: MatSort;
   @ViewChild(MatPaginator) paginator: MatPaginator;
-  tableColumns: string[] = ['patientNo', 'predictedMonths']; // ,'position', 'predictedDate'];
+  tableColumns: string[] = ['patientNo', 'predictedMonths', 'predictedDate']; // ,'position', 'predictedDate'];
   // data = [
   //   { patientID: '007xXn9BM', predictedMonths: '2', predictedDate: '16/01/2015'},
   //   { patientID: '4MxPiblH7', predictedMonths: '3', predictedDate: '28/05/2015'},
@@ -80,7 +80,7 @@ export class MyReportComponent implements OnInit {
     // });
     await this.loadReports();
   }
-  async loadReports(updateChartData = true) {
+  async loadReports() {
     // this.api.ListReports().then(event => {
     // let reports = event.items as Array<Report>;
     const taskID = '02558c19-ae10-4ebf-8b5f-c8f9cb34a4aa';
@@ -96,6 +96,7 @@ export class MyReportComponent implements OnInit {
       download: true ,
       level: 'public'
     };
+    // this.reports = [];
     await Storage.get( 'public/output.csv', storageOptions ).then(
       async data => {
         data["Body"].text().then(
@@ -109,16 +110,14 @@ export class MyReportComponent implements OnInit {
               const report = {
                 patientNo: lineArr[0],
                 predictedMonths: lineArr[1],
-                // predictedDate: lineArr[1]
+                predictedDate: lineArr[2]
               };
               this.reports.push(report);
             }
-            if (updateChartData) {
-              this.updateChartData();
-            }
+            this.updateChartData();
 
           });
-        console.log(this.reports);
+        // console.log(this.reports);
       },
       error => {
         console.log( 'Boo. Err. ', error );
@@ -126,53 +125,63 @@ export class MyReportComponent implements OnInit {
   }
 
   async updateChartData() {
-    const filteredReports = [];
-    await this.loadReports(false);
+    let filteredReports = [];
     if (this.selectedChartYear && this.selectedChartYear !== 'Select Year') {
       for (let i = 0; i < this.reports.length; i++) {
-        const year = this.reports[i].predictedDate.split('/')[2];
+        const year = this.reports[i].predictedDate.split('-')[0];
         if (year === this.selectedChartYear) {
           filteredReports.push(this.reports[i]);
 
         }
       }
-      this.reports = filteredReports;
     }
-    // const patientCountsByMonthDict = {};
-    // const totalPatientCountsByMonthArr = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
-    // for (let i = 0; i < this.reports.length; i++) {
-    //   this.reports[i].position = i + 1;
-      // let month = this.reports[i].predictedDate.split('/')[1];
-      // const year = this.reports[i].predictedDate.split('/')[2];
-      // if (month[0] === '0') {
-      //   month = month[1];
-      // }
-    //   if (!(year in patientCountsByMonthDict)) {
-    //     patientCountsByMonthDict[year] = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
-    //   }
-    //   if (!(this.options.Year.includes(year))) {
-    //     this.options.Year.push(year);
-    //   }
-    //   patientCountsByMonthDict[year][+month - 1] += 1;
-    //   totalPatientCountsByMonthArr[+month - 1] += 1;
-    // }
-    // this.options.Year.sort();
-    // this.options.Year.unshift(this.options.Year.pop());
-    // if (!this.selectedChartYear || this.selectedChartYear === 'Select Year') {
-    //   this.patientCountsByMonth = [
-    //     {data: totalPatientCountsByMonthArr, label: 'Total number of patients with complications'}
-    //   ];
-    // } else {
-    //   this.patientCountsByMonth = [
-    //     {
-    //       data: patientCountsByMonthDict[this.selectedChartYear], label: 'Number of patients with complications in '
-    //         + this.selectedChartYear
-    //     }
-    //   ];
-    // }
+    else {
+      filteredReports = this.reports;
+    }
+    const patientCountsByMonthDict = {};
+    const totalPatientCountsByMonthArr = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+    console.log(filteredReports);
+    for (let i = 0; i < filteredReports.length; i++) {
+      filteredReports[i].position = i + 1;
+      if (filteredReports[i].predictedDate === '') { continue; }
+      const year = filteredReports[i].predictedDate.split('-')[0];
+      let month = filteredReports[i].predictedDate.split('-')[1];
 
-    this.dataSource = new MatTableDataSource(this.reports);
+      if (month[0] === '0') {
+        month = month[1];
+      }
+      if (!(year in patientCountsByMonthDict)) {
+        patientCountsByMonthDict[year] = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+      }
+      if (!(this.options.Year.includes(year))) {
+        this.options.Year.push(year);
+      }
+      patientCountsByMonthDict[year][+month - 1] += 1;
+      totalPatientCountsByMonthArr[+month - 1] += 1;
+    }
+    this.options.Year.sort();
+    this.options.Year.unshift(this.options.Year.pop());
+    if (!this.selectedChartYear || this.selectedChartYear === 'Select Year') {
+      this.patientCountsByMonth = [
+        {data: totalPatientCountsByMonthArr, label: 'Total number of patients with complications'}
+      ];
+    } else {
+      this.patientCountsByMonth = [
+        {
+          data: patientCountsByMonthDict[this.selectedChartYear], label: 'Number of patients with complications in '
+            + this.selectedChartYear
+        }
+      ];
+    }
+
+    this.dataSource = new MatTableDataSource(filteredReports);
     this.dataSource.sort = this.sort;
+    this.dataSource.sortingDataAccessor = (item, property) => {
+      switch (property) {
+        case 'predictedDate': return new Date(item.predictedDate);
+        default: return item[property];
+      }
+    };
     this.dataSource.paginator = this.paginator;
     console.log(this.dataSource);
 
