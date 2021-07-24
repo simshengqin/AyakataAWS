@@ -4,7 +4,11 @@
   padding-bottom: 32px;
   padding-top: 32px;
 }
-
+.no-tasks-message {
+  color: #898989!important;
+  margin: 20px 15px 20px 15px;
+  text-align: center;
+}
 table {
   width: 100%;
   mat-icon {

@@ -49,6 +49,7 @@ export class MyTaskComponent implements OnInit {
   fullMonthDayYearFormat: string;
   patientCountsByMonth: Array<any>;
   selectedChartYear = 'Select Year';
+  isNoTasksInAWS = false;
   constructor(
     private router: Router,
     private api: APIService,
@@ -66,6 +67,7 @@ export class MyTaskComponent implements OnInit {
 
     this.api.ListTasks().then(event => {
       const tasks = event.items as Array<Task>;
+      if (tasks.length == 0) { this.isNoTasksInAWS = true; }
       for (let i = 0; i < tasks.length; i++) {
         tasks[i].position = i + 1;
       }
