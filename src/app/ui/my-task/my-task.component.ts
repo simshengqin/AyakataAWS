@@ -18,7 +18,7 @@ export class MyTaskComponent implements OnInit {
   dataSource;
   @ViewChild(MatSort) sort: MatSort;
   @ViewChild(MatPaginator) paginator: MatPaginator;
-  tableColumns: string[] = ['position', 'filename', 'uploadDate', 'uploadTime', 'status'];
+  tableColumns: string[] = ['position', 'id', 'uploadDate', 'uploadTime', 'status'];
   // data = [
   //   {filename: 'test1.csv', uploadDate: '16/01/2015', patientCount: '5', status: 'processing'},
   //   {filename: 'test2.csv', uploadDate: '18/05/2015', patientCount: '8', status: 'processing'},
@@ -74,7 +74,7 @@ export class MyTaskComponent implements OnInit {
       this.dataSource.paginator = this.paginator;
       console.log(this.dataSource);
     });
-    this.updateChartData();
+    //this.updateChartData();
 
   }
 
@@ -84,52 +84,52 @@ export class MyTaskComponent implements OnInit {
   }
   onRowClick(row: any) {
     this.clickedRows.has(row) ? this.clickedRows.delete(row) : this.clickedRows.add(row);
-    this.updateChartData();
+    //this.updateChartData();
   }
-  updateChartData() {
-    this.api.ListReports().then(event => {
-      let reports = event.items as Array<Report>;
-      if (this.clickedRows.size > 0) {
-        const filteredReports = [];
-        for (const report of reports) {
-          for (const clickedRow of this.clickedRows) {
-            if (clickedRow.filename === report.filename) {
-              filteredReports.push(report);
-              break;
-            }
-          }
-        }
-        reports = filteredReports;
-      }
-      const patientCountsByMonthDict = {};
-      const totalPatientCountsByMonthArr = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
-      for (let i = 0; i < reports.length; i++) {
-        reports[i].position = i + 1;
-        let month = reports[i].predictedDate.split('/')[1];
-        const year = reports[i].predictedDate.split('/')[2];
-        if (month[0] === '0') { month = month[1]; }
-        if (!(year in patientCountsByMonthDict)) {
-          patientCountsByMonthDict[year] = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
-        }
-        if (!(this.options.Year.includes(year))) {
-          this.options.Year.push(year);
-        }
-        patientCountsByMonthDict[year][+month - 1] += 1;
-        totalPatientCountsByMonthArr[+month - 1] += 1;
-      }
-      this.options.Year.sort();
-      this.options.Year.unshift(this.options.Year.pop());
-      if (!this.selectedChartYear || this.selectedChartYear === 'Select Year') {
-        this.patientCountsByMonth = [
-          { data: totalPatientCountsByMonthArr, label: 'Total number of patients with complications' }
-        ];
-      }
-      else {
-        this.patientCountsByMonth = [
-          { data: patientCountsByMonthDict[this.selectedChartYear], label: 'Number of patients with complications in '
-              + this.selectedChartYear }
-        ];
-      }
-    });
-  }
+  // updateChartData() {
+  //   this.api.ListReports().then(event => {
+  //     let reports = event.items as Array<Report>;
+  //     if (this.clickedRows.size > 0) {
+  //       const filteredReports = [];
+  //       for (const report of reports) {
+  //         for (const clickedRow of this.clickedRows) {
+  //           if (clickedRow.filename === report.filename) {
+  //             filteredReports.push(report);
+  //             break;
+  //           }
+  //         }
+  //       }
+  //       reports = filteredReports;
+  //     }
+  //     const patientCountsByMonthDict = {};
+  //     const totalPatientCountsByMonthArr = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+  //     for (let i = 0; i < reports.length; i++) {
+  //       reports[i].position = i + 1;
+  //       let month = reports[i].predictedDate.split('/')[1];
+  //       const year = reports[i].predictedDate.split('/')[2];
+  //       if (month[0] === '0') { month = month[1]; }
+  //       if (!(year in patientCountsByMonthDict)) {
+  //         patientCountsByMonthDict[year] = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+  //       }
+  //       if (!(this.options.Year.includes(year))) {
+  //         this.options.Year.push(year);
+  //       }
+  //       patientCountsByMonthDict[year][+month - 1] += 1;
+  //       totalPatientCountsByMonthArr[+month - 1] += 1;
+  //     }
+  //     this.options.Year.sort();
+  //     this.options.Year.unshift(this.options.Year.pop());
+  //     if (!this.selectedChartYear || this.selectedChartYear === 'Select Year') {
+  //       this.patientCountsByMonth = [
+  //         { data: totalPatientCountsByMonthArr, label: 'Total number of patients with complications' }
+  //       ];
+  //     }
+  //     else {
+  //       this.patientCountsByMonth = [
+  //         { data: patientCountsByMonthDict[this.selectedChartYear], label: 'Number of patients with complications in '
+  //             + this.selectedChartYear }
+  //       ];
+  //     }
+  //   });
+  // }
 }

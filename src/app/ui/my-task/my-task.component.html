@@ -23,9 +23,9 @@
         <td mat-cell *matCellDef="let element; let i = index"> {{ element["position"] }} </td>
       </ng-container>
 
-      <ng-container matColumnDef="filename">
+      <ng-container matColumnDef="id">
         <th mat-header-cell *matHeaderCellDef mat-sort-header> Task ID </th>
-        <td mat-cell *matCellDef="let element"> {{ element["filename"] }} </td>
+        <td mat-cell *matCellDef="let element"> {{ element["id"] }} </td>
       </ng-container>
 
       <ng-container matColumnDef="uploadDate">

@@ -51,7 +51,7 @@ export class HeaderComponent implements OnInit {
       id: task.id,
       filename: task.filename,
       uploadDate: task.uploadDate,
-      patientCount: task.patientCount,
+      //patientCount: task.patientCount,
       status2: 2 // Read the task notification
     };
     await this.api.UpdateTask(updateTaskInput);
