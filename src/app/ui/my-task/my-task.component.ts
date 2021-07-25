@@ -18,7 +18,7 @@ export class MyTaskComponent implements OnInit {
   dataSource;
   @ViewChild(MatSort) sort: MatSort;
   @ViewChild(MatPaginator) paginator: MatPaginator;
-  tableColumns: string[] = ['position', 'id', 'uploadDate', 'status'];
+  tableColumns: string[] = ['position', 'uploadDate', 'status']; // id
   // data = [
   //   {filename: 'test1.csv', uploadDate: '16/01/2015', patientCount: '5', status: 'processing'},
   //   {filename: 'test2.csv', uploadDate: '18/05/2015', patientCount: '8', status: 'processing'},

@@ -25,19 +25,19 @@
 
         <!-- Input Text for Paitent ID & Patient Case number -->
         <form [formGroup]="myForm">
-        <div class="row">
-            <div class="col-5 justify-content-center">
+        <div class="row justify-content-center">
+            <div class="col-5">
                 <div class="input-group input-group-lg">
                     <input type="text" class="form-control" placeholder="Patient No" [(ngModel)]="patientNo" formControlName="PID"> <!-- ngmodel for input field to be used in BE TS-->
                 </div>
             </div>
-            <div class="col-5 justify-content-center">
-                <div class="input-group input-group-lg">
-                    <input type="text" class="form-control" placeholder="Patient Case Number" [(ngModel)]="patientCasenumber" formControlName="PCN">
-                    <!-- <input type="text" class="form-control" placeholder="Patient Case Number" ([ngModel])="patientCasenumber"> -->
-                </div>
-            </div>
-            <div class="col-2 justify-content-center">
+<!--            <div class="col-5 justify-content-center">-->
+<!--                <div class="input-group input-group-lg">-->
+<!--                    <input type="text" class="form-control" placeholder="Patient Case Number" [(ngModel)]="patientCasenumber" formControlName="PCN">-->
+<!--                    &lt;!&ndash; <input type="text" class="form-control" placeholder="Patient Case Number" ([ngModel])="patientCasenumber"> &ndash;&gt;-->
+<!--                </div>-->
+<!--            </div>-->
+            <div class="col-2">
                 <div class="input-group input-group-lg">
                     <button type="button" class="btn btn-outline-success btn-lg" (click)="search()"> Search </button>
                 </div>

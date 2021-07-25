@@ -3,9 +3,3 @@
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 
-.max-width-section {
-  max-width: 1400px;
-  margin: 0 auto;
-  padding-bottom: 32px;
-  padding-top: 32px;
-}

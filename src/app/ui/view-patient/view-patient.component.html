@@ -20,7 +20,7 @@
   </form>
 </div>
 -->
-<div class="container">
+<div class="container max-width-section">
 
 <div class="row justify-content-center">
     <img src="../../../assets/images/Medico-Logo-Color.png" width="300" height="150" class="img-fluid" alt="Responsive image"/>
@@ -31,20 +31,20 @@
 <div class="form-body">
   <form autocomplete="off" [formGroup]="createForm" (ngSubmit)="onCreate(createForm.value)">
 
-    <div class="row">
+    <div class="row justify-content-center">
       <!-- Patient_No -->
       <div class="col-5 justify-content-center">
         <div class="input-group input-group-lg">
-          <input type="text" class="form-control" formControlName="Patient_No" autocomplete="off" placeholder="Patient ID" [(ngModel)] = "selectedPatientNo">
+          <input type="text" class="form-control" formControlName="Patient_No" autocomplete="off" placeholder="Patient No" [(ngModel)] = "selectedPatientNo">
         </div>
       </div>
       <!-- End of Patient_No -->
       <!-- Case_No -->
-      <div class="col-5 justify-content-center">
-        <div class="input-group input-group-lg">
-            <input type="text" class="form-control" formControlName="Case_No" autocomplete="off" placeholder="Patient Case Number">
-        </div>
-      </div>
+<!--      <div class="col-5 justify-content-center">-->
+<!--        <div class="input-group input-group-lg">-->
+<!--            <input type="text" class="form-control" formControlName="Case_No" autocomplete="off" placeholder="Patient Case Number">-->
+<!--        </div>-->
+<!--      </div>-->
       <!-- End of Case_No -->
       <!-- Button -->
       <div class="col-2 justify-content-center">
@@ -60,40 +60,39 @@
 <br>
 <br>
 
-  <div class="row">
-    <h1 class="display-4">  Results: </h1>
-    <div class="col-12 shadow p-3 mb-5 bg-white rounded">
+  <div class="row justify-content-center">
+    <div class="col-11 shadow p-3 mb-5 bg-white rounded">
       <!-- If patients array / search query is not length 0 or null -->
       <!-- If patients array / search query length is greater than 0 or NOT null-->
       <div class="justify-content-center">
 
-          <div class="d-flex justify-content-center display-4">  Patient No: </div>
+          <div class="d-flex justify-content-center display-4 text-center">  Patient No: </div>
           <br>
           <div *ngIf="hasPatientNo && predictedDate === '-'" class="d-flex justify-content-center">
-            <h1 class="display-5 text-muted"> Please input a patient No </h1>
+            <h1 class="display-5 text-muted text-center"> Please input a patient No </h1>
           </div>
           <div *ngIf="hasPatientNo && predictedDate !== '-'" class="d-flex justify-content-center">
-            <h1 class="display-5 text-muted"> {{selectedPatientNo}} </h1>
+            <h1 class="display-5 text-muted text-center"> {{selectedPatientNo}} </h1>
           </div>
           <div *ngIf="!hasPatientNo" class="d-flex justify-content-center">
-            <h1 class="display-5 text-muted"> Patient No not found! </h1>
+            <h1 class="display-5 text-muted text-center"> Patient No not found! </h1>
           </div>
           <br>
-          <div class="row">
+          <div class="row  justify-content-center">
             <!-- Predicted Months: -->
-            <div class="col-6">
-              <div class="d-flex justify-content-center display-4"> Predicted Months: </div>
+            <div class="col-11 col-lg-6">
+              <div class="d-flex justify-content-center display-4 text-center"> Predicted Months: </div>
               <div *ngIf="predictedMonths == '-'" class="d-flex justify-content-center">
-                <h1 class="display-5 text-muted"> - </h1>
+                <h1 class="display-5 text-muted text-center"> - </h1>
               </div>
               <div *ngIf="predictedMonths !== '-'" class="d-flex justify-content-center">
-                <h1 class="display-5 text-muted"> {{predictedMonths | number:'1.0-0'}} </h1>
+                <h1 class="display-5 text-muted text-center"> {{predictedMonths | number:'1.0-0'}} </h1>
               </div>
             </div>
             <!-- Predicted Date: -->
-            <div class="col-6">
-              <div class="d-flex justify-content-center display-4"> Predicted Date: </div>
-              <div class="d-flex justify-content-center"> <h1 class="display-5 text-muted"> {{predictedDate}} </h1> </div>
+            <div class="col-11 col-lg-6">
+              <div class="d-flex justify-content-center display-4 text-center"> Predicted Date: </div>
+              <div class="d-flex justify-content-center text-center"> <h1 class="display-5 text-muted"> {{predictedDate}} </h1> </div>
             </div>
 
           </div> <!-- End of row -->

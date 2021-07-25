@@ -4,6 +4,7 @@ html, body {
 .loginPageBackground {
   background-image: url("../assets/images/login-wallpaper2.jpg");
   height: 100%;
+  background-position: 0% 90%;
   background-size: cover;
 }
 .login-logo-container {
@@ -24,5 +25,8 @@ html, body {
   vertical-align: middle;
   height: 100vh;
 
+}
+.router-body {
+  // background-color: #EEF3F6;
 }
 

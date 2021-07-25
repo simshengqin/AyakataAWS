@@ -111,7 +111,7 @@ export class MyReportComponent implements OnInit {
               const report = {
                 patientNo: lineArr[0],
                 predictedMonths: lineArr[1],
-                predictedDate: lineArr[2]
+                predictedDate: lineArr[2].split(' ')[0]
               };
               this.reports.push(report);
             }

@@ -3,7 +3,7 @@
   }
 </style>
 <app-header></app-header>
-<div class="max-width-section">
+<div class="max-width-section padding-wrapper">
 <!--  <div class="row" >-->
 <!--    <div class="col">-->
 <!--      <select class="form-control mb-3" >-->
@@ -21,13 +21,16 @@
     <h1 *ngIf="filename">Report for {{ filename }}</h1>
   </div>
   <ng-container>
-    <div class="col-3 mx-auto">
-      <select class="form-control" [(ngModel)]="selectedChartYear" (change)="updateChartData()">
-        <option *ngFor="let option of options.Year" [value]="option">
-          {{option}}
-        </option>
-      </select>
+    <div class="row justify-content-center">
+      <div class="col-md-3">
+        <select class="form-control" [(ngModel)]="selectedChartYear" (change)="updateChartData()">
+          <option *ngFor="let option of options.Year" [value]="option">
+            {{option}}
+          </option>
+        </select>
+      </div>
     </div>
+
     <div  class="table-responsive">
       <table mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8">
 
