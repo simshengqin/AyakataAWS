@@ -47,9 +47,9 @@
       <div *ngIf="missingfileMessage !== ''" class="alert alert-danger" role="alert">
         {{ missingfileMessage}}
       </div>
-<!--      <div>-->
-<!--        Uploading in process: <mat-progress-bar id="progress-bar" mode="determinate" class="mt-3 mb-3"></mat-progress-bar>-->
-<!--      </div>-->
+      <div *ngIf="isUploading">
+        Uploading in process: <mat-progress-bar id="progress-bar" mode="indeterminate" class="mt-3 mb-3"></mat-progress-bar>
+      </div>
       <div class="float-right">
         <button class="btn btn-info" (click)="uploadFile()">Upload</button>
       </div>

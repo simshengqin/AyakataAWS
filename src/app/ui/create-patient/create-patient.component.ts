@@ -36,6 +36,7 @@ export class CreatePatientComponent implements OnInit {
   missingfileMessage = '';
   hasProcessingTask = false;
   uploadProgress = 0;
+  isUploading = false;
   /*
   @ViewChild('filePatient') filePatient: ElementRef;
   @ViewChild('fileLab') fileLab: ElementRef;
@@ -122,6 +123,7 @@ export class CreatePatientComponent implements OnInit {
         // isRead: false
       };
       // const newTaskDB = await this.api.CreateTask(newTask);
+      this.isUploading = true;
       for (const ele of this.files) {
         // newTaskDB.id
         const result = await Storage.put('aaa' + '/' + ele.name, ele,
