@@ -122,7 +122,7 @@ export class CreatePatientComponent implements OnInit {
         // reportID: null,
         // isRead: false
       };
-      // const newTaskDB = await this.api.CreateTask(newTask);
+      const newTaskDB = await this.api.CreateTask(newTask);
       this.isUploading = true;
       for (const ele of this.files) {
         // newTaskDB.id
