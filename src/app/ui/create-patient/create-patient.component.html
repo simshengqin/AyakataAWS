@@ -25,7 +25,7 @@
 
       <br>
       <ngx-dropzone (change)="onSelect($event)">
-        <ngx-dropzone-label> Please drop your files here or click to upload :) ..... We won't Bite ^_^! </ngx-dropzone-label>
+        <ngx-dropzone-label> Please drop your files here </ngx-dropzone-label>
         <ngx-dropzone-preview *ngFor="let f of files" [removable]="true" (removed)="onRemove(f)">
           <ngx-dropzone-label>{{ f.name }} </ngx-dropzone-label>
         </ngx-dropzone-preview>

@@ -80,11 +80,6 @@
           </div>
           <br>
           <div class="row">
-            <!-- Predicted Date: -->
-            <div class="col-6">
-              <div class="d-flex justify-content-center display-4"> Predicted Date: </div>
-              <div class="d-flex justify-content-center"> <h1 class="display-5 text-muted"> {{predictedDate}} </h1> </div>
-            </div>
             <!-- Predicted Months: -->
             <div class="col-6">
               <div class="d-flex justify-content-center display-4"> Predicted Months: </div>
@@ -95,6 +90,12 @@
                 <h1 class="display-5 text-muted"> {{predictedMonths | number:'1.0-0'}} </h1>
               </div>
             </div>
+            <!-- Predicted Date: -->
+            <div class="col-6">
+              <div class="d-flex justify-content-center display-4"> Predicted Date: </div>
+              <div class="d-flex justify-content-center"> <h1 class="display-5 text-muted"> {{predictedDate}} </h1> </div>
+            </div>
+
           </div> <!-- End of row -->
       </div> <!-- End of second ngIf  -->
       <!--<br>
