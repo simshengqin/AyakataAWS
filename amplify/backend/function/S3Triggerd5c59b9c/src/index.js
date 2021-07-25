@@ -65,7 +65,6 @@ exports.handler = async (event, context, callback) => {
 
     const parser = csv.parseStream(csvFile, { headers: true }).on("data", function (data) {
       parser.pause();  // can pause reading using this at a particular row
-      console.log('One line from .csv >> ', data);
       parser.resume(); // to continue reading
     }).on("end", function () {
       resolve('csv parse process finished')

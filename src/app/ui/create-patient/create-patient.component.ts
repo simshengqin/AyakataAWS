@@ -51,7 +51,6 @@ export class CreatePatientComponent implements OnInit {
     this.api.ListTasks().then(event => {
       const tasks = event.items as Array<Task>;
       for (const task of tasks) {
-        console.log(task);
         if (task.status2 === 0) {
           this.hasProcessingTask = true;
         }
@@ -61,12 +60,10 @@ export class CreatePatientComponent implements OnInit {
 
   // NGX Dropzone
   public onSelect(event) {
-    console.log(event);
     this.files.push(...event.addedFiles);
   }
 
   public onRemove(event) {
-    console.log(event);
     this.files.splice(this.files.indexOf(event), 1);
   }
 
@@ -124,7 +121,6 @@ export class CreatePatientComponent implements OnInit {
         // reportID: null,
         // isRead: false
       };
-      console.log(newTask);
       // const newTaskDB = await this.api.CreateTask(newTask);
       for (const ele of this.files) {
         // newTaskDB.id
@@ -160,116 +156,14 @@ export class CreatePatientComponent implements OnInit {
         this.missingfileMessage = 'Please upload these files: ' + missingFileNames.join(' , ');
       }
 
-
       // this.showError();
     }
-
     // this.files = [];
-
   }
 
   public showSuccess() {
     this.toastr.success( '5 File(s) have been Uploaded successfully!', '', {positionClass: 'toast-top-center'});
     this.router.navigate(['my-task']);
   }
-  // public showError(){
-  //   this.toastr.error('The following file(s) could not be Uploaded' + ' successfully: ' + this.errorMessages, '', {positionClass: 'toast-top-center', timeOut: 10000});
-  // }
-  // public closeDisplay(){
-  //   document.getElementById('displayUploadStatus').style.display = 'none';
-  // }
-
-  /*
-  start(){
-    document.getElementById("displayUploadStatus").style.display = "none"
-  }
-
-  async uploadFile() {
-    //const result = await Storage.put(this.file.nativeElement.files.item(0).name, this.file.nativeElement.files.item(0));
-
-    this.SuccessfulFileUpload = 0; // reset count
-    this.UnsuccessfulFileUpload = 0; // reset count
-    this.ngx_toast_index_success = 1; // reset index
-    this.ngx_toast_index_error = 1; // reset index
-
-    // Check for PATIENT Data file
-    if(this.filePatient.nativeElement.files.item(0) != null){
-      if(this.checkFileNamingConvention(this.filePatient.nativeElement.files.item(0).name)){
-        const result = await Storage.put(this.filePatient.nativeElement.files.item(0).name, this.filePatient.nativeElement.files.item(0));
-      }
-    } else {
-      console.log(" Patient Data is not included")
-    }
-
-    // Check for LAB Data file
-    if(this.fileLab.nativeElement.files.item(0) != null){
-      if(this.checkFileNamingConvention(this.fileLab.nativeElement.files.item(0).name)){
-        const result = await Storage.put(this.fileLab.nativeElement.files.item(0).name, this.fileLab.nativeElement.files.item(0));
-      }
-    } else {
-      console.log(" Lab Data is not included")
-    }
-
-    // Check for CASE Data file
-    if(this.fileCase.nativeElement.files.item(0) != null){
-      if(this.checkFileNamingConvention(this.fileCase.nativeElement.files.item(0).name)){
-        const result = await Storage.put(this.fileCase.nativeElement.files.item(0).name, this.fileCase.nativeElement.files.item(0));
-      }
-    } else {
-      console.log(" Case Data is not included")
-    }
-
-    // Check for MEDICATION Data file
-    if(this.fileMedication.nativeElement.files.item(0) != null){
-      if(this.checkFileNamingConvention(this.fileMedication.nativeElement.files.item(0).name)){
-        const result = await Storage.put(this.fileMedication.nativeElement.files.item(0).name, this.fileMedication.nativeElement.files.item(0));
-      }
-    } else {
-      console.log(" Medication Data is not included")
-    }
-
-    // Check for SURGICAL Data file
-    if(this.fileSurgical.nativeElement.files.item(0) != null){
-      if(this.checkFileNamingConvention(this.fileSurgical.nativeElement.files.item(0).name)){
-        const result = await Storage.put(this.fileSurgical.nativeElement.files.item(0).name, this.fileSurgical.nativeElement.files.item(0));
-      }
-    } else {
-      console.log(" Surgical Data is not included")
-    }
-
-    //console.log(this.successMessage);
-    //console.log(this.errorMessages);
-    if(this.successMessage!=""){
-      this.showSuccess();
-    }
-    if(this.errorMessages!=""){
-      this.showError();
-    }
-
-    document.getElementById("displayUploadStatus").style.display = "block"
-
-    // this.toastrService.success('Uploaded ' + this.file.nativeElement.files.item(0).name +  ' successfully!', '', {positionClass: 'toast-top-center'});
-    // console.log(result);
-  }
-
-  private checkFileNamingConvention(input:string):boolean{
-    var fileNames:string[] = ["casevisit_test.csv" ,"labresult_test.csv" , "medicationorder_test.csv", "patientdemo_test.csv", "surgical_test.csv"]
-    if(fileNames.includes(input.toLowerCase())){
-      this.successMessage += this.ngx_toast_index_success + ".) " + input + " "
-      this.ngx_toast_index_success++;
-      this.SuccessfulFileUpload++;
-      return true
-    } else {
-      this.errorMessages += this.ngx_toast_index_success + ".) " + input + " "
-      this.ngx_toast_index_error++;
-      this.UnsuccessfulFileUpload++;
-      return false
-    }
-  }
-
-
-  public closeDisplay(){
-    document.getElementById("displayUploadStatus").style.display = "none"
-  } */
 
 }

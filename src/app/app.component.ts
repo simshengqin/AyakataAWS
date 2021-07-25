@@ -16,10 +16,8 @@ export class AppComponent implements OnInit, OnDestroy{
 
   async ngOnInit() {
     onAuthUIStateChange(async (authState, authData) => {
-      console.log(authState);
       this.authState = authState;
       this.loggedIn = false;
-      console.log(this.authState);
       if (this.authState === 'signedin') { // || this.authState === 'signin') {
         this.loggedIn = true;
         this.user = authData as CognitoUserInterface;

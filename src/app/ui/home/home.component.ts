@@ -28,7 +28,6 @@ export class HomeComponent implements OnInit {
 
   //
   search(){
-    console.log('View test');
     /*
       Function: Need to search Database if patient exist and sent patientid to view-patient component
 
@@ -37,14 +36,12 @@ export class HomeComponent implements OnInit {
       if patientCasenumber search result, returns null, inform Users of incorrect search.
 
     */
-      console.log(this.patientNo);
     this.router.navigate(['/view-patient'] , {queryParams: { patientNo : this.patientNo }});
   }
 
   create(){
     // this.router.navigate(['/create-patient']);
     this.router.navigateByUrl('/create-patient');
-    console.log('Test');
   }
 
 }

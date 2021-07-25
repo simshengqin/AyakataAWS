@@ -17,7 +17,6 @@ export class HeaderComponent implements OnInit {
 
   ngOnInit(): void {
     this.url = this.router.url;
-    console.log(this.url);
     this.username = localStorage.getItem('username'); // get cookies
     this.getNewTasks();
   } // ngOnInit --> run when components start

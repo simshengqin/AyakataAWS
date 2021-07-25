@@ -74,7 +74,6 @@ export class MyTaskComponent implements OnInit {
       this.dataSource = new MatTableDataSource(tasks);
       this.dataSource.sort = this.sort;
       this.dataSource.paginator = this.paginator;
-      console.log(this.dataSource);
     });
     //this.updateChartData();
 

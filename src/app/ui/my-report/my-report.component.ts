@@ -142,7 +142,6 @@ export class MyReportComponent implements OnInit {
     }
     const patientCountsByMonthDict = {};
     const totalPatientCountsByMonthArr = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
-    console.log(filteredReports);
     for (let i = 0; i < filteredReports.length; i++) {
       filteredReports[i].position = i + 1;
       if (filteredReports[i].predictedDate === '') { continue; }
@@ -185,7 +184,6 @@ export class MyReportComponent implements OnInit {
       }
     };
     this.dataSource.paginator = this.paginator;
-    console.log(this.dataSource);
 
   }
 

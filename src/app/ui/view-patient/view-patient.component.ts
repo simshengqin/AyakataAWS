@@ -81,7 +81,6 @@ export class ViewPatientComponent implements OnInit, OnDestroy {
   }
   */
   public onCreate(data: any) {
-    console.log(data);
   }
 
   ngOnDestroy() {
@@ -111,10 +110,8 @@ export class ViewPatientComponent implements OnInit, OnDestroy {
       async data => {
         data["Body"].text().then(
           async csvText => {
-            // console.log(csvText);
             const csvTextArr = csvText.split('\n');
             // - 1 as there is an empty line at the end
-            console.log(this.selectedPatientNo);
             if (this.selectedPatientNo && this.selectedPatientNo !== '') {
               this.hasPatientNo = false;
               this.predictedDate = '-';
