@@ -57,6 +57,7 @@ import { MyAccountComponent } from './ui/my-account/my-account.component';
 import {MDBBootstrapModule} from "angular-bootstrap-md";
 import { ChartComponent } from './shared/components/chart/chart.component';
 import {NgxCsvParserModule} from "ngx-csv-parser";
+import {FlexLayoutModule} from "@angular/flex-layout";
 
 Amplify.configure(awsconfig);
 
@@ -104,7 +105,8 @@ Amplify.configure(awsconfig);
     ToastrModule.forRoot(),
     NgxDropzoneModule,
     MDBBootstrapModule.forRoot(),
-    NgxCsvParserModule
+    NgxCsvParserModule,
+    FlexLayoutModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

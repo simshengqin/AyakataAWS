@@ -1,11 +1,14 @@
-<amplify-authenticator>
+<div [ngClass]="{'loginPageBackground': !loggedIn}">
+<!--  <div [ngClass]="loggedIn ? 'd-none' : 'login-logo-container'">-->
+<!--    <img class="login-logo mx-auto" src="../assets/images/Medico-Logo-Color.png">-->
+<!--  </div>-->
 
-  <div>
-<!--    <span *ngIf="user?.username" class="App-header">Hello, {{ user.username }}</span>-->
-    <div class="spacer"></div>
-    <router-outlet></router-outlet>
+  <amplify-authenticator [ngClass]="{'loginPageStyle': !loggedIn}">
+    <div>
+      <div class="spacer"></div>
+      <router-outlet></router-outlet>
+    </div>
+  </amplify-authenticator>
 
-  </div>
+</div>
 
-  <router-outlet></router-outlet>
-</amplify-authenticator>
