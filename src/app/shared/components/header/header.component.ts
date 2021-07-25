@@ -23,7 +23,9 @@ export class HeaderComponent implements OnInit {
   } // ngOnInit --> run when components start
   async handleSignOutButtonClick() {
     try {
+
       await Auth.signOut();
+      localStorage.removeItem('username');
       Hub.dispatch('UI Auth', {   // channel must be 'UI Auth'
         event: 'AuthStateChange',    // event must be 'AuthStateChange'
         message: 'signedout'    // message must be 'signedout'

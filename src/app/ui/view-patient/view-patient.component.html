@@ -1,7 +1,7 @@
 <app-header></app-header>
 <br>
 <br>
-<!-- 
+<!--
 <div class="form-body">
   <form autocomplete="off" [formGroup]="createForm" (ngSubmit)="onCreate(createForm.value)">
     <div class="row">
@@ -30,12 +30,12 @@
 
 <div class="form-body">
   <form autocomplete="off" [formGroup]="createForm" (ngSubmit)="onCreate(createForm.value)">
-    
+
     <div class="row">
       <!-- Patient_No -->
       <div class="col-5 justify-content-center">
         <div class="input-group input-group-lg">
-          <input type="text" class="form-control" formControlName="Patient_No" autocomplete="off" placeholder="Patient ID" [(ngModel)] = "selectedPatientNo"> 
+          <input type="text" class="form-control" formControlName="Patient_No" autocomplete="off" placeholder="Patient ID" [(ngModel)] = "selectedPatientNo">
         </div>
       </div>
       <!-- End of Patient_No -->
@@ -67,9 +67,17 @@
       <!-- If patients array / search query length is greater than 0 or NOT null-->
       <div class="justify-content-center">
 
-          <div class="d-flex justify-content-center display-3">  Patient ID: </div>
+          <div class="d-flex justify-content-center display-3">  Patient No: </div>
           <br>
-          <div class="d-flex justify-content-center"> <h1 class="display-5 text-muted"> {{selectedPatientNo}} </h1> </div>
+          <div *ngIf="hasPatientNo && predictedDate === 'Predicted Date'" class="d-flex justify-content-center">
+            <h1 class="display-5 text-muted"> Please input a patient No </h1>
+          </div>
+          <div *ngIf="hasPatientNo && predictedDate !== 'Predicted Date'" class="d-flex justify-content-center">
+            <h1 class="display-5 text-muted"> {{selectedPatientNo}} </h1>
+          </div>
+          <div *ngIf="!hasPatientNo" class="d-flex justify-content-center">
+            <h1 class="display-5 text-muted"> Patient No not found! </h1>
+          </div>
           <br>
           <div class="row">
             <!-- Predicted Date: -->
@@ -80,7 +88,7 @@
             <!-- Predicted Months: -->
             <div class="col-6">
               <div class="d-flex justify-content-center display-4"> Predicted Months: </div>
-              <div class="d-flex justify-content-center"> <h1 class="display-5 text-muted"> {{predictedMonths}} </h1> </div>
+              <div class="d-flex justify-content-center"> <h1 class="display-5 text-muted"> {{predictedMonths | number:'1.0-0'}} </h1> </div>
             </div>
           </div> <!-- End of row -->
       </div> <!-- End of second ngIf  -->
@@ -95,7 +103,7 @@
 
 
 
-<!-- 
+<!--
 <div *ngFor="let patient of patients">
   <div>{{ patient.Patient_No }}</div>
   <div>{{ patient.Case_No }}</div>

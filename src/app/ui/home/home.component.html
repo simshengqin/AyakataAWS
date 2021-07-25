@@ -2,10 +2,10 @@
 
 <div class="d-flex align-items-center justify-content-center">
     <div class="container">
-        
+
         <br>
         <br>
-            
+
 
         <div class="row justify-content-center">
             <img src="../../../assets/images/Medico-Logo-Color.png" width="500" height="250" class="img-fluid" alt="Responsive image"/>
@@ -22,13 +22,13 @@
 
         <br>
         <br>
-        
+
         <!-- Input Text for Paitent ID & Patient Case number -->
         <form [formGroup]="myForm">
         <div class="row">
             <div class="col-5 justify-content-center">
                 <div class="input-group input-group-lg">
-                    <input type="text" class="form-control" placeholder="Patient ID" [(ngModel)]="patientNo" formControlName="PID"> <!-- ngmodel for input field to be used in BE TS-->
+                    <input type="text" class="form-control" placeholder="Patient No" [(ngModel)]="patientNo" formControlName="PID"> <!-- ngmodel for input field to be used in BE TS-->
                 </div>
             </div>
             <div class="col-5 justify-content-center">
@@ -43,13 +43,13 @@
                 </div>
             </div>
         </div>
-    </form> 
+    </form>
 
         <br>
 
-        <div class="row justify-content-center">
-            <button type="button" class="btn btn-primary btn-lg" (click)="create()"> Create </button>
-        </div>
+<!--        <div class="row justify-content-center">-->
+<!--            <button type="button" class="btn btn-primary btn-lg" (click)="create()"> Create </button>-->
+<!--        </div>-->
 
         <br>
 

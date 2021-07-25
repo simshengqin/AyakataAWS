@@ -24,8 +24,9 @@ export class ViewPatientComponent implements OnInit, OnDestroy {
   selectedPatientNo: string;
   predictedDate: string = "Predicted Date";
   predictedMonths: string = "Predicted Months";
-  patientNo: string = "Patient ID";
+  patientNo: string = "Patient No";
   router: any;
+  hasPatientNo = true;
   constructor(private api: APIService, private fb: FormBuilder , private activatedRoute: ActivatedRoute) { }
 
   ngOnInit(): void {
@@ -106,14 +107,15 @@ export class ViewPatientComponent implements OnInit, OnDestroy {
       download: true ,
       level: 'public'
     };
-    await Storage.get( 'public/02558c19-ae10-4ebf-8b5f-c8f9cb34a4aa/output.csv', storageOptions ).then(
+    await Storage.get( 'public/output.csv', storageOptions ).then(
       async data => {
         data["Body"].text().then(
           async csvText => {
-            console.log(csvText);
+            // console.log(csvText);
             const csvTextArr = csvText.split('\n');
             // - 1 as there is an empty line at the end
             console.log(this.selectedPatientNo);
+            if (this.selectedPatientNo && this.selectedPatientNo !== '') { this.hasPatientNo = false;}
             for (let i = 1; i < csvTextArr.length - 1; i++) {
               const lineArr = csvTextArr[i].split(',');
               // const report = {
@@ -122,11 +124,13 @@ export class ViewPatientComponent implements OnInit, OnDestroy {
               //     predictedDate: lineArr[1]
               //   }
                 if (this.selectedPatientNo ==  lineArr[0]) {
-                  this.predictedMonths = lineArr[2];
-                  this.predictedDate = lineArr[1];
+                  this.predictedMonths = lineArr[1];
+                  this.predictedDate = lineArr[2];
+                  this.hasPatientNo = true;
                   // return(this.predictedMonths, this.predictedDate)}
                 }
-              };
+              }
+
           });
       },
       error => {

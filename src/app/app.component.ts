@@ -9,7 +9,7 @@ export class AppComponent implements OnInit, OnDestroy{
   title = 'authenticator';
   user: CognitoUserInterface;
   authState: AuthState;
-  loggedIn = false;
+  loggedIn = true;
   isLoginDelayActive = false;
   @ViewChild('file') file: ElementRef;
   constructor(private ref: ChangeDetectorRef) { }
