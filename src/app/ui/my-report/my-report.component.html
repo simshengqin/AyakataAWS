@@ -21,6 +21,13 @@
     <h1 *ngIf="filename">Report for {{ filename }}</h1>
   </div>
   <ng-container>
+    <div class="col-3 mx-auto">
+      <select class="form-control" [(ngModel)]="selectedChartYear" (change)="updateChartData()">
+        <option *ngFor="let option of options.Year" [value]="option">
+          {{option}}
+        </option>
+      </select>
+    </div>
     <div  class="table-responsive">
       <table mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8">
 
@@ -66,13 +73,7 @@
       <div *ngIf="isNoReportsInAWS" class="no-reports-message">No reports currently. Upload patients' data to display the reports!</div>
     </div>
     <mat-paginator class="mt-3" [pageSizeOptions]="[5, 10, 20, 50, 100]" showFirstLastButtons></mat-paginator>
-    <div class="col-3 mx-auto">
-      <select class="form-control" [(ngModel)]="selectedChartYear" (change)="updateChartData()">
-        <option *ngFor="let option of options.Year" [value]="option">
-          {{option}}
-        </option>
-      </select>
-    </div>
+
     <app-chart [chartDatasets] = patientCountsByMonth></app-chart>
   </ng-container>
 

@@ -22,8 +22,8 @@ export class ViewPatientComponent implements OnInit, OnDestroy {
   placeHolder = {Patient_No:"Please Select a Patient", Predicted_Date: "DD/MM/YYYY", Predicted_Months: "0" }
   reports: any;
   selectedPatientNo: string;
-  predictedDate: string = "Predicted Date";
-  predictedMonths: string = "Predicted Months";
+  predictedDate: string = "-";
+  predictedMonths: string = "-";
   patientNo: string = "Patient No";
   router: any;
   hasPatientNo = true;
@@ -115,7 +115,11 @@ export class ViewPatientComponent implements OnInit, OnDestroy {
             const csvTextArr = csvText.split('\n');
             // - 1 as there is an empty line at the end
             console.log(this.selectedPatientNo);
-            if (this.selectedPatientNo && this.selectedPatientNo !== '') { this.hasPatientNo = false;}
+            if (this.selectedPatientNo && this.selectedPatientNo !== '') {
+              this.hasPatientNo = false;
+              this.predictedDate = '-';
+              this.predictedMonths = '-';
+            }
             for (let i = 1; i < csvTextArr.length - 1; i++) {
               const lineArr = csvTextArr[i].split(',');
               // const report = {

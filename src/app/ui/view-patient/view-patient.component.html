@@ -67,12 +67,12 @@
       <!-- If patients array / search query length is greater than 0 or NOT null-->
       <div class="justify-content-center">
 
-          <div class="d-flex justify-content-center display-3">  Patient No: </div>
+          <div class="d-flex justify-content-center display-4">  Patient No: </div>
           <br>
-          <div *ngIf="hasPatientNo && predictedDate === 'Predicted Date'" class="d-flex justify-content-center">
+          <div *ngIf="hasPatientNo && predictedDate === '-'" class="d-flex justify-content-center">
             <h1 class="display-5 text-muted"> Please input a patient No </h1>
           </div>
-          <div *ngIf="hasPatientNo && predictedDate !== 'Predicted Date'" class="d-flex justify-content-center">
+          <div *ngIf="hasPatientNo && predictedDate !== '-'" class="d-flex justify-content-center">
             <h1 class="display-5 text-muted"> {{selectedPatientNo}} </h1>
           </div>
           <div *ngIf="!hasPatientNo" class="d-flex justify-content-center">
@@ -88,7 +88,12 @@
             <!-- Predicted Months: -->
             <div class="col-6">
               <div class="d-flex justify-content-center display-4"> Predicted Months: </div>
-              <div class="d-flex justify-content-center"> <h1 class="display-5 text-muted"> {{predictedMonths | number:'1.0-0'}} </h1> </div>
+              <div *ngIf="predictedMonths == '-'" class="d-flex justify-content-center">
+                <h1 class="display-5 text-muted"> - </h1>
+              </div>
+              <div *ngIf="predictedMonths !== '-'" class="d-flex justify-content-center">
+                <h1 class="display-5 text-muted"> {{predictedMonths | number:'1.0-0'}} </h1>
+              </div>
             </div>
           </div> <!-- End of row -->
       </div> <!-- End of second ngIf  -->
