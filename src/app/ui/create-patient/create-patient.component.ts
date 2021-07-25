@@ -125,8 +125,7 @@ export class CreatePatientComponent implements OnInit {
       const newTaskDB = await this.api.CreateTask(newTask);
       this.isUploading = true;
       for (const ele of this.files) {
-        // newTaskDB.id
-        const result = await Storage.put('aaa' + '/' + ele.name, ele,
+        const result = await Storage.put(newTaskDB.id + '/' + ele.name, ele,
           // {progressCallback(progress) {
           //   let uploadProgress = progress.loaded / progress.total * 100;
           //   const progressBar = document.getElementById('progress-bar');
